@@ -1,0 +1,77 @@
+/* .form-control {
+    padding: 13px 16px;
+    border-radius: 10px; 
+    font-size: 16px; 
+}
+/* .container {
+    font-family: 'Lato';
+} */
+h1{
+    font-size: 32px;
+    margin: 0;
+}
+h2 {
+    font-size: 24px;
+    margin: 0;
+}
+h3 {
+    font-size: 22px;
+}
+h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+h5 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 600;
+}
+.card {
+    border-radius: 10px;
+}
+/* Đảm bảo container chiếm đầy màn hình */
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* Phần body giữa, sẽ chiếm không gian còn lại */
+  .flex-fill {
+    flex: 1;
+  }
+  
+  /* Card và form bên trong */
+  .card {
+    border-radius: 10px;
+  }
+  
+  .form-control {
+    padding: 13px 16px; /* Kích thước nút */
+    border-radius: 10px; /* Góc bo tròn */
+    font-size: 16px; /* Kích thước chữ */
+  }
+  
+  h1, h2, h3, h4, h5 {
+    font-family: 'Lato';
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .card-body {
+    padding: 30px;
+  }
+  
+.container {
+    font-family: 'Lato';
+}
+.container-fluid {
+  padding: 0;
+}
+

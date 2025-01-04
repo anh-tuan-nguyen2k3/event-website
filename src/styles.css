@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('assets/fonts/Lato-Regular.ttf');
+    /* font-weight: normal;
+    font-style: normal; */
+  }
+  
+  @font-face {
+    font-family: 'Lato';
+    src: url('assets/fonts/Lato-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Lato';
+    src: url('assets/fonts/Lato-Black.ttf') format('truetype');
+    font-weight: 900; /* Đặt font-weight phù hợp */
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Lato';
+    src: url('assets/fonts/Lato-Heavy.ttf') format('truetype');
+    font-weight: 800; /* Đặt font-weight phù hợp */
+    font-style: normal;
+  }
+  
+h1{
+    font-size: 32px;
+    margin: 0;
+}
+h2 {
+    font-size: 24px;
+    margin: 0;
+}
+h3 {
+    font-size: 22px;
+}
+h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+h5 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 600;
+}

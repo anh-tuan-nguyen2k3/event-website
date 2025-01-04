@@ -1,0 +1,12 @@
+.custom-button {
+    padding: 13px 16px; /* Kích thước nút */
+    border: none; /* Loại bỏ viền */
+    border-radius: 10px; /* Góc bo tròn */
+    cursor: pointer; /* Con trỏ chuyển thành tay khi rê chuột */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
+    font-size: 16px; /* Kích thước chữ */
+    width: 100%;
+  }
+  
+  
+  

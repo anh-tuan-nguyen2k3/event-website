@@ -1,0 +1,51 @@
+
+<header>
+    <nav class="navbar bg-white">
+        <div class="container-fluid">
+            <div class="container header">
+                <div class="row">
+                    <img class="col-3 logo" src="assets/images/logo/uel_logo.jpg" alt="uel-logo">
+                    <button class="menu-toggle col-6" aria-label="Toggle Menu" (click)="toggleMenu()">
+                        <img src="assets/images/icons/ic_toggle.svg" alt="Menu Icon" />
+                    </button>
+                    <div class="container col-3 div-search">
+                        <form class="form-full-width">
+                            <input class="form-control" type="search" placeholder="ERPsim 2024" aria-label="Search" style="font-family: 'Lato';">
+                        </form>
+                    </div>
+                    
+                    <!-- Nút toggle menu, gọi phương thức toggleMenu() khi click -->
+                    <!-- Menu, sử dụng binding để hiển thị hoặc ẩn menu dựa trên giá trị isMenuOpen -->
+                    <ul class="menu col-6" [class.show]="isMenuOpen">
+                        <li class="toggler">
+                            <a href="/home" class="text-decoration-none" style="color: inherit;">
+                                <h5>Trang chủ</h5>
+                            </a>
+                            
+                        </li>
+                        <li class="toggler">
+                            <a href="/events" class="text-decoration-none" style="color: inherit;">
+                                <h5>Sự kiện</h5>
+                            </a>
+                        </li>    
+                        <li class="toggler">
+                            <a href="#" class="text-decoration-none" style="color: inherit;">
+                                <h5>Sự kiện của tôi</h5>
+                            </a>
+                        </li>
+                        <li>
+                            <app-button 
+                                class="login-button"
+                                text="Đăng nhập" 
+                                color="#F05A22"
+                                hoverColor="#FB8357"
+                                textColor="#fff"
+                                (buttonClick)="onLoginClick()">
+                            </app-button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
