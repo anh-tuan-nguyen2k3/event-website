@@ -51,4 +51,8 @@ export const routes: Routes = [
         path:'header2',
         component:Header2Component
     },
+    {
+        path:'home',
+        component: HomepageComponent
+    }
 ];
