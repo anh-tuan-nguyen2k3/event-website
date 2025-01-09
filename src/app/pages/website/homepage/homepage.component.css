@@ -1,3 +1,33 @@
 .container-fluid {
     padding: 0;
   }
+.fixed-header {
+  position: fixed;
+  width: 100%;
+  z-index: 1030;
+}
+.card-body {
+  padding-right: 6px;
+  padding-left: 6px;
+}
+.card-text{
+  margin-bottom: 8px;
+}
+.fas{
+  margin-right: 8px;
+  width: 24px;
+  height: auto;
+}
+.title {
+  font-size: 36px; /* Kích thước chữ */
+  font-weight: bold; /* In đậm */
+  text-align: center; /* Căn giữa */
+}
+
+.title .blue {
+  color: #144E8C; /* Màu xanh đậm */
+}
+
+.title .orange {
+  color: #F05A22; /* Màu cam */
+}

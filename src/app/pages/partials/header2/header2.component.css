@@ -1,0 +1,161 @@
+
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ */
+    padding: 0;
+    position: relative;
+    z-index: 999;
+}
+.logo {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    /* margin-right: 30px; */
+}
+.header {
+    font-family: 'Lato';
+    /* display: flex; */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+.menu {
+    list-style: none; /* Loại bỏ dấu chấm đầu dòng */
+    display: flex; /* Hiển thị các phần tử theo chiều ngang */
+    justify-content: flex-end;
+    padding: 0; /* Loại bỏ padding mặc định */
+    margin: 0; /* Loại bỏ margin mặc định */
+    align-items: center;
+}
+/* Định dạng mục trong danh sách */
+.menu li {
+    display: flex; /* Hiển thị mỗi mục trên cùng một dòng */
+    margin-left: 30spx;
+    color: #0056b3;
+    font-weight: 500;
+    justify-content: flex-end;
+}
+.row {
+    max-width: 100%;
+}
+h1{
+    font-size: 32px;
+    margin: 0;
+}
+h2 {
+    font-size: 24px;
+    margin: 0;
+}
+h3 {
+    font-size: 22px;
+}
+h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+h5 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.form-control {
+    width: 100%; /* Đảm bảo input chiếm hết chiều rộng cột */
+    padding: 8px 15px; /* Thêm khoảng cách bên trong */
+    border: 1px solid #144E8C;
+    border-radius: 10px;
+    outline-offset: 0;
+}
+form {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    max-width: 100%;
+}
+
+.login-button:hover {
+    color: #0056b3; 
+  }
+.menu-toggle {
+    display: none; /* Ẩn nút toggle khi màn hình lớn hơn 768px */
+    justify-content: flex-end;
+    cursor: pointer;
+}
+li {
+    margin-left: 30px;
+}
+.div-search{
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .menu {
+        display: none; /* Ẩn menu */
+        flex-direction: column; 
+        position: absolute; /* Menu xuất hiện trên cùng */
+        top: 100%; /* Đặt menu ngay dưới thanh điều hướng */
+        right: 0;
+        background: white;
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        /* padding: 15px 0; */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bóng đổ cho menu */
+    }
+
+    .menu li {
+        margin: 10px 0; /* Khoảng cách giữa các mục menu */
+        text-align: center; /* Căn giữa nội dung */
+    }
+
+    .menu.show {
+        display: flex; /* Hiển thị menu khi có class "show" */
+    }
+
+    .menu-toggle {
+        display: flex; /* Sử dụng Flexbox */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-left: auto; /* Đẩy nút về bên phải */
+        padding: 0;
+    }
+
+    .menu-toggle img {
+        width: 24px; /* Kích thước icon */
+        height: auto;
+        align-items: end;
+        margin-left: auto;
+    }
+    .logo {
+        width: 200px;
+        height: auto;
+        padding: 10px;
+        margin: 0;
+    }
+    .form-control {
+        max-width: 100%;
+    }
+    .header {
+        margin-bottom: 20px;
+        padding: 0;
+        width: 100%;
+    }
+    .form-full-width {
+        width: 100%; 
+        flex: 100%; 
+
+    }
+    .form-control {
+        width: 100%; 
+ 
+    }
+    .div-search{
+        width: 100%;
+    }
+}
+
+
+ 

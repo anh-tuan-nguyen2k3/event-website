@@ -8,6 +8,8 @@ import { HomepageComponent } from './pages/website/homepage/homepage.component';
 import { EventsComponent } from './pages/website/events/events.component';
 import { ForgetpasswordComponent } from './pages/website/forgetpassword/forgetpassword.component';
 import { Header2Component } from './pages/partials/header2/header2.component';
+import { EventdetailComponent } from './pages/website/eventdetail/eventdetail.component';
+import { PersonalinfoComponent } from './pages/website/personalinfo/personalinfo.component';
 
 export const routes: Routes = [
     {
@@ -54,5 +56,14 @@ export const routes: Routes = [
     {
         path:'home',
         component: HomepageComponent
+    },
+    {
+        path:'event-detail',
+        component: EventdetailComponent
+    },
+    {
+        path:'personalinfo',
+        component: PersonalinfoComponent
     }
+
 ];

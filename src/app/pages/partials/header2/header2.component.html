@@ -1,27 +1,66 @@
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="/assets/images/events-banner/1920x1080.png" class="d-block w-100" alt="">
+
+<header>
+  <nav class="navbar bg-white">
+      <div class="container-fluid">
+          <div class="container header">
+              <div class="row">
+                  <img class="col-3 logo" src="assets/images/logo/uel_logo.jpg" alt="uel-logo">
+                  <button class="menu-toggle col-6" aria-label="Toggle Menu" (click)="toggleMenu()">
+                      <img src="assets/images/icons/ic_toggle.svg" alt="Menu Icon" />
+                  </button>
+                  <div class="container col-3 div-search">
+                      <form class="form-full-width">
+                          <input class="form-control" type="search" placeholder="ERPsim 2024" aria-label="Search" style="font-family: 'Lato';">
+                      </form>
+                  </div>
+                  
+                  <!-- Nút toggle menu, gọi phương thức toggleMenu() khi click -->
+                  <!-- Menu, sử dụng binding để hiển thị hoặc ẩn menu dựa trên giá trị isMenuOpen -->
+                  <ul class="menu col-6" [class.show]="isMenuOpen">
+                      <li class="toggler">
+                          <a href="/home" class="text-decoration-none" style="color: inherit;">
+                              <h5>Trang chủ</h5>
+                          </a>
+                          
+                      </li>
+                      <li class="toggler">
+                          <a href="/events" class="text-decoration-none" style="color: inherit;">
+                              <h5>Sự kiện</h5>
+                          </a>
+                      </li>    
+                      <li class="toggler">
+                          <a href="#" class="text-decoration-none" style="color: inherit;">
+                              <h5>Sự kiện của tôi</h5>
+                          </a>
+                      </li>
+                      <li  class="toggler" *ngIf="isLoggedIn">
+                        <a href="/events" class="text-decoration-none" style="color: inherit;" (onclick)="onProfileClick()">
+                            <h5>Thông tin cá nhân</h5>
+                        </a>
+                    </li>
+                    <li *ngIf="!isLoggedIn">
+                        <app-button 
+                            class="login-button"
+                            text="Đăng nhập" 
+                            color="#F05A22"
+                            hoverColor="#FB8357"
+                            textColor="#fff"
+                            (buttonClick)="onLoginClick()">
+                        </app-button>
+                    </li>
+                    <li *ngIf="isLoggedIn">
+                      <app-button 
+                          class="logout-button"
+                          text="Đăng xuất" 
+                          color="#F05A22"
+                          hoverColor="#FB8357"
+                          textColor="#fff"
+                          (buttonClick)="onLogout()">
+                      </app-button>
+                  </li>
+                  </ul>
+              </div>
+          </div>
       </div>
-      <div class="carousel-item">
-        <img src="/assets/images/events-banner/banner1.jpeg" class="d-block w-100" alt="">
-      </div>
-      <div class="carousel-item">
-        <img src="/assets/images/events-banner/banner1.jpeg" class="d-block w-100" alt="">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-  
+  </nav>
+</header>
