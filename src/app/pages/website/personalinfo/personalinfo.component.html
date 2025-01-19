@@ -3,24 +3,27 @@
     <div class="container vh-100">
         <div class="row">
           <!-- Sidebar Menu -->
-          <div class="col-md-3">
+          <div class="col-md-3 p-4">
             <div class="list-group">
               <a
-            
-                class="list-group-item list-group-item-action active"
+                href="#"
+                class="list-group-item list-item"
                 id="personal-info-tab"
-                (click)="selectTab('personal-info')"
+                [ngClass]="{ 'active': selectedTab === 'personal-info' }"
+                (click)="selectTab('personal-info', $event)"
               >
                 Thông tin tài khoản
               </a>
               <a
-                href=""
+                href="#"
                 class="list-group-item list-group-item-action"
                 id="my-events-tab"
-                (click)="selectTab('my-events')"
+                [ngClass]="{ 'active': selectedTab === 'my-events' }"
+                (click)="selectTab('my-events', $event)"
               >
                 Sự kiện của tôi
               </a>
+
             </div>
           </div>
       
@@ -28,19 +31,79 @@
           <div class="col-md-9 p-4">
             <div *ngIf="selectedTab === 'personal-info'">
               <h4 class="mb-4">THÔNG TIN TÀI KHOẢN</h4>
-              <div class="card p-4">
-                <p><strong>Tài khoản sinh viên:</strong> tuanna21411&#64;st.uel.edu.vn</p>
-                <p><strong>Họ và tên:</strong> Nguyễn Anh Tuấn</p>
-                <p><strong>Mã số sinh viên:</strong> K214110826</p>
-                <p><strong>Số điện thoại:</strong> 0842040403</p>
-                <button class="btn btn-primary">Chỉnh sửa</button>
+              <div class="card p-4 rounded-4">
+                <div class="mb-2">
+                  <span ><strong>Tài khoản sinh viên:</strong></span>
+                  <span id="email" style="margin-left: 6px;">Chưa cập nhật</span>
+                </div>
+                <div class="mb-2">
+                  <span><strong>Họ và tên:</strong></span>
+                  <span id="username" style="margin-left: 6px;">Chưa cập nhật</span>
+                </div>
+                <div class="mb-2">
+                  <span><strong>Mã số sinh viên:</strong></span>
+                  <span id="idnumber" style="margin-left: 6px;"></span>
+                </div>
+                <div class="mb-2">
+                  <span><strong>Số điện thoại:</strong></span>
+                  <span id="phone" style="margin-left: 6px;">Chưa cập nhật</span>
+                </div>
+                <app-button 
+                  class="login-button mt-2 btn-edit"
+                  text="Chỉnh sửa" 
+                  color="#F05A22"
+                  hoverColor="#FB8357"
+                  textColor="#fff"
+                  >
+            </app-button>
               </div>
+            <!-- Sự kiện của tôi -->
             </div>
-      
-            <div *ngIf="selectedTab === 'my-events'">
-              <h4 class="mb-4">SỰ KIỆN CỦA TÔI</h4>
-              <p>Hiển thị danh sách sự kiện của bạn ở đây...</p>
-            </div>
+          
+              <div *ngIf="selectedTab === 'my-events'">
+                <h4 class="mb-4">SỰ KIỆN CỦA TÔI</h4>
+                <div *ngFor="let event of appEvents" class="card p-3 mb-3 rounded-4">
+                  <div class="row g-0">
+                    <div class="col-md-3 ">
+                      <img
+                        [src]="event.imageUrl"
+                        class="img-fluid rounded-start rounded-4"
+                        alt="Event Image"
+                      />
+                    </div>
+                    <div class="col-md-9">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <ul class="list-unstyled">
+                          <li>
+                            <i class="bi bi-clock"></i>
+                            {{ event.startDate | date: 'short' }} - {{ event.endDate | date: 'short' }}
+                          </li>
+                          <li>
+                            <i class="bi bi-ticket"></i>
+                            Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
+                          </li>
+                        </ul>
+                        <p class="card-text">
+                          <span
+                            class="badge"
+                            [ngClass]="{
+                              'bg-success': event.status === 'Approved',
+                              'bg-warning text-dark': event.status === 'Pending',
+                              'bg-danger': event.status === 'Rejected'
+                            }"
+                          >
+                            Trạng thái: {{ event.status }}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            
+            
           </div>
         </div>
       </div>

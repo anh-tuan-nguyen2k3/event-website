@@ -15,6 +15,7 @@ export class ButtonComponent implements OnInit{
   @Input() color: string = '#F05A22'; // Màu nền mặc định
   @Input() textColor: string = '#fff'; // Màu chữ mặc định
   @Input() hoverColor: string = '#0056b3'; // Màu nền khi hover
+  @Input() icon: string = ''; // Tên icon hiển thị (mặc định không có icon)
   @Output() buttonClick = new EventEmitter<void>(); // Sự kiện khi nhấn nút
   
 

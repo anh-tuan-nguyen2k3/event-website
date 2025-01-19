@@ -12,10 +12,33 @@ import { bootstrapApplication } from '@angular/platform-browser';
   styleUrl: './eventdetail.component.css'
 })
 export class EventdetailComponent implements OnInit, AfterViewInit{
+  isLoggedIn: boolean = false; // Kiểm tra người dùng đã đăng nhập chưa
+
   openModal() {
     const modalElement = document.getElementById('registerModal')!;
     const modal = new (window as any).bootstrap.Modal(modalElement);
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    
+    if (loggedInUser) {
+    const user = JSON.parse(loggedInUser); // Chuyển đổi từ chuỗi JSON sang đối tượng
+    this.isLoggedIn = true;
+    // Gán thông tin người dùng vào các trường trong form
+    const usernameInput = document.getElementById('username') as HTMLInputElement;
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+    const phone = document.getElementById('phone') as HTMLInputElement;
+    const idnumber = document.getElementById('idnumber') as HTMLInputElement;
+
+    if (usernameInput && emailInput) {
+      usernameInput.value = user.name; // Hiển thị tên người dùng
+      emailInput.value = user.email;  // Hiển thị email
+      phone.value = user.phone;
+      idnumber.value = user.idnumber;
+    }
+
+    }
+
     modal.show();
+
   }
   constructor () {}
   ngOnInit(): void {

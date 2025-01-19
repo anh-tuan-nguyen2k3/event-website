@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../partials/header/header.component';
 import { FooterComponent } from '../../partials/footer/footer.component';
 import { ButtonComponent } from '../../../shared/button/button.component';
@@ -14,10 +14,18 @@ import { Header2Component } from '../../partials/header2/header2.component';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   email: string = '';
   password: string = '';
   message: string = '';
+
+  ngOnInit(): void {
+    // Kiểm tra trạng thái đăng nhập từ localStorage
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+      window.location.href = '/home'
+    }
+  }
 
   login() {
      // Kiểm tra định dạng email

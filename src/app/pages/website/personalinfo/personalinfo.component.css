@@ -1,0 +1,20 @@
+/* Thêm màu nền và kiểu chữ cho tab đang được chọn */
+.active-tab {
+    background-color: #144E8C; /* Màu nền xanh */
+    color: #ffffff; /* Màu chữ trắng */
+  }
+  
+  /* Tùy chọn: Thay đổi màu chữ khi di chuột qua các thẻ */
+  .list-item {
+    /* background-color: #144E8C; */
+  }
+  .btn-edit {
+    /* width: fit-content; */
+    /* display: flex; */
+    /* margin-left: auto; */
+    height: auto; /* Tự điều chỉnh chiều cao */
+  }
+  .img {
+    height: auto;
+    width: 100px;
+  }

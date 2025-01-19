@@ -35,15 +35,15 @@
                         </li>
                         <li  class="toggler" *ngIf="isLoggedIn">
                           <a href="/personalinfo" class="text-decoration-none" style="color: inherit;">
-                              <h5>Thông tin cá nhân</h5>
+                              <h5>Tài khoản</h5>
                           </a>
                       </li>
                       <li *ngIf="!isLoggedIn">
                           <app-button 
                               class="login-button"
                               text="Đăng nhập" 
-                              color="#F05A22"
-                              hoverColor="#FB8357"
+                              color="#144E8C"
+                              hoverColor="#144DEF"
                               textColor="#fff"
                               (buttonClick)="onLoginClick()">
                           </app-button>

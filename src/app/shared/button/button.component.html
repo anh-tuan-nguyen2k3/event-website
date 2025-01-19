@@ -5,5 +5,6 @@
   (mouseout)="onMouseOut()"
   [style.color]="textColor"
   class="custom-button">
-  {{ text }}
+  <i *ngIf="icon" class="{{ icon }}"></i> <!-- Hiển thị icon nếu có -->
+  <span *ngIf="!icon">{{ text }}</span> <!-- Hiển thị text nếu không có icon -->
 </button>
