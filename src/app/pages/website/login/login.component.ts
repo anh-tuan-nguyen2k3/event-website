@@ -42,10 +42,14 @@ export class LoginComponent implements OnInit{
 
       // Lưu trạng thái đăng nhập (giả lập với LocalStorage)
       localStorage.setItem('loggedInUser', JSON.stringify(user));
-
-      // Điều hướng đến trang chủ hoặc trang khác
-      window.location.href = '/home'; // Thay bằng route phù hợp
-    } else {
+      //Check admin
+      if (user.isAdmin === true) {
+        // Điều hướng đến trang admin
+        window.location.href = '/admin'; // Thay bằng route trang admin phù hợp
+      } else {
+        // Điều hướng đến trang chủ hoặc trang khác
+        window.location.href = '/home'; // Thay bằng route phù hợp
+      }
       this.message = 'Email hoặc mật khẩu không chính xác!';
       console.log(this.message)
     }

@@ -31,3 +31,6 @@
 .title .orange {
   color: #F05A22; /* Màu cam */
 }
+.cardevent {
+  text-decoration: none;
+}

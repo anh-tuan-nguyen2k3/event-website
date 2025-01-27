@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/website/login/login.component';
 import { HeaderComponent } from './pages/partials/header/header.component';
 import { ButtonComponent } from './shared/button/button.component';
@@ -10,6 +10,11 @@ import { ForgetpasswordComponent } from './pages/website/forgetpassword/forgetpa
 import { Header2Component } from './pages/partials/header2/header2.component';
 import { EventdetailComponent } from './pages/website/eventdetail/eventdetail.component';
 import { PersonalinfoComponent } from './pages/website/personalinfo/personalinfo.component';
+import { NgModule } from '@angular/core';
+import {  } from '@angular/core';
+import { AdminhomeComponent } from './pages/admin/adminhome/adminhome.component';
+
+
 
 export const routes: Routes = [
     {
@@ -58,12 +63,23 @@ export const routes: Routes = [
         component: HomepageComponent
     },
     {
-        path:'event-detail',
+        path:'event-detail/:id',
         component: EventdetailComponent
     },
     {
         path:'personalinfo',
         component: PersonalinfoComponent
+    },
+    {
+        path:'admin',
+        component: AdminhomeComponent
     }
-
 ];
+
+@NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
+})
+
+export class AppRoutingModule {}
+

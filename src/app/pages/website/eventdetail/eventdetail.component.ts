@@ -3,6 +3,9 @@ import { HeaderComponent } from '../../partials/header/header.component';
 import { FooterComponent } from '../../partials/footer/footer.component';
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { AppEvent } from '../../../services/event.service';
+import { ActivatedRoute } from '@angular/router';
+import { APPEVENTS } from '../../../../data';
 
 @Component({
   selector: 'app-eventdetail',
@@ -13,11 +16,20 @@ import { bootstrapApplication } from '@angular/platform-browser';
 })
 export class EventdetailComponent implements OnInit, AfterViewInit{
   isLoggedIn: boolean = false; // Kiểm tra người dùng đã đăng nhập chưa
+  eventID: number | null = null;
+  eventDetail: AppEvent | undefined;
+  isRegisteredForEvent: boolean = false; // Trạng thái đã đăng ký
 
+
+  constructor(private route: ActivatedRoute) {}
   openModal() {
     const modalElement = document.getElementById('registerModal')!;
     const modal = new (window as any).bootstrap.Modal(modalElement);
     const loggedInUser = localStorage.getItem('loggedInUser');
+
+    if (this.isRegisteredForEvent) {
+      return;
+    }
     
     if (loggedInUser) {
     const user = JSON.parse(loggedInUser); // Chuyển đổi từ chuỗi JSON sang đối tượng
@@ -40,11 +52,29 @@ export class EventdetailComponent implements OnInit, AfterViewInit{
     modal.show();
 
   }
-  constructor () {}
+  
   ngOnInit(): void {
     this.updateContentPadding();
     const content = document.querySelector('.content') as HTMLElement;
     content.style.paddingTop = '80px'
+
+    this.eventID = Number(this.route.snapshot.paramMap.get('id'));
+    this.eventDetail = APPEVENTS.find(event => event.eventID === this.eventID);
+
+    this.checkRegistration();
+
+  }
+
+  checkRegistration(): void {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser && this.eventID) {
+      const user = JSON.parse(loggedInUser);
+      if (user.regisEvent && user.regisEvent.includes(this.eventID.toString())) {
+        this.isRegisteredForEvent = true;
+      }
+    }
+    console.log(this.eventID);
+    
   }
 
   ngAfterViewInit(): void {

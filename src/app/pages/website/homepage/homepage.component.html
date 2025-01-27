@@ -33,44 +33,33 @@
       <!-- Sự kiện -->
       <div class="container mt-4 mb-4">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-          <!-- Card 1 -->
-          <div class="col">
-            <a href="/event-detail">
-              <div class="card h-100 p-2 rounded-4">
-                <img src="/assets/images/events/event-erp.jpg" class="card-img-top rounded-3" alt="Event Image">
-                <div class="card-body">
-                  <h5 class="card-title">GALA FINAL ROUND ERPSIM 2025</h5>
-                  <p class="card-text"><i class="fas fa-clock"></i> 7:30 AM - 16/11/2024</p>
-                  <p class="card-text"><i class="fas fa-users"></i> 50/150</p>
+          
+            <div class="col" *ngFor="let event of appEvents">
+              <a class="cardevent" [routerLink]="['/event-detail', event.eventID]">
+                <div class="card h-100 p-2 rounded-4">
+                  <img
+                    [src]="event.imageUrl"
+                    class="card-img-top rounded-3"
+                    alt="Event Image"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">{{ event.title.length > 31 ? (event.title | slice:0:31) + '...' : event.title }}</h5>
+                    <p class="card-text">
+                      <i class="fas fa-clock"></i>
+                      {{ event.startDate | date: 'short' }} - {{ event.endDate | date: 'short' }}
+                    </p>
+                    <p class="card-text">
+                      <i class="fas fa-users"></i>
+                      Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </a>
-            
-          </div>
-      
-          <!-- Card 2 -->
-          <div class="col">
-            <div class="card h-100 p-2 rounded-4">
-              <img src="/assets/images/events/event-erp.jpg" class="card-img-top rounded-3" alt="Event Image">
-              <div class="card-body">
-                <h5 class="card-title">GALA FINAL ROUND ERPSIM 2025</h5>
-                <p class="card-text"><i class="fas fa-clock"></i> 7:30 AM - 16/11/2024</p>
-                <p class="card-text"><i class="fas fa-users"></i> 50/150</p>
-              </div>
+              </a>
             </div>
-          </div>
-      
-          <!-- Card 3 -->
-          <div class="col">
-            <div class="card h-100 p-2 rounded-4">
-              <img src="/assets/images/events/event-erp.jpg" class="card-img-top rounded-3" alt="Event Image">
-              <div class="card-body">
-                <h5 class="card-title">GALA FINAL ROUND ERPSIM 2025</h5>
-                <p class="card-text"><i class="fas fa-clock"></i> 7:30 AM - 16/11/2024</p>
-                <p class="card-text"><i class="fas fa-users"></i> 50/150</p>
-              </div>
-            </div>
-          </div>
+       
+          
+
+          
         </div>
       </div>
       

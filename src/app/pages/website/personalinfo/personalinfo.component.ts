@@ -28,29 +28,16 @@ export class PersonalinfoComponent implements AfterViewInit{
     this.initdata();
     console.log(`Tab được chọn: ${tab}`);
   }
+  test: any;
+  user: any;
   initdata() {
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser) {
-      const user = JSON.parse(loggedInUser); // Chuyển đổi từ chuỗi JSON sang đối tượng
+      this.user = JSON.parse(loggedInUser); // Chuyển đổi từ chuỗi JSON sang đối tượng
+      this.test = JSON.parse(loggedInUser); // Chuyển đổi từ chuỗi JSON sang đối tượng
       this.isLoggedIn = true;
-  
-      const usernameSpan = document.getElementById('username');
-      const emailParagraph = document.getElementById('email');
-      const phoneSpan = document.getElementById('phone');
-      const idnumberSpan = document.getElementById('idnumber');
-  
-      if (usernameSpan) {
-        usernameSpan.innerText = user.name;
-      }
-      if (emailParagraph) {
-        emailParagraph.textContent = user.email || 'Chưa cập nhật';
-      }
-      if (phoneSpan) {
-        phoneSpan.innerText = user.phone || 'Chưa cập nhật';
-      }
-      if (idnumberSpan) {
-        idnumberSpan.innerText = user.idnumber || 'Chưa cập nhật';
-      }
+
+      console.log(this.user, 123)
       }
       this.loadEvents();
   }

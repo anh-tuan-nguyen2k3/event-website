@@ -1,47 +1,41 @@
 <div class="container-fluid">
     <app-header class="fixed-header"></app-header>
     <div class="container-fuild row mb-4 content">
-        <img src="/assets/images/events-banner/banner1.jpeg" alt="">
+        <img class="event-banner" src="/assets/images/events-banner/banner1.jpeg" alt="">
     </div>
     <div class="container mt-4">
         <div class="row">
-          <!-- Phần nội dung sự kiện -->
-          <div class="col-md-8 mb-4">
-            <div class="content card">
+            <div class="col-md-8 mb-4">
+              <div class="content card">
                 <div class="event-content p-3 shadow-sm">
-                    <h2 class="event-title">CUỘC THI SAP ERPSIM STUDENT COMPETITION 2024 - VIETNAM | BEYOND THE FUTURE</h2>
-                    <p>Cuộc thi "SAP ERPSim Student Competition 2024 - Vietnam" được tổ chức trong bối cảnh công nghệ ERP...</p>
-                    <h4>THÔNG TIN CHI TIẾT CUỘC THI</h4>
-                    <p><b>Vòng sơ loại:</b> Online từ 27/10/2024 - 03/11/2024</p>
-                    <p><b>Vòng chung kết:</b> PLANETARY ERP diễn ra từ 15/11/2024 - 16/11/2024</p>
-                    <h4>ĐƠN VỊ TỔ CHỨC</h4>
-                    <ul>
-                      <li>Trường Đại học Kinh tế - Luật, ĐHQG-HCM</li>
-                      <li>Đơn vị đồng hành: Trung tâm Ươm tạo Kỹ thuật Công nghệ UEL</li>
-                    </ul>
-                    <h4>CƠ CẤU GIẢI THƯỞNG</h4>
-                    <p>Giải nhất: 500 AUD</p>
-                    <p>Giải nhì: 200 AUD</p>
-                    <p>Giải ba: 100 AUD</p>
-                  </div>
+                  <h2 class="event-title">{{ eventDetail?.title }}</h2>
+                  <p>{{ eventDetail?.description }}</p>
                 </div>
+              </div>
             </div>
-            
           <!-- Phần thông tin sự kiện -->
           <div class="col-md-4 mb-4">
             <div class="event-info card p-3 border shadow-sm d-flex justify-content-center">
               <h4 class="text-center">THÔNG TIN SỰ KIỆN</h4>
-              <p><i class="fas fa-clock"></i> <b>Thời gian:</b> 01/12/2024</p>
-              <p><i class="fas fa-map-marker-alt"></i><b>Địa điểm:</b> Hội trường A, Trường Đại học Kinh tế - Luật</p>
-              <p><i class="fas fa-users"></i><b>Vé còn:</b> 30/200</p>
+              <p><i class="fas fa-clock"></i> <b>Thời gian:</b> {{ eventDetail?.startDate }}</p>
+              <p><i class="fas fa-map-marker-alt"></i><b>Địa điểm:</b> {{ eventDetail?.location }}</p>
+              <p><i class="fas fa-users"></i><b>Vé còn:</b> {{ eventDetail?.availableSeats }} / {{ eventDetail?.totalSeats }}</p>
               <div>
-                <app-button 
+                <!-- <app-button 
                         class="login-button"
                         text="Đăng ký" 
                         color="#F05A22"
                         hoverColor="#F05A22"
                         textColor="#fff"
                         (buttonClick)="openModal()">
+                </app-button> -->
+                <app-button 
+                    class="login-button"
+                    [text]="isRegisteredForEvent ? 'Đã đăng ký' : 'Đăng ký'" 
+                    [color]="isRegisteredForEvent ? '#6c757d' : '#F05A22'"
+                    [hoverColor]="isRegisteredForEvent ? '#6c757d' : '#F05A22'"
+                    [textColor]="'#fff'"
+                    (buttonClick)="openModal()">
                 </app-button>
               </div>
               <!-- Modal Form -->

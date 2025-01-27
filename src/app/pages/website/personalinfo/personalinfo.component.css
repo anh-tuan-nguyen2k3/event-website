@@ -1,20 +1,35 @@
 /* Thêm màu nền và kiểu chữ cho tab đang được chọn */
 .active-tab {
-    background-color: #144E8C; /* Màu nền xanh */
-    color: #ffffff; /* Màu chữ trắng */
+    /* background-color: #144E8C; 
+    color: #ffffff;  */
   }
   
-  /* Tùy chọn: Thay đổi màu chữ khi di chuột qua các thẻ */
-  .list-item {
-    /* background-color: #144E8C; */
+/* Tùy chọn: Thay đổi màu chữ khi di chuột qua các thẻ */
+.list-item {
+  /* background-color: #144E8C; */
+}
+
+/* Khi được chọn: nền xanh #144E8C */
+.list-group-item.list-item.active {
+  background-color: #144E8C !important;
+  color: #fff !important; /* Màu chữ khi chọn */
+  border-color: #144E8C;
+}
+.list-group-item.list-item:not(.active-tab):hover {
+  color: #144E8C;
+}
+.btn-edit {
+  /* width: fit-content; */
+  /* display: flex; */
+  /* margin-left: auto; */
+  height: auto; /* Tự điều chỉnh chiều cao */
+}
+.img {
+  height: auto;
+  width: 100px;
   }
-  .btn-edit {
-    /* width: fit-content; */
-    /* display: flex; */
-    /* margin-left: auto; */
-    height: auto; /* Tự điều chỉnh chiều cao */
-  }
-  .img {
-    height: auto;
-    width: 100px;
-  }
+.content {
+  flex: 1;
+  min-height: 100vh;
+}
+

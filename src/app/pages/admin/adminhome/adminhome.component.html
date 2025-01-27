@@ -1,1 +1,131 @@
-<p>adminhome works!</p>
+<section id="sidebar" class="d-flex flex-column vh-100 p-3">
+    <a class="d-flex align-items-center mb-3 text-decoration-none">
+      <i class='bx bxs-smile fs-3 me-2'></i>
+      <p class="fs-4 fw-bold" style="color: #FFFFFF;">UEL EVENT</p>
+    </a>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a href="#" class="nav-link d-flex align-items-center"
+            [ngClass]="{'active': selectedTab === 'dashboard'}"
+            (click)="selectTab('dashboard', $event)"
+        >
+          <i class='bx bxs-shopping-bag-alt me-2'></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link d-flex align-items-center"
+            [ngClass]="{ 'active': selectedTab === 'all-event' }"
+            (click)="selectTab('all-event', $event)"
+        >
+          <i class='bx bxs-shopping-bag-alt me-2'></i>
+          <span>Sự kiện</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link d-flex align-items-center"
+            [ngClass]="{ 'active': selectedTab === 'pendingevents' }"
+            (click)="selectTab('pendingevents', $event)"
+        >
+          <i class='bx bxs-shopping-bag-alt me-2'></i>
+          <span>Sự kiện chờ duyệt</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link d-flex align-items-center"
+            [ngClass]="{ 'active': selectedTab === 'orgs' }"
+            (click)="selectTab('orgs', $event)"
+        >
+          <i class='bx bxs-shopping-bag-alt me-2'></i>
+          <span>Câu lạc bộ/ Tổ chức</span>
+        </a>
+      </li>
+      
+    </ul>
+    <ul class="nav flex-column mt-auto">
+      
+      <li class="nav-item">
+        <a href="#" class="nav-link d-flex align-items-center text-danger">
+          <i class='bx bxs-log-out-circle me-2'></i>
+          <span>Đăng xuất</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+  
+  <section id="content" class="flex-grow-1 p-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container-fluid">
+          <a href="#" class="" style="text-decoration: none; font-family: 'Lato'; margin-left: auto; text-align: end;">Trang chủ</a>
+        </div>
+      </nav>
+      <main class="mt-4">
+        <!-- Dashboard -->
+        <div *ngIf="selectedTab === 'dashboard'">
+          <h4 class="mb-4">DASHBOARD</h4>
+        </div>
+
+        <!-- Events -->
+        <div *ngIf="selectedTab === 'all-event'">
+            <h4 class="mb-4">SỰ KIỆN</h4>
+            <div *ngFor="let event of appEvents" class="card p-3 mb-3 rounded-4">
+              <div class="row g-0">
+                <div class="col-md-3 ">
+                  <img
+                    [src]="event.imageUrl"
+                    class="img-fluid rounded-start rounded-4"
+                    alt="Event Image"
+                  />
+                </div>
+                <div class="col-md-9">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ event.title }}</h5>
+                    <ul class="list-unstyled">
+                      <li>
+                        <i class="fas fa-clock"></i>
+                        {{ event.startDate }} - {{ event.endDate }}
+                      </li>
+                      <li>
+                        <i class="fas fa-users"></i>
+                        Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
+                      </li>
+                    </ul>
+                    <div class="d-flex flex-row align-items-center gap-2">
+                      <p class="m-0">Trạng thái: </p>
+                    <p class="card-text">
+                      <span
+                        class="badge"
+                        [ngClass]="{
+                          'bg-success': event.status === 'Approved',
+                          'bg-warning text-dark': event.status === 'Pending',
+                          'bg-danger': event.status === 'Rejected'
+                        }"
+                      >
+                        {{ event.status }}
+                      </span>
+                    </p>
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pending Events -->
+          <div *ngIf="selectedTab === 'pendingevents'">
+          <h4 class="mb-4">SỰ KIỆN CHỜ DUYỆT</h4>
+          </div>
+          <!-- Danh sách tổ chức -->
+          <div *ngIf="selectedTab === 'orgs'">
+          <h4 class="mb-4">CÂU LẠC BỘ/ TỔ CHỨC</h4>
+          </div>
+
+
+    </main>
+  
+      
+  
+    
+  </section>
+  

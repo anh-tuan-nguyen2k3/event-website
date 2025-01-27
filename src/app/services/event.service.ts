@@ -11,6 +11,8 @@ export class AppEvent {
     isFeatured: boolean; // Đánh dấu sự kiện nổi bật (true/false)
     createdAt: Date; // Thời gian tạo sự kiện
     imageUrl: string;
+    bannerUrl: string;
+    location: string;
   
     constructor(
       eventID: number,
@@ -25,6 +27,9 @@ export class AppEvent {
       isFeatured: boolean,
       createdAt: Date,
       imageUrl: string,
+      bannerUrl: string,
+      location: string,
+
 
     ) {
       this.eventID = eventID;
@@ -39,6 +44,9 @@ export class AppEvent {
       this.isFeatured = isFeatured;
       this.createdAt = createdAt;
       this.imageUrl=imageUrl;
-    }
+      this.bannerUrl=bannerUrl;
+      this.location= location;
+
+    } 
   }
   

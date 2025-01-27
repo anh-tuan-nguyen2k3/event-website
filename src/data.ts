@@ -9,7 +9,8 @@ export const USERS: User[] = [
         isAdmin: false,
         phone: "0123456789",
         token: '',
-        idnumber:''
+        idnumber:'',
+        regisEvent: ['1']
     },
     {
         email: "admin@st.uel.edu.vn",
@@ -18,7 +19,8 @@ export const USERS: User[] = [
         isAdmin: true,
         phone: "0123456789",
         token: '',
-        idnumber:''
+        idnumber:'',
+        regisEvent: []
     }
 
 ]
@@ -35,7 +37,9 @@ export const APPEVENTS: AppEvent[] = [
       availableSeats: 50, // Số lượng chỗ ngồi còn lại
       isFeatured: true, // Sự kiện nổi bật
       createdAt: new Date("2024-10-01T09:00:00"),
-      imageUrl: "/assets/images/events/event-erp.jpg"
+      imageUrl: "/assets/images/events/event-erp.jpg",
+      bannerUrl: "/assets/images/events/event-erp.jpg",
+      location: "Hội trường A"
     },
     {
       eventID: 2,
@@ -50,6 +54,40 @@ export const APPEVENTS: AppEvent[] = [
       isFeatured: false,
       createdAt: new Date("2024-11-01T10:00:00"),
       imageUrl: "/assets/images/events/event-erp.jpg",
+      bannerUrl: "/assets/images/events/event-erp.jpg",
+      location: "Hội trường A"
+    },
+    {
+      eventID: 3,
+      title: "CHƯƠNG TRÌNH HỘI NGHỊ KHOA HỌC 2024",
+      description: "Hội nghị về những tiến bộ khoa học kỹ thuật.",
+      startDate: new Date("2024-12-10T09:00:00"),
+      endDate: new Date("2024-12-10T17:00:00"),
+      status: "Pending",
+      createdBy: 102,
+      totalSeats: 300,
+      availableSeats: 120,
+      isFeatured: false,
+      createdAt: new Date("2024-11-01T10:00:00"),
+      imageUrl: "/assets/images/events/event-erp.jpg",
+      bannerUrl: "/assets/images/events/event-erp.jpg",
+      location: "Hội trường A"
+    },
+    {
+      eventID: 4,
+      title: "CHƯƠNG TRÌNH HỘI NGHỊ KHOA HỌC 2024",
+      description: "Hội nghị về những tiến bộ khoa học kỹ thuật.",
+      startDate: new Date("2024-12-10T09:00:00"),
+      endDate: new Date("2024-12-10T17:00:00"),
+      status: "Pending",
+      createdBy: 102,
+      totalSeats: 300,
+      availableSeats: 120,
+      isFeatured: false,
+      createdAt: new Date("2024-11-01T10:00:00"),
+      imageUrl: "/assets/images/events/event-erp.jpg",
+      bannerUrl: "/assets/images/events/event-erp.jpg",
+      location: "Hội trường A"
     },
   ];
 

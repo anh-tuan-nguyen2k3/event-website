@@ -1,13 +1,15 @@
 <div class="container-fluid m-0 p-0">
     <app-header></app-header>
-    <div class="container vh-100">
+    <div class="container content">
         <div class="row">
           <!-- Sidebar Menu -->
           <div class="col-md-3 p-4">
             <div class="list-group">
               <a
+
                 href="#"
                 class="list-group-item list-item"
+                
                 id="personal-info-tab"
                 [ngClass]="{ 'active': selectedTab === 'personal-info' }"
                 (click)="selectTab('personal-info', $event)"
@@ -16,7 +18,7 @@
               </a>
               <a
                 href="#"
-                class="list-group-item list-group-item-action"
+                class="list-group-item list-item"
                 id="my-events-tab"
                 [ngClass]="{ 'active': selectedTab === 'my-events' }"
                 (click)="selectTab('my-events', $event)"
@@ -34,19 +36,19 @@
               <div class="card p-4 rounded-4">
                 <div class="mb-2">
                   <span ><strong>Tài khoản sinh viên:</strong></span>
-                  <span id="email" style="margin-left: 6px;">Chưa cập nhật</span>
+                  <span id="email" style="margin-left: 6px;">{{user?.email || 'Chưa cập nhật'}}</span>
                 </div>
                 <div class="mb-2">
                   <span><strong>Họ và tên:</strong></span>
-                  <span id="username" style="margin-left: 6px;">Chưa cập nhật</span>
+                  <span id="username" style="margin-left: 6px;">{{user?.name || 'Chưa cập nhật'}}</span>
                 </div>
                 <div class="mb-2">
                   <span><strong>Mã số sinh viên:</strong></span>
-                  <span id="idnumber" style="margin-left: 6px;"></span>
+                  <span id="idnumber" style="margin-left: 6px;">{{user?.idnumber || 'Chưa cập nhật'}}</span>
                 </div>
                 <div class="mb-2">
                   <span><strong>Số điện thoại:</strong></span>
-                  <span id="phone" style="margin-left: 6px;">Chưa cập nhật</span>
+                  <span id="phone" style="margin-left: 6px;">{{user?.phone || 'Chưa cập nhật'}}</span>
                 </div>
                 <app-button 
                   class="login-button mt-2 btn-edit"
@@ -76,14 +78,16 @@
                         <h5 class="card-title">{{ event.title }}</h5>
                         <ul class="list-unstyled">
                           <li>
-                            <i class="bi bi-clock"></i>
+                            <i class="fas fa-clock"></i>
                             {{ event.startDate | date: 'short' }} - {{ event.endDate | date: 'short' }}
                           </li>
                           <li>
-                            <i class="bi bi-ticket"></i>
+                            <i class="fas fa-users"></i>
                             Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
                           </li>
                         </ul>
+                        <div class="d-flex flex-row align-items-center gap-2">
+                          <p class="m-0">Trạng thái: </p>
                         <p class="card-text">
                           <span
                             class="badge"
@@ -93,17 +97,18 @@
                               'bg-danger': event.status === 'Rejected'
                             }"
                           >
-                            Trạng thái: {{ event.status }}
+                            {{ event.status }}
                           </span>
                         </p>
+                        
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             
-            
-            
+
           </div>
         </div>
       </div>

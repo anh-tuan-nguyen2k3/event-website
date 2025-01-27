@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { LoginComponent } from './app/pages/website/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { Header2Component } from './app/pages/partials/header2/header2.component';
+import { RouterModule } from '@angular/router';
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
@@ -16,6 +17,7 @@ bootstrapApplication(AppComponent, appConfig)
     imports: [
       BrowserModule,
       FormsModule, // Thêm FormsModule vào đây
+      RouterModule
     ],
     providers: [],
     bootstrap: []
