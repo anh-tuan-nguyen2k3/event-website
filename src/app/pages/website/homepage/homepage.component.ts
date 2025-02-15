@@ -3,10 +3,11 @@ import { HeaderComponent } from '../../partials/header/header.component';
 import { FooterComponent } from '../../partials/footer/footer.component';
 import { OnInit, AfterViewInit } from '@angular/core';
 import { Header2Component } from '../../partials/header2/header2.component';
-import { AppEvent } from '../../../services/event.service';
+// import { AppEvent } from '../../../services/event.service';
 import { APPEVENTS } from '../../../../data';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Event2Service } from '../../../services/event2.service';
 
 
 @Component({
@@ -17,8 +18,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './homepage.component.css'
 })
 export class HomepageComponent implements OnInit, AfterViewInit {
-  constructor () {}
-  appEvents: AppEvent[] = [];
+  constructor (private eventService: Event2Service  ) {}
+  appEvents: any =  [];
   ngOnInit(): void {
     this.updateContentPadding();
     const content = document.querySelector('.content') as HTMLElement;
@@ -26,8 +27,15 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     
     this.initdata();
   }
+
   initdata() {
-    this.appEvents = APPEVENTS;
+    // this.appEvents = APPEVENTS;
+    this.eventService.getAllEvents().subscribe(
+      (res) => {
+          console.log(res.result);
+          this.appEvents = [res.result]
+      }
+    )
   }
 
   ngAfterViewInit(): void {

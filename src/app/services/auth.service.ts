@@ -16,7 +16,7 @@ export class AuthService {
 
     constructor(private httpClient: HttpClient){}
 
-    getToken(): string | null{
+    getToken(p0: string): string | null{
         return localStorage.getItem("token")
       }
     
@@ -28,18 +28,13 @@ export class AuthService {
         return this.jwtHelper.decodeToken(token);
     }
 
-    getRoleFromToken(): number | null {
-        const token = this.getToken();
-         if (token) {
-            const decodedToken = this.decodeToken(token);
-           return decodedToken.scope;
-         }
-         return null;
-     }
+
 
     authenticate(req: any): Observable<any> {
         return this.httpClient.post<ApiResponse<AuthResponse>>(this.url, req).pipe(
             map((res: ApiResponse<AuthResponse>) => {
+                if(res.result !== null)
+                    this.setToken(res.result.token);
                 return res;
             })
         )

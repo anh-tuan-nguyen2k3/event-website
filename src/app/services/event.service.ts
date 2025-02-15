@@ -14,6 +14,9 @@ export class AppEvent {
     bannerUrl: string;
     location: string;
     participants: string[];
+
+
+
   
     constructor(
       eventID: number,
@@ -52,3 +55,4 @@ export class AppEvent {
     } 
   }
   
+
