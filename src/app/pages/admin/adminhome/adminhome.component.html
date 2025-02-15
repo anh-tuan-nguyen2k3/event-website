@@ -115,10 +115,70 @@
           <!-- Pending Events -->
           <div *ngIf="selectedTab === 'pendingevents'">
           <h4 class="mb-4">SỰ KIỆN CHỜ DUYỆT</h4>
+            <div *ngFor="let event of pendingEvents" class="card p-3 mb-3 rounded-4">
+              <div class="row g-0">
+                <div class="col-md-3 ">
+                  <img
+                    [src]="event.imageUrl"
+                    class="img-fluid rounded-start rounded-4"
+                    alt="Event Image"
+                  />
+                </div>
+                <div class="col-md-9">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ event.title }}</h5>
+                    <ul class="list-unstyled">
+                      <li>
+                        <i class="fas fa-clock"></i>
+                        {{ event.startDate }} - {{ event.endDate }}
+                      </li>
+                      <li>
+                        <i class="fas fa-users"></i>
+                        Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
+                      </li>
+                    </ul>
+                    <div class="d-flex flex-row align-items-center gap-2">
+                      <p class="m-0">Trạng thái: </p>
+                    <p class="card-text">
+                      <span
+                        class="badge"
+                        [ngClass]="{
+                          'bg-success': event.status === 'Approved',
+                          'bg-warning text-dark': event.status === 'Pending',
+                          'bg-danger': event.status === 'Rejected'
+                        }"
+                      >
+                        {{ event.status }}
+                      </span>
+                    </p>
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- Danh sách tổ chức -->
           <div *ngIf="selectedTab === 'orgs'">
           <h4 class="mb-4">CÂU LẠC BỘ/ TỔ CHỨC</h4>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Mã số sinh viên</th>
+                <th>Họ và Tên</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of participants; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ user.idnumber }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+              </tr>
+            </tbody>
+          </table>
           </div>
 
 

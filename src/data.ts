@@ -9,8 +9,8 @@ export const USERS: User[] = [
         isAdmin: false,
         phone: "0123456789",
         token: '',
-        idnumber:'',
-        regisEvent: ['1']
+        idnumber:'1',
+        regisEvent: ['1','4']
     },
     {
         email: "admin@st.uel.edu.vn",
@@ -19,9 +19,9 @@ export const USERS: User[] = [
         isAdmin: true,
         phone: "0123456789",
         token: '',
-        idnumber:'',
+        idnumber:'2',
         regisEvent: []
-    }
+    }  
 
 ]
 export const APPEVENTS: AppEvent[] = [
@@ -39,7 +39,8 @@ export const APPEVENTS: AppEvent[] = [
       createdAt: new Date("2024-10-01T09:00:00"),
       imageUrl: "/assets/images/events/event-erp.jpg",
       bannerUrl: "/assets/images/events/event-erp.jpg",
-      location: "Hội trường A"
+      location: "Hội trường A",
+      participants: ['1']
     },
     {
       eventID: 2,
@@ -55,7 +56,8 @@ export const APPEVENTS: AppEvent[] = [
       createdAt: new Date("2024-11-01T10:00:00"),
       imageUrl: "/assets/images/events/event-erp.jpg",
       bannerUrl: "/assets/images/events/event-erp.jpg",
-      location: "Hội trường A"
+      location: "Hội trường A",
+      participants: ['']
     },
     {
       eventID: 3,
@@ -71,15 +73,16 @@ export const APPEVENTS: AppEvent[] = [
       createdAt: new Date("2024-11-01T10:00:00"),
       imageUrl: "/assets/images/events/event-erp.jpg",
       bannerUrl: "/assets/images/events/event-erp.jpg",
-      location: "Hội trường A"
+      location: "Hội trường A",
+      participants: ['']
     },
     {
       eventID: 4,
-      title: "CHƯƠNG TRÌNH HỘI NGHỊ KHOA HỌC 2024",
+      title: "CHƯƠNG TRÌNH HỘI NGHỊ KHOA HỌC 2024-4",
       description: "Hội nghị về những tiến bộ khoa học kỹ thuật.",
       startDate: new Date("2024-12-10T09:00:00"),
       endDate: new Date("2024-12-10T17:00:00"),
-      status: "Pending",
+      status: "Approved",
       createdBy: 102,
       totalSeats: 300,
       availableSeats: 120,
@@ -87,7 +90,8 @@ export const APPEVENTS: AppEvent[] = [
       createdAt: new Date("2024-11-01T10:00:00"),
       imageUrl: "/assets/images/events/event-erp.jpg",
       bannerUrl: "/assets/images/events/event-erp.jpg",
-      location: "Hội trường A"
+      location: "Hội trường A",
+      participants: ['1','2']
     },
   ];
 

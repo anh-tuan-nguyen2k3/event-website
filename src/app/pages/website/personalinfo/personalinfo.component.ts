@@ -17,6 +17,8 @@ export class PersonalinfoComponent implements AfterViewInit{
   selectedTab: string = 'personal-info';
   isLoggedIn: boolean = false; // Kiểm tra người dùng đã đăng nhập chưa
   appEvents: AppEvent[] = [];
+  color = '#F05A22'; // Màu mặc định của nút
+  textColor = '#ffffff'; // Màu chữ mặc định
 
   ngAfterViewInit(): void {
    this.initdata();
@@ -42,7 +44,23 @@ export class PersonalinfoComponent implements AfterViewInit{
       this.loadEvents();
   }
   loadEvents() {
-    this.appEvents = APPEVENTS;
+    if (this.isLoggedIn && this.user) {
+      this.appEvents = APPEVENTS.filter(event => event.participants.includes(this.user.idnumber));
+    } else {
+      this.appEvents = [];
+    }  }
+
+  onClick() {
+    console.log("Button Thêm sự kiện được nhấn!");
+    // Thêm logic mở modal/tạo sự kiện ở đây
+  }
+  
+  onMouseOver() {
+    
+  }
+  
+  onMouseOut() {
+   
   }
 
 }

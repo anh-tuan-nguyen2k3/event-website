@@ -114,3 +114,11 @@ body {
 		display: none;
 	}
 }
+thead {
+	background-color: #144E8C;
+	color: #FFFFFF;
+  }
+table, th {
+	order: 1px solid black;
+	color:#FFFFFF
+}

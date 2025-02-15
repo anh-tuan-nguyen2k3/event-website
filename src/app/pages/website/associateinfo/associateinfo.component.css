@@ -41,3 +41,11 @@ button {
   transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
   font-size: 16px; /* Kích thước chữ */
 }
+
+.listuser {
+    background-color: #144E8C;
+    color: #ffffff;
+    border: none;
+    display: flex;
+    justify-content: end;
+}

@@ -13,6 +13,7 @@ import { PersonalinfoComponent } from './pages/website/personalinfo/personalinfo
 import { NgModule } from '@angular/core';
 import {  } from '@angular/core';
 import { AdminhomeComponent } from './pages/admin/adminhome/adminhome.component';
+import { AssociateinfoComponent } from './pages/website/associateinfo/associateinfo.component';
 
 
 
@@ -73,6 +74,10 @@ export const routes: Routes = [
     {
         path:'admin',
         component: AdminhomeComponent
+    },
+    {
+        path:'associateinfo',
+        component: AssociateinfoComponent
     }
 ];
 

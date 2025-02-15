@@ -13,6 +13,7 @@ export class AppEvent {
     imageUrl: string;
     bannerUrl: string;
     location: string;
+    participants: string[];
   
     constructor(
       eventID: number,
@@ -29,7 +30,7 @@ export class AppEvent {
       imageUrl: string,
       bannerUrl: string,
       location: string,
-
+      participants: string[] = []
 
     ) {
       this.eventID = eventID;
@@ -46,6 +47,7 @@ export class AppEvent {
       this.imageUrl=imageUrl;
       this.bannerUrl=bannerUrl;
       this.location= location;
+      this.participants = participants
 
     } 
   }

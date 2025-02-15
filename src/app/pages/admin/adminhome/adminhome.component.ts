@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { AppEvent } from '../../../services/event.service';
 import { APPEVENTS } from '../../../../data';
 import { CommonModule } from '@angular/common';
-
+import { User } from '../../../services/user.service';
+import { USERS } from '../../../../data';
 @Component({
   selector: 'app-adminhome',
   standalone: true,
@@ -14,12 +15,21 @@ import { CommonModule } from '@angular/common';
 export class AdminhomeComponent implements OnInit{
   isLoggedIn: boolean = false;
   appEvents: AppEvent[] = [];
+  pendingEvents: AppEvent[] = [];
   selectedTab: string = '';
+  eventID = 4; 
+  participants : User[] = []
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.appEvents = APPEVENTS;
+    const event = APPEVENTS.find(e => e.eventID === this.eventID);
+    if (event) {
+      // Lọc danh sách USERS có ID trong danh sách participants của event
+      this.participants = USERS.filter(user => event.participants.includes(user.idnumber));
+    }
+    this.pendingEvents = APPEVENTS.filter(event => event.status === 'Pending')
   }
 
   selectTab(tab: string, event: Event) {

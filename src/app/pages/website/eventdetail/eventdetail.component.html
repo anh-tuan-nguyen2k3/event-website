@@ -21,14 +21,6 @@
               <p><i class="fas fa-map-marker-alt"></i><b>Địa điểm:</b> {{ eventDetail?.location }}</p>
               <p><i class="fas fa-users"></i><b>Vé còn:</b> {{ eventDetail?.availableSeats }} / {{ eventDetail?.totalSeats }}</p>
               <div>
-                <!-- <app-button 
-                        class="login-button"
-                        text="Đăng ký" 
-                        color="#F05A22"
-                        hoverColor="#F05A22"
-                        textColor="#fff"
-                        (buttonClick)="openModal()">
-                </app-button> -->
                 <app-button 
                     class="login-button"
                     [text]="isRegisteredForEvent ? 'Đã đăng ký' : 'Đăng ký'" 

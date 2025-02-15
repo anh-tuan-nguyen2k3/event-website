@@ -69,12 +69,15 @@ export class EventdetailComponent implements OnInit, AfterViewInit{
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser && this.eventID) {
       const user = JSON.parse(loggedInUser);
+      console.log("Danh sách sự kiện đã đăng ký của user:", user.regisEvent); // In ra danh sách eventID đã đăng ký
+
       if (user.regisEvent && user.regisEvent.includes(this.eventID.toString())) {
         this.isRegisteredForEvent = true;
       }
     }
     console.log(this.eventID);
-    
+    console.log(this.isRegisteredForEvent);
+          
   }
 
   ngAfterViewInit(): void {
