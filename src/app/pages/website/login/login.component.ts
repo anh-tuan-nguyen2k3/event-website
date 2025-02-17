@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit{
   }
 
   login() {
-    console.log(123)
     // Kiểm tra định dạng email
      if (!this.isEmailValid(this.email)) {
         this.message = 'Email không đúng định dạng!';
@@ -45,7 +44,6 @@ export class LoginComponent implements OnInit{
         this.authService.authenticate(req).subscribe(
           (res) => {
               const role_id : number|null = this.authService.decodeToken(res.result.token).scope;
-              console.log(role_id)
               if(role_id == 3 || role_id == 2){
                 this.router.navigateByUrl('/home')
               }else if(role_id == 1){

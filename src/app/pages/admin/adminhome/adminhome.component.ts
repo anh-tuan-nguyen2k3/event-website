@@ -5,6 +5,8 @@ import { APPEVENTS } from '../../../../data';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../services/user.service';
 import { USERS } from '../../../../data';
+import { Event2Service } from '../../../services/event2.service';
+
 @Component({
   selector: 'app-adminhome',
   standalone: true,
@@ -20,16 +22,30 @@ export class AdminhomeComponent implements OnInit{
   eventID = 4; 
   participants : User[] = []
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private eventSerive: Event2Service) { }
 
   ngOnInit(): void {
-    this.appEvents = APPEVENTS;
-    const event = APPEVENTS.find(e => e.eventID === this.eventID);
-    if (event) {
-      // Lọc danh sách USERS có ID trong danh sách participants của event
-      this.participants = USERS.filter(user => event.participants.includes(user.idnumber));
-    }
-    this.pendingEvents = APPEVENTS.filter(event => event.status === 'Pending')
+   this.initialApproveEvents();
+   this.initialPendingEvents(); 
+   
+  }
+
+  initialApproveEvents(){
+    this.eventSerive.getAllEventsByStatus("approved").subscribe(
+      (res) => {
+          console.log(res.result);
+          this.appEvents = res.result;
+      }
+    )
+  }
+
+  initialPendingEvents(){
+    this.eventSerive.getAllEventsByStatus("pending").subscribe(
+      (res) => {
+          console.log(res.result);
+          this.pendingEvents = res.result;
+      }
+    )
   }
 
   selectTab(tab: string, event: Event) {
