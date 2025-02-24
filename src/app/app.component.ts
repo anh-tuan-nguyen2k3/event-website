@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
     RouterOutlet, 
     HttpClientModule, 
     CommonModule,
+    FormsModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

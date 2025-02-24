@@ -62,7 +62,7 @@ h5 {
 
 .form-control {
     width: 100%; /* Đảm bảo input chiếm hết chiều rộng cột */
-    padding: 8px 15px; /* Thêm khoảng cách bên trong */
+    /* padding: 8px 15px; Thêm khoảng cách bên trong */
     border: 1px solid #144E8C;
     border-radius: 10px;
     outline-offset: 0;

@@ -1,0 +1,29 @@
+.container-fluid {
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+.title {
+font-size: 36px; 
+font-weight: bold; 
+text-align: center; 
+}
+
+.title .blue {
+color: #144E8C;
+}
+
+.title .orange {
+color: #F05A22;
+}
+
+@media (max-width: 768px) {
+  .container .row > div {
+      flex: 1 1 100%; /* Mỗi item chiếm toàn bộ hàng trên màn hình nhỏ */
+  }
+
+  .container .row {
+      justify-content: center; /* Căn giữa nội dung */
+  }
+}

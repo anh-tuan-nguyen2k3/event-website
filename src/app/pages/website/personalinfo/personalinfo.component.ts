@@ -19,6 +19,7 @@ export class PersonalinfoComponent implements AfterViewInit{
   appEvents: AppEvent[] = [];
   color = '#F05A22'; // Màu mặc định của nút
   textColor = '#ffffff'; // Màu chữ mặc định
+  
 
   ngAfterViewInit(): void {
    this.initdata();
@@ -36,7 +37,6 @@ export class PersonalinfoComponent implements AfterViewInit{
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (loggedInUser) {
       this.user = JSON.parse(loggedInUser); // Chuyển đổi từ chuỗi JSON sang đối tượng
-      this.test = JSON.parse(loggedInUser); // Chuyển đổi từ chuỗi JSON sang đối tượng
       this.isLoggedIn = true;
 
       console.log(this.user, 123)

@@ -14,6 +14,8 @@ import { NgModule } from '@angular/core';
 import {  } from '@angular/core';
 import { AdminhomeComponent } from './pages/admin/adminhome/adminhome.component';
 import { AssociateinfoComponent } from './pages/website/associateinfo/associateinfo.component';
+import { FacultyComponent } from './pages/website/faculty/faculty.component';
+import { DashboardComponent } from './pages/website/dashboard/dashboard.component';
 
 
 
@@ -78,6 +80,14 @@ export const routes: Routes = [
     {
         path:'associateinfo',
         component: AssociateinfoComponent
+    },
+    {
+        path:'faculty',
+        component: FacultyComponent
+    },
+    {
+        path:'dashboard',
+        component: DashboardComponent
     }
 ];
 
