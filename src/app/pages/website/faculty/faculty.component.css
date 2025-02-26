@@ -5,8 +5,8 @@
     height: 100vh;
 }
 .club-logo {
-    width: 100px; 
-    height: 100px;
+    width: 150px; 
+    height: 150px;
     border-radius: 50%; 
     object-fit: cover; 
     border: 3px solid rgba(0, 0, 0, 0.1); 
