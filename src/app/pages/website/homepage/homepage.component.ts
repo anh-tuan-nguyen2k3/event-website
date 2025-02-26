@@ -8,6 +8,7 @@ import { APPEVENTS } from '../../../../data';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Event2Service } from '../../../services/event2.service';
+import { FacultyService } from '../../../services/faculty.service';
 
 
 @Component({
@@ -18,8 +19,10 @@ import { Event2Service } from '../../../services/event2.service';
   styleUrl: './homepage.component.css'
 })
 export class HomepageComponent implements OnInit, AfterViewInit {
-  constructor (private eventService: Event2Service  ) {}
+  constructor (private eventService: Event2Service, private facultyService: FacultyService  ) {}
   appEvents: any =  [];
+  faculties: any = [];
+
   ngOnInit(): void {
     this.updateContentPadding();
     const content = document.querySelector('.content') as HTMLElement;
@@ -36,6 +39,14 @@ export class HomepageComponent implements OnInit, AfterViewInit {
           this.appEvents = res.result;
       }
     )
+
+    this.facultyService.getAllFaculty().subscribe(
+      (res) => {
+        console.log(res.result);
+        this.faculties = res.result;
+      }
+    )
+
   }
 
   ngAfterViewInit(): void {
