@@ -38,9 +38,24 @@
                   <span ><strong>Tài khoản sinh viên:</strong></span>
                   <span id="email" style="margin-left: 6px;">{{user?.email || 'Chưa cập nhật'}}</span>
                 </div>
-                <div class="mb-2">
+                <!-- <div class="mb-2">
                   <span><strong>Họ và tên:</strong></span>
                   <span id="username" style="margin-left: 6px;">{{user?.name || 'Chưa cập nhật'}}</span>
+                  <input *ngIf="isEditing" type="text" [(ngModel)]="tempName" class="form-control d-inline w-auto">
+
+                </div> -->
+                <div class="mb-2">
+                  <span><strong>Họ và tên:</strong></span>
+                
+                  <!-- Chỉ hiển thị nếu không ở chế độ chỉnh sửa -->
+                  <span *ngIf="!isEditing" id="username" style="margin-left: 6px;">
+                    {{ user?.name || 'Chưa cập nhật' }}
+                  </span>
+                
+                  <!-- Hiển thị ô input khi isEditing = true -->
+                  <input *ngIf="isEditing" type="text" [(ngModel)]="tempName"
+                         class="form-control d-inline w-auto ms-2">
+                
                 </div>
                 <div class="mb-2">
                   <span><strong>Mã số sinh viên:</strong></span>
@@ -50,14 +65,48 @@
                   <span><strong>Số điện thoại:</strong></span>
                   <span id="phone" style="margin-left: 6px;">{{user?.phone || 'Chưa cập nhật'}}</span>
                 </div>
-                <app-button 
+                <!-- <app-button 
                   class="login-button mt-2 btn-edit"
                   text="Chỉnh sửa" 
                   color="#F05A22"
                   hoverColor="#FB8357"
                   textColor="#fff"
                   >
-            </app-button>
+                </app-button> -->
+                <!-- <app-button 
+                  *ngIf="!isEditing"
+                  class="login-button mt-2 btn-edit"
+                  text="Chỉnh sửa" 
+                  color="#F05A22"
+                  hoverColor="#FB8357"
+                  textColor="#fff"
+                  (click)="toggleEdit()">
+                </app-button>
+
+                <app-button 
+                  *ngIf="isEditing"
+                  class="login-button mt-2 btn-save"
+                  text="Lưu" 
+                  color="#28a745"
+                  hoverColor="#42c977"
+                  textColor="#fff"
+                  (click)="toggleEdit()">
+                </app-button> -->
+                <app-button *ngIf="!isEditing" (click)="startEditing()"
+                    class="login-button mt-2 btn-edit"
+                    text="Chỉnh sửa"
+                    color="#F05A22"
+                    hoverColor="#FB8357"
+                    textColor="#fff">
+                </app-button>
+
+                <app-button *ngIf="isEditing" (click)="saveChanges()"
+                            class="login-button mt-2 btn-edit"
+                            text="Lưu"
+                            color="#28a745"
+                            hoverColor="#58d68d"
+                            textColor="#fff">
+                </app-button>
               </div>
             </div>
            <!-- Sự kiện của tôi -->

@@ -41,6 +41,31 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Listen for resize events and update padding dynamically
     window.addEventListener('resize', this.updateContentPadding);
+    const track = document.querySelector('.logo-track') as HTMLElement;
+    const logos = document.querySelectorAll('.club-logo');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let index = 0;
+    const maxIndex = logos.length - 6; // Vì luôn hiển thị 6 logo
+
+    function updateSlide() {
+      track.style.transform = `translateX(-${index * 110}px)`;
+    }
+
+    nextBtn?.addEventListener('click', () => {
+      if (index < maxIndex) {
+        index++;
+        updateSlide();
+      }
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      if (index > 0) {
+        index--;
+        updateSlide();
+      }
+    });
   }
 
   private updateContentPadding(): void {

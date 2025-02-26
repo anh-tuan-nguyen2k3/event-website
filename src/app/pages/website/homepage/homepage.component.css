@@ -63,3 +63,46 @@
 .material-icons{
   color: #F05A22;
 }
+
+/* ---- */
+.logo-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.logo-container {
+  width: 850px; /* Chứa đúng 6 logo */
+  overflow: hidden;
+}
+
+.logo-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  padding: 20px;
+}
+
+.club-logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.slider-btn {
+  background: transparent; /* Làm nền trong suốt */
+  border: none; /* Loại bỏ viền */
+  font-size: 24px;
+  cursor: pointer;
+  color: #000; /* Đổi màu biểu tượng nếu cần */
+  padding: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.slider-btn:hover {
+  transform: scale(1.1); /* Hiệu ứng phóng to nhẹ khi hover */
+  color: #007bff; /* Đổi màu khi hover (tùy chỉnh) */
+}
+
