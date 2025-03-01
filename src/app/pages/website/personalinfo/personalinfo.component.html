@@ -59,39 +59,32 @@
                 </div>
                 <div class="mb-2">
                   <span><strong>Mã số sinh viên:</strong></span>
-                  <span id="idnumber" style="margin-left: 6px;">{{user?.idnumber || 'Chưa cập nhật'}}</span>
+                  
+                  <span *ngIf="!isEditing" id="idnumber" style="margin-left: 6px;">
+                    {{ user?.idnumber || 'Chưa cập nhật' }}
+                  </span>
+                
+                  <!-- Hiển thị ô input khi isEditing = true -->
+                  <input *ngIf="isEditing" type="text" [(ngModel)]="tempId"
+                         class="form-control d-inline w-auto ms-2">
+                  
                 </div>
+
+
+
+
                 <div class="mb-2">
                   <span><strong>Số điện thoại:</strong></span>
-                  <span id="phone" style="margin-left: 6px;">{{user?.phone || 'Chưa cập nhật'}}</span>
-                </div>
-                <!-- <app-button 
-                  class="login-button mt-2 btn-edit"
-                  text="Chỉnh sửa" 
-                  color="#F05A22"
-                  hoverColor="#FB8357"
-                  textColor="#fff"
-                  >
-                </app-button> -->
-                <!-- <app-button 
-                  *ngIf="!isEditing"
-                  class="login-button mt-2 btn-edit"
-                  text="Chỉnh sửa" 
-                  color="#F05A22"
-                  hoverColor="#FB8357"
-                  textColor="#fff"
-                  (click)="toggleEdit()">
-                </app-button>
 
-                <app-button 
-                  *ngIf="isEditing"
-                  class="login-button mt-2 btn-save"
-                  text="Lưu" 
-                  color="#28a745"
-                  hoverColor="#42c977"
-                  textColor="#fff"
-                  (click)="toggleEdit()">
-                </app-button> -->
+                  <span *ngIf="!isEditing" id="phone" style="margin-left: 6px;">
+                    {{user?.phone || 'Chưa cập nhật'}}
+                  </span>
+                
+                  <!-- Hiển thị ô input khi isEditing = true -->
+                  <input *ngIf="isEditing" type="text" [(ngModel)]="tempPhone"
+                         class="form-control d-inline w-auto ms-2">
+                </div>
+
                 <app-button *ngIf="!isEditing" (click)="startEditing()"
                     class="login-button mt-2 btn-edit"
                     text="Chỉnh sửa"

@@ -30,6 +30,9 @@ export class PersonalinfoComponent implements AfterViewInit{
 
   isEditing = false;
   tempName = this.user.name;
+  tempPhone = this.user.phone;
+  tempId = this.user.idnumber
+
 
   // toggleEdit() {
   //   this.isEditing = !this.isEditing;
@@ -39,6 +42,8 @@ export class PersonalinfoComponent implements AfterViewInit{
   // }
   startEditing() {
     this.tempName = this.user.name; // Lưu giá trị ban đầu
+    this.tempPhone = this.user.phone
+    this.tempId = this.user.idnumber
     this.isEditing = true; // Bật chế độ chỉnh sửa
   }
 
@@ -46,6 +51,15 @@ export class PersonalinfoComponent implements AfterViewInit{
     if (this.tempName.trim()) {
       this.user.name = this.tempName; // Cập nhật dữ liệu mới
     }
+    if (this.tempPhone.trim()) {
+      this.user.phone = this.tempPhone // Cập nhật dữ liệu mới
+    }
+    if (this.tempId.trim()) {
+      this.user.idnumber = this.tempId // Cập nhật dữ liệu mới
+    }
+     
+     
+    
     this.isEditing = false; // Ẩn input, hiển thị lại span
   }
 
@@ -60,7 +74,6 @@ export class PersonalinfoComponent implements AfterViewInit{
     this.initdata();
     console.log(`Tab được chọn: ${tab}`);
   }
-  test: any;
   // user: any;
   initdata() {
     const loggedInUser = localStorage.getItem('loggedInUser');

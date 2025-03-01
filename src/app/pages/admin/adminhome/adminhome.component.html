@@ -63,6 +63,28 @@
         <!-- Dashboard -->
         <div *ngIf="selectedTab === 'dashboard'">
           <h4 class="mb-4">DASHBOARD</h4>
+          <!-- filter -->
+          <div class="container mb-4">
+            <div class="row g-2 align-items-center">           
+                <!-- Dropdown Thể loại -->
+                <div class="col-md-3 col-6">
+                    <select class="form-select rounded-3">
+                        <option selected>Thể loại</option>
+                        <option value="1">Cuộc thi</option>
+                        <option value="2">Hoạt động tình nguyện</option>
+                        <option value="3">Hội thảo/ Workshop</option>
+                        <option value="4">Khác</option>
+                    </select>
+                </div>
+        
+                <!-- Dropdown Đơn vị tổ chức -->
+                <!-- Ô chọn ngày -->
+                <div class="col-md-2 col-6">
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+        </div>
+        <!-- end filter -->
           <div class="container">
             <div class="row g-3"> <!-- Sử dụng g-3 để tạo khoảng cách giữa các card -->
                 <div class="col-lg-4 col-md-6 col-12">
@@ -194,21 +216,66 @@
           </div>
           <!-- Danh sách tổ chức -->
           <div *ngIf="selectedTab === 'orgs'">
-          <h4 class="mb-4">CÂU LẠC BỘ/ TỔ CHỨC</h4>
+          
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="mb-0">CÂU LẠC BỘ/ TỔ CHỨC</h4>
+            <button 
+            (click)="onClick()"
+            (mouseover)="onMouseOver()"
+            (mouseout)="onMouseOut()"
+            [ngStyle]="{'background-color': color, 'color': textColor, 'border': '2px solid #F05A22'}"                  
+            class="btn btn-primary d-flex align-items-center"
+            >
+              <i class="fas fa-plus" style="margin-left: 6px;"></i> <!-- Icon thêm sự kiện -->
+              Thêm tổ chức
+            </button>
+          </div>
+
+          <div class="modal fade" id="organizationModal" tabindex="-1" aria-labelledby="organizationModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="organizationModalLabel">Thêm tổ chức</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="organizationName" class="form-label">Tên tổ chức</label>
+                      <input type="text" class="form-control" id="organizationName" placeholder="Nhập tên tổ chức"
+                             [(ngModel)]="organizationName" name="organizationName">
+                    </div>
+                
+                    <div class="mb-3">
+                      <label for="organizationEmail" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="organizationEmail" placeholder="Nhập email"
+                             [(ngModel)]="organizationEmail" name="organizationEmail">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                  <button type="button" class="btn btn-primary" (click)="addOrganization()">Thêm tổ chức</button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          
+
+
           <table class="table table-bordered">
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Mã số sinh viên</th>
-                <th>Họ và Tên</th>
+                <th>Tổ chức</th>
                 <th>Email</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of participants; let i = index">
+              <tr *ngFor="let user of faculties; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ user.idnumber }}</td>
-                <td>{{ user.name }}</td>
+                <td>{{ user.faculty_name }}</td>
                 <td>{{ user.email }}</td>
               </tr>
             </tbody>
