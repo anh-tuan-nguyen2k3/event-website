@@ -33,6 +33,22 @@ export class AuthService {
           localStorage.setItem("token", token);
     }
 
+    getUserId() :any{
+        const token = localStorage.getItem("token");
+        if(token !== null)
+            return this.jwtHelper.decodeToken(token).uid;
+        else 
+            return null;
+    }
+
+    getRoleId() :any{
+        const token = localStorage.getItem("token");
+        if(token !== null)
+            return this.jwtHelper.decodeToken(token).scope;
+        else 
+            return null;
+    }
+
     decodeToken(token: string): any{
         return this.jwtHelper.decodeToken(token);
     }

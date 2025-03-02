@@ -6,6 +6,8 @@ import { ButtonComponent } from '../../../shared/button/button.component';
 import { APPEVENTS } from '../../../../data';
 import { AppEvent } from '../../../services/event.service';
 import { FormsModule } from '@angular/forms';
+import { User2Service } from '../../../services/user2.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-personalinfo',
@@ -14,19 +16,27 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './personalinfo.component.html',
   styleUrl: './personalinfo.component.css'
 })
-export class PersonalinfoComponent implements AfterViewInit{
+export class PersonalinfoComponent implements AfterViewInit, OnInit{
   selectedTab: string = 'personal-info';
   isLoggedIn: boolean = false; // Kiểm tra người dùng đã đăng nhập chưa
   appEvents: AppEvent[] = [];
   color = '#F05A22'; // Màu mặc định của nút
   textColor = '#ffffff'; // Màu chữ mặc định
+  user?: any;
+
+  constructor(private userService: User2Service, private authService: AuthService){}
+  ngOnInit(): void {
+    const userId = this.authService.getUserId();
+    if(userId !== null)
+      this.userService.getUserbyId(userId).subscribe(
+        (res) => {
+          this.user = res.result;
+        }
+      )
+    else
+      window.location.href="/login";
+  }
   
-  user = {
-    email: 'example@student.com',
-    name: 'Nguyễn Văn A',
-    idnumber: '12345678',
-    phone: '0987654321'
-  };
 
   isEditing = false;
   tempName = this.user.name;
