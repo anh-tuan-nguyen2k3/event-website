@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { User } from '../../../services/user.service';
 import { USERS } from '../../../../data';
 import { Event2Service } from '../../../services/event2.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-adminhome',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './adminhome.component.html',
   styleUrl: './adminhome.component.css'
 })
@@ -20,7 +21,17 @@ export class AdminhomeComponent implements OnInit{
   pendingEvents: AppEvent[] = [];
   selectedTab: string = '';
   eventID = 4; 
-  participants : User[] = []
+  color = '#F05A22'; // Màu mặc định của nút
+  textColor = '#ffffff'; // Màu chữ mặc định
+  // faculties : User[] = []
+  organizationName: string = '';
+  organizationEmail: string = '';
+  faculties: any[] = [
+    { email: 'artclub@example.com', faculty_name: 'Art Club' },
+    { email: 'robotics@example.com', faculty_name: 'Robotics Club' },
+    { email: 'environment@example.com', faculty_name: 'Environment Club' }
+  ];
+  
 
   constructor(private router: Router, private eventSerive: Event2Service) { }
 
@@ -59,4 +70,44 @@ export class AdminhomeComponent implements OnInit{
     this.isLoggedIn = false;
     this.router.navigate(['/home']);
   }
+  onClick() {
+    console.log("Add event button is clicked");
+    const modalElement = document.getElementById('organizationModal');
+  if (modalElement) {
+    const modal = new (window as any).bootstrap.Modal(modalElement);      
+    modal.show();
+  }
+  }
+  onMouseOver() {
+      
+  }
+  
+  onMouseOut() {
+   
+  }
+  
+
+  addOrganization() {
+    if (this.organizationName.trim() && this.organizationEmail.trim()) {
+      // Thêm tổ chức mới vào danh sách
+      this.faculties.push({
+        faculty_name: this.organizationName,
+        email: this.organizationEmail
+      });
+
+      // Reset input sau khi thêm
+      this.organizationName = '';
+      this.organizationEmail = '';
+
+      // Đóng modal sau khi thêm thành công
+      const modalElement = document.getElementById('organizationModal');
+      if (modalElement) {
+        const modal = new (window as any).bootstrap.Modal(modalElement);
+        modal.hide();
+      }
+    } else {
+      alert('Vui lòng nhập đầy đủ thông tin!');
+    }
+  }
+
 }
