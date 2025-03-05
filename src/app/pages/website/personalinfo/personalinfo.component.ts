@@ -22,11 +22,19 @@ export class PersonalinfoComponent implements AfterViewInit, OnInit{
   appEvents: AppEvent[] = [];
   color = '#F05A22'; // Màu mặc định của nút
   textColor = '#ffffff'; // Màu chữ mặc định
-  user?: any;
+  // user?: any;
   tempName: any;
   tempPhone: any;
   tempId: any;
   isEditing: boolean | undefined;
+
+  user: any = {
+    email: 'nguyenanhtuan1.442003@gmail.com',
+    name: '',
+    phone: '',
+    idnumber: ''
+  };
+  
 
   constructor(private userService: User2Service, private authService: AuthService){}
   ngOnInit(): void {

@@ -143,4 +143,32 @@ export class AssociateinfoComponent implements AfterViewInit{
     onCategoryChange(event: any) {
       this.event.catgoryId = +event.target.value;
     }
+    passwordData = {
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    };
+    
+    changePassword() {
+      if (!this.passwordData.currentPassword || !this.passwordData.newPassword || !this.passwordData.confirmPassword) {
+        alert("Vui lòng nhập đầy đủ thông tin!");
+        return;
+      }
+    
+      if (this.passwordData.newPassword !== this.passwordData.confirmPassword) {
+        alert("Mật khẩu mới và nhập lại không khớp!");
+        return;
+      }
+    
+      console.log("Đổi mật khẩu thành công!", this.passwordData);
+      alert("Mật khẩu đã được thay đổi!");
+      
+      // Reset form
+      this.passwordData = {
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      };
+    }
+    
 }
