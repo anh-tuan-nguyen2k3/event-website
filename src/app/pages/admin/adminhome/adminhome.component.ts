@@ -132,6 +132,7 @@ export class AdminhomeComponent implements OnInit{
         if (modalElement) {
           const modal = new (window as any).bootstrap.Modal(modalElement);
           modal.show();
+          console.log('Click participantModal')
         }
       }
   

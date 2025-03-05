@@ -107,12 +107,13 @@ export class EventdetailComponent implements OnInit, AfterViewInit{
   submitForm() {
     console.log('Dữ liệu form:', this.formData);
     // alert('Form submitted!'); 
-    let modalElement = document.getElementById('eventDetailModal');
+    let modalElement = document.getElementById('registerModal');
     if (modalElement) {
       let modal = bootstrap.Modal.getInstance(modalElement);
       modal.hide();
     
     }
+    
     
   }
 }

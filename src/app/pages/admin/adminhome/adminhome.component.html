@@ -243,9 +243,9 @@
         <!-- Pending Events -->
         <div *ngIf="selectedTab === 'pendingevents'">
             <h4 class="mb-4">SỰ KIỆN CHỜ DUYỆT</h4>
-            <div *ngFor="let event of pendingEvents" class="card p-3 mb-3 rounded-4">
+            <div *ngFor="let event of appEvents" class="card p-3 mb-3 rounded-4">
                 <div class="row g-0">
-                    <div class="col-md-3 ">
+                    <div class="col-md-2 ">
                         <img
                             [src]="event.imageUrl"
                             class="img-fluid rounded-start rounded-4"
@@ -281,6 +281,78 @@
                                 </p>
                         
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 d-flex align-items-center justify-content-center">
+                        <div class="dropdown">
+                            <button class="btn p-0 border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="/assets/images/icons/ic_more.svg" alt="More">
+                            </button>
+                        
+                            <ul class="dropdown-menu rounded-4">
+                                <li><a class="dropdown-item" (click)="openModal(event)" >Chi tiết sự kiện</a></li>
+                                <li>
+                                    <button class="dropdown-item" (click)="openParticipantModal(event)">Danh sách đăng ký</button>
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#">Xóa</a></li>
+                            </ul>
+                        
+                        </div>
+                    </div>
+                    <div class="modal fade" id="participantModal" tabindex="-1" aria-labelledby="participantModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="participantModalLabel">Danh sách đăng ký tham gia</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã số sinh viên</th>
+                                    <th>Họ và Tên</th>
+                                    <th>Email</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let user of participants; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ user.idnumber }}</td>
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                        </div>
+                    </div> 
+
+                    <!-- Modal thông tin sự kiện -->
+                    <div
+                    class="modal fade"
+                    id="eventDetailModal"
+                    tabindex="-1"
+                    aria-labelledby="eventDetailModalLabel"
+                    aria-hidden="true"
+                    >
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="eventDetailModalLabel">{{ selectedEvent?.title }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <img [src]="selectedEvent?.imageUrl" class="img-fluid mb-3" *ngIf="selectedEvent?.imageUrl" />
+                            <p>{{ selectedEvent?.description }}</p>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="approveEvent()">Duyệt</button>
+                            <button type="button" class="btn btn-danger" (click)="rejectEvent()">Từ chối</button>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
