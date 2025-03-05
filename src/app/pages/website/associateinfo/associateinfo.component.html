@@ -66,62 +66,67 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form>
+                          <form (ngSubmit)="onSubmit()" #eventForm="ngForm">
+
                             <div class="mb-3">
                               <label for="eventTitle" class="form-label">Tiêu đề</label>
-                              <input type="text" class="form-control" id="eventTitle" placeholder="Tiêu đề không quá 100 ký tự">
+                              <input type="text" class="form-control" id="eventTitle" placeholder="Tiêu đề không quá 100 ký tự"
+                                required [(ngModel)]="event.title" name="title">
                             </div>
-                  
+        
                             <div class="mb-3">
                               <label class="form-label">Ảnh tiêu đề</label>
                               <div class="input-group">
-                                <button class="btn btn-outline-secondary">
-                                  <i class="fas fa-image"></i> Thêm ảnh
-                                </button>
+                                <input type="file" (change)="onFileSelect($event)" name="image-banner" id="image-banner">
                               </div>
                             </div>
-                  
+        
                             <div class="mb-3">
                               <label class="form-label">Thời gian đăng ký</label>
                               <div class="d-flex gap-2">
-                                <input type="date" class="form-control">
-                                <input type="date" class="form-control">
+                                <input type="date" class="form-control" required [(ngModel)]="event.startDate" name="startDate">
+                                <input type="date" class="form-control" required [(ngModel)]="event.endDate" name="endDate">
                               </div>
                             </div>
-                  
+        
                             <div class="row">
                               <div class="col-md-4">
                                 <label for="eventLocation" class="form-label">Địa điểm</label>
-                                <input type="text" class="form-control" id="eventLocation">
+                                <input type="text" class="form-control" id="eventLocation" required [(ngModel)]="event.location"
+                                  name="location">
                               </div>
                               <div class="col-md-4">
                                 <label for="eventParticipants" class="form-label">Số lượng tham gia</label>
-                                <input type="number" class="form-control" id="eventParticipants">
+                                <input type="number" class="form-control" id="eventParticipants" required
+                                  [(ngModel)]="event.participants" name="participants">
                               </div>
                               <div class="col-md-4 col-6">
                                 <label for="category" class="form-label">Thể loại</label>
-                                <select class="form-select rounded-3">
-                                    <option selected>Thể loại</option>
-                                    <option value="1">Cuộc thi</option>
-                                    <option value="2">Hoạt động tình nguyện</option>
-                                    <option value="3">Hội thảo/ Workshop</option>
-                                    <option value="4">Khác</option>
+                                <select  (change)="onCategoryChange($event)" class="form-select rounded-3" required [(ngModel)]="event.catgoryId" name="category">
+                                  <option value={{1}}>Cuộc thi</option>
+                                  <option value={{2}}>Hoạt động tình nguyện</option>
+                                  <option value={{3}}>Hội thảo/ Workshop</option>
+                                  <option value={{4}}>Khác</option>
                                 </select>
+                              </div>
                             </div>
-                            </div>
-                  
+        
                             <div class="mb-3">
                               <label for="eventDetails" class="form-label">Chi tiết sự kiện</label>
-                              <textarea class="form-control" id="eventDetails" rows="4"></textarea>
+                              <textarea class="form-control" id="eventDetails" rows="4" required [(ngModel)]="event.description"
+                                name="details"></textarea>
                             </div>
-                  
+        
                             <div class="mb-3">
                               <label class="form-label">Ảnh bài đăng</label>
                               <div class="input-group">
-                                <button class="btn btn-outline-secondary border">
-                                  <i class="fas fa-image"></i> Thêm ảnh
-                                </button>
+                                <input type="file" (change)="onFileSelect($event)" name="image-avatar" id="image-avatar">
                               </div>
+                            </div>    
+        
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" (click)="onCancel()">Hủy</button>
+                              <button type="submit" class="btn btn-primary" [disabled]="!eventForm.form.valid">Gửi sự kiện</button>
                             </div>
                           </form>
                         </div>
@@ -264,7 +269,7 @@
                             <button class="btn listuser d-flex align-items-center gap-2"
                                     style="background-color: #144E8C; color: #ffffff; border: none;"
                                     (click)="openParticipantModal(event)">
-                              <i class="fa-solid fa-table-list"></i>
+                              <i class="fa-solid fa-table-list"></i>.
                             </button>
                           </div>
                           
