@@ -39,7 +39,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <form>
+                    <!-- <form>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="username" placeholder=" " required />
                             <label for="text">Họ và tên</label>
@@ -64,7 +64,36 @@
                             textColor="#fff"
                             >
                         </app-button>
+                    </form> -->
+                    <form (ngSubmit)="submitForm()">
+                      <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="username" placeholder=" " required [(ngModel)]="formData.username" name="username"/>
+                          <label for="username">Họ và tên</label>
+                      </div>   
+                      <div class="form-floating mb-3">
+                          <input type="email" class="form-control" id="email" placeholder=" " required [(ngModel)]="formData.email" name="email"/>
+                          <label for="email">Email</label>
+                      </div>        
+                      <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="idnumber" placeholder=" " required [(ngModel)]="formData.idnumber" name="idnumber"/>
+                          <label for="idnumber">Mã số sinh viên</label>
+                      </div>  
+                      <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="phone" placeholder=" " [(ngModel)]="formData.phone" name="phone"/>
+                          <label for="phone">Số điện thoại</label>
+                      </div>  
+                  
+                      <app-button 
+                          class="login-button"
+                          text="Đăng ký" 
+                          color="#F05A22"
+                          hoverColor="#F05A22"
+                          textColor="#fff"
+                          type="submit"
+                      >
+                      </app-button>
                     </form>
+                  
                     </div>
                 </div>
                 </div>

@@ -50,288 +50,314 @@
             </a>
         </li>
     </ul>
-  </section>
+</section>
   
-  <section id="content" class="flex-grow-1 p-3">
-      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-          <div class="container-fluid">
-              <a href="#" class="" style="text-decoration: none; font-family: 'Lato'; margin-left: auto; text-align: end;">Trang chủ</a>
-          </div>
-      </nav>
-      <main class="mt-4">
-        <!-- Dashboard -->
-          <div *ngIf="selectedTab === 'dashboard'">
-              <h4 class="mb-4">DASHBOARD</h4>
-              <!-- filter -->
-              <div class="container mb-4">
-                  <div class="row g-2 align-items-center">           
-                      <!-- Dropdown Thể loại -->
-                      <div class="col-md-3 col-6">
-                          <select class="form-select rounded-3">
-                              <option selected>Thể loại</option>
-                              <option value="1">Cuộc thi</option>
-                              <option value="2">Hoạt động tình nguyện</option>
-                              <option value="3">Hội thảo/ Workshop</option>
-                              <option value="4">Khác</option>
-                          </select>
-                      </div>
-                      <!-- Dropdown Đơn vị tổ chức -->
-                      <!-- Ô chọn ngày -->
-                      <div class="col-md-2 col-6">
-                          <input type="date" class="form-control">
-                      </div>
-                  </div>
-              </div>
-          <!-- end filter -->
-              <div class="container">
-              <div class="row g-3"> <!-- Sử dụng g-3 để tạo khoảng cách giữa các card -->
-                  <div class="col-lg-4 col-md-6 col-12">
-                      <div class="card rounded-4 p-3 slicer">
-                          <div class="row">
-                              <h5 class="col-6 mb-4">Sự kiện</h5>
-                              <div class="col-6 icon text-end">Icon</div>
-                          </div>
-                          <h3>355</h3>
-                      </div>
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-12">
-                      <div class="card rounded-4 p-3 slicer">
-                          <div class="row">
-                              <h5 class="col-6 mb-4">Tổ chức</h5>
-                              <div class="col-6 icon text-end">Icon</div>
-                          </div>
-                          <h3>12</h3>
-                      </div>
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-12">
-                      <div class="card rounded-4 p-3 slicer">
-                          <div class="row">
-                              <h5 class="col-6 mb-4">Tham dự</h5>
-                              <div class="col-6 icon text-end">Icon</div>
-                          </div>
-                          <h3>1234</h3>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          </div>
+<section id="content" class="flex-grow-1 p-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container-fluid">
+            <a href="#" class="" style="text-decoration: none; font-family: 'Lato'; margin-left: auto; text-align: end;">Trang chủ</a>
+        </div>
+    </nav>
+    <main class="mt-4">
+    <!-- Dashboard -->
+        <div *ngIf="selectedTab === 'dashboard'">
+            <h4 class="mb-4">DASHBOARD</h4>
+            <!-- filter -->
+            <div class="container mb-4">
+                <div class="row g-2 align-items-center">           
+                    <!-- Dropdown Thể loại -->
+                    <div class="col-md-3 col-6">
+                        <select class="form-select rounded-3">
+                            <option selected>Thể loại</option>
+                            <option value="1">Cuộc thi</option>
+                            <option value="2">Hoạt động tình nguyện</option>
+                            <option value="3">Hội thảo/ Workshop</option>
+                            <option value="4">Khác</option>
+                        </select>
+                    </div>
+                    <!-- Dropdown Đơn vị tổ chức -->
+                    <!-- Ô chọn ngày -->
+                    <div class="col-md-2 col-6">
+                        <input type="date" class="form-control">
+                    </div>
+                </div>
+            </div>
+        <!-- end filter -->
+            <div class="container">
+            <div class="row g-3"> <!-- Sử dụng g-3 để tạo khoảng cách giữa các card -->
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card rounded-4 p-3 slicer">
+                        <div class="row">
+                            <h5 class="col-6 mb-4">Sự kiện</h5>
+                            <div class="col-6 icon text-end">Icon</div>
+                        </div>
+                        <h3>355</h3>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card rounded-4 p-3 slicer">
+                        <div class="row">
+                            <h5 class="col-6 mb-4">Tổ chức</h5>
+                            <div class="col-6 icon text-end">Icon</div>
+                        </div>
+                        <h3>12</h3>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card rounded-4 p-3 slicer">
+                        <div class="row">
+                            <h5 class="col-6 mb-4">Tham dự</h5>
+                            <div class="col-6 icon text-end">Icon</div>
+                        </div>
+                        <h3>1234</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
 
-        <!-- Events -->
-          <div *ngIf="selectedTab === 'all-event'">
-              <h4 class="mb-4">SỰ KIỆN</h4>
-              <div *ngFor="let event of appEvents" class="card p-3 mb-3 rounded-4">
-                  <div class="row g-0">
-                      <div class="col-md-2 d-flex justify-content-center align-items-center">
-                          <img
-                              [src]="event.imageUrl"
-                              class="img-fluid rounded-start rounded-4"
-                              alt="Event Image"
-                          />
-                      </div>
-                      <div class="col-md-9">
-                          <div class="card-body">
-                              <h5 class="card-title">{{ event.title }}</h5>
-                              <ul class="list-unstyled">
-                                  <li>
-                                      <i class="fas fa-clock"></i>
-                                      {{ event.startDate }} - {{ event.endDate }}
-                                  </li>
-                                  <li>
-                                      <i class="fas fa-users"></i>
-                                      Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
-                                  </li>
-                              </ul>
-                              <div class="d-flex flex-row align-items-center gap-2">
-                                  <p class="m-0">Trạng thái: </p>
-                                  <p class="card-text">
-                                  <span
-                                      class="badge"
-                                      [ngClass]="{
-                                        'bg-success': event.status === 'Approved',
-                                        'bg-warning text-dark': event.status === 'Pending',
-                                        'bg-danger': event.status === 'Rejected'
-                                      }"
-                                  >
-                                      {{ event.status }}
-                                  </span>
-                              </p>
-                              
-                              </div>
-                          </div>
-                      </div>
-    
-                      <div class="col-md-1 d-flex align-items-center justify-content-center">
-                          <div class="dropdown">
-                              <button class="btn p-0 border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  <img src="/assets/images/icons/ic_more.svg" alt="More">
-                              </button>
-                            
-                              <ul class="dropdown-menu rounded-4">
-                                  <li><a class="dropdown-item" href="#">Chi tiết sự kiện</a></li>
-                                  <li>
-                                      <button class="dropdown-item" (click)="openParticipantModal(event)">Danh sách đăng ký</button>
-                                  </li>
-                                  <li><a class="dropdown-item text-danger" href="#">Xóa</a></li>
-                              </ul>
-                            
-                          </div>
-                      </div>
-
-                      <div class="modal fade" id="participantModal" tabindex="-1" aria-labelledby="participantModalLabel" aria-hidden="true">
-                          <div class="modal-dialog modal-lg">
-                          <div class="modal-content">
-                              <div class="modal-header">
-                              <h5 class="modal-title" id="participantModalLabel">Danh sách đăng ký tham gia</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                              <table class="table table-bordered">
-                                  <thead>
-                                  <tr>
-                                      <th>STT</th>
-                                      <th>Mã số sinh viên</th>
-                                      <th>Họ và Tên</th>
-                                      <th>Email</th>
-                                  </tr>
-                                  </thead>
-                                  <tbody>
-                                  <tr *ngFor="let user of participants; let i = index">
-                                      <td>{{ i + 1 }}</td>
-                                      <td>{{ user.idnumber }}</td>
-                                      <td>{{ user.name }}</td>
-                                      <td>{{ user.email }}</td>
-                                  </tr>
-                                  </tbody>
-                              </table>
-                              </div>
-                          </div>
-                          </div>
-                      </div> 
-                    
-              
-                  </div>
-              </div>
-          </div>
-
-          <!-- Pending Events -->
-          <div *ngIf="selectedTab === 'pendingevents'">
-              <h4 class="mb-4">SỰ KIỆN CHỜ DUYỆT</h4>
-              <div *ngFor="let event of pendingEvents" class="card p-3 mb-3 rounded-4">
-                  <div class="row g-0">
-                      <div class="col-md-3 ">
-                          <img
-                              [src]="event.imageUrl"
-                              class="img-fluid rounded-start rounded-4"
-                              alt="Event Image"
-                          />
-                      </div>
-                      <div class="col-md-9">
-                          <div class="card-body">
-                              <h5 class="card-title">{{ event.title }}</h5>
-                              <ul class="list-unstyled">
-                                  <li>
-                                      <i class="fas fa-clock"></i>
-                                      {{ event.startDate }} - {{ event.endDate }}
-                                  </li>
-                                  <li>
-                                      <i class="fas fa-users"></i>
-                                      Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
-                                  </li>
-                              </ul>
-                              <div class="d-flex flex-row align-items-center gap-2">
-                                  <p class="m-0">Trạng thái: </p>
-                                  <p class="card-text">
-                                  <span
+    <!-- Events -->
+        <div *ngIf="selectedTab === 'all-event'">
+            <h4 class="mb-4">SỰ KIỆN</h4>
+            <div *ngFor="let event of appEvents" class="card p-3 mb-3 rounded-4">
+                <div class="row g-0">
+                    <div class="col-md-2 d-flex justify-content-center align-items-center">
+                        <img
+                            [src]="event.imageUrl"
+                            class="img-fluid rounded-start rounded-4"
+                            alt="Event Image"
+                        />
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.title }}</h5>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <i class="fas fa-clock"></i>
+                                    {{ event.startDate }} - {{ event.endDate }}
+                                </li>
+                                <li>
+                                    <i class="fas fa-users"></i>
+                                    Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
+                                </li>
+                            </ul>
+                            <div class="d-flex flex-row align-items-center gap-2">
+                                <p class="m-0">Trạng thái: </p>
+                                <p class="card-text">
+                                <span
                                     class="badge"
                                     [ngClass]="{
-                                      'bg-success': event.status === 'Approved',
-                                      'bg-warning text-dark': event.status === 'Pending',
-                                      'bg-danger': event.status === 'Rejected'
+                                    'bg-success': event.status === 'Approved',
+                                    'bg-warning text-dark': event.status === 'Pending',
+                                    'bg-danger': event.status === 'Rejected'
                                     }"
-                                  >
-                                      {{ event.status }}
-                                  </span>
-                                  </p>
+                                >
+                                    {{ event.status }}
+                                </span>
+                            </p>
                             
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <!-- Danh sách tổ chức -->
-          <div *ngIf="selectedTab === 'orgs'">
-          
-              <div class="d-flex justify-content-between align-items-center mb-4">
-                  <h4 class="mb-0">CÂU LẠC BỘ/ TỔ CHỨC</h4>
-                  <button 
-                      (click)="onClick()"
-                      (mouseover)="onMouseOver()"
-                      (mouseout)="onMouseOut()"
-                      [ngStyle]="{'background-color': color, 'color': textColor, 'border': '2px solid #F05A22'}"                  
-                      class="btn btn-primary d-flex align-items-center"
-                  >
-                  <i class="fas fa-plus" style="margin-left: 6px;"></i> <!-- Icon thêm sự kiện -->
-                      Thêm tổ chức
-                  </button>
-              </div>
+                            </div>
+                        </div>
+                    </div>
 
-              <div class="modal fade" id="organizationModal" tabindex="-1" aria-labelledby="organizationModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="organizationModalLabel">Thêm tổ chức</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                              <form>
-                                  <div class="mb-3">
-                                      <label for="organizationName" class="form-label">Tên tổ chức</label>
-                                      <input type="text" class="form-control" id="organizationName" placeholder="Nhập tên tổ chức"
-                                            [(ngModel)]="organizationName" name="organizationName">
-                                  </div>
-                            
-                                  <div class="mb-3">
-                                      <label for="organizationEmail" class="form-label">Email</label>
-                                      <input type="email" class="form-control" id="organizationEmail" placeholder="Nhập email"
-                                            [(ngModel)]="organizationEmail" name="organizationEmail">
-                                  </div>
-                              </form>
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                              <button type="button" class="btn btn-primary" (click)="addOrganization()">Thêm tổ chức</button>
-                          </div>
+                    <div class="col-md-1 d-flex align-items-center justify-content-center">
+                        <div class="dropdown">
+                            <button class="btn p-0 border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="/assets/images/icons/ic_more.svg" alt="More">
+                            </button>
                         
-                      </div>
-                  </div>
-              </div>
-          
+                            <ul class="dropdown-menu rounded-4">
+                                <li><a class="dropdown-item" (click)="openModal(event)" >Chi tiết sự kiện</a></li>
+                                <li>
+                                    <button class="dropdown-item" (click)="openParticipantModal(event)">Danh sách đăng ký</button>
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#">Xóa</a></li>
+                            </ul>
+                        
+                        </div>
+                    </div>
+                    <!-- Model danh sách tham gia -->
+                    <div class="modal fade" id="participantModal" tabindex="-1" aria-labelledby="participantModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="participantModalLabel">Danh sách đăng ký tham gia</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã số sinh viên</th>
+                                    <th>Họ và Tên</th>
+                                    <th>Email</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let user of participants; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ user.idnumber }}</td>
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                        </div>
+                    </div> 
+
+                    <!-- Modal thông tin sự kiện -->
+                    <div
+                    class="modal fade"
+                    id="eventDetailModal"
+                    tabindex="-1"
+                    aria-labelledby="eventDetailModalLabel"
+                    aria-hidden="true"
+                    >
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="eventDetailModalLabel">{{ selectedEvent?.title }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <img [src]="selectedEvent?.imageUrl" class="img-fluid mb-3" *ngIf="selectedEvent?.imageUrl" />
+                            <p>{{ selectedEvent?.description }}</p>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="approveEvent()">Duyệt</button>
+                            <button type="button" class="btn btn-danger" (click)="rejectEvent()">Từ chối</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                
+            
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Events -->
+        <div *ngIf="selectedTab === 'pendingevents'">
+            <h4 class="mb-4">SỰ KIỆN CHỜ DUYỆT</h4>
+            <div *ngFor="let event of pendingEvents" class="card p-3 mb-3 rounded-4">
+                <div class="row g-0">
+                    <div class="col-md-3 ">
+                        <img
+                            [src]="event.imageUrl"
+                            class="img-fluid rounded-start rounded-4"
+                            alt="Event Image"
+                        />
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.title }}</h5>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <i class="fas fa-clock"></i>
+                                    {{ event.startDate }} - {{ event.endDate }}
+                                </li>
+                                <li>
+                                    <i class="fas fa-users"></i>
+                                    Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
+                                </li>
+                            </ul>
+                            <div class="d-flex flex-row align-items-center gap-2">
+                                <p class="m-0">Trạng thái: </p>
+                                <p class="card-text">
+                                <span
+                                class="badge"
+                                [ngClass]="{
+                                    'bg-success': event.status === 'Approved',
+                                    'bg-warning text-dark': event.status === 'Pending',
+                                    'bg-danger': event.status === 'Rejected'
+                                }"
+                                >
+                                    {{ event.status }}
+                                </span>
+                                </p>
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Danh sách tổ chức -->
+        <div *ngIf="selectedTab === 'orgs'">
+        
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="mb-0">CÂU LẠC BỘ/ TỔ CHỨC</h4>
+                <button 
+                    (click)="onClick()"
+                    (mouseover)="onMouseOver()"
+                    (mouseout)="onMouseOut()"
+                    [ngStyle]="{'background-color': color, 'color': textColor, 'border': '2px solid #F05A22'}"                  
+                    class="btn btn-primary d-flex align-items-center"
+                >
+                <i class="fas fa-plus" style="margin-left: 6px;"></i> <!-- Icon thêm sự kiện -->
+                    Thêm tổ chức
+                </button>
+            </div>
+
+            <div class="modal fade" id="organizationModal" tabindex="-1" aria-labelledby="organizationModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="organizationModalLabel">Thêm tổ chức</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="organizationName" class="form-label">Tên tổ chức</label>
+                                    <input type="text" class="form-control" id="organizationName" placeholder="Nhập tên tổ chức"
+                                        [(ngModel)]="organizationName" name="organizationName">
+                                </div>
+                        
+                                <div class="mb-3">
+                                    <label for="organizationEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="organizationEmail" placeholder="Nhập email"
+                                        [(ngModel)]="organizationEmail" name="organizationEmail">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <button type="button" class="btn btn-primary" (click)="addOrganization()">Thêm tổ chức</button>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        
 
 
-          <table class="table table-bordered">
-              <thead>
-                  <tr>
-                      <th>STT</th>
-                      <th>Tổ chức</th>
-                      <th>Email</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let user of faculties; let i = index">
-                      <td>{{ i + 1 }}</td>
-                      <td>{{ user.faculty_name }}</td>
-                      <td>{{ user.email }}</td>
-                  </tr>
-              </tbody>
-          </table>
-          </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tổ chức</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of faculties; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ user.faculty_name }}</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
 
 
-    </main>
-  
-      
-  
+</main>
+
     
-  </section>
-  
+
+
+</section>

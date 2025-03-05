@@ -5,7 +5,7 @@
             <div class="card shadow-lg">
                 <div class="card-body">
                     <h2 class="text-center mb-3" style="color: #F05A22; font-weight: 600;">ĐĂNG KÝ</h2>
-                    <form>
+                    <!-- <form>
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="email" placeholder=" " required />
                             <label for="email">Email</label>
@@ -31,7 +31,36 @@
                                 textColor="#fff">
                             </app-button>
                         </div>
+                    </form> -->
+                    <form (ngSubmit)="onSubmit()">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email" placeholder=" " required [(ngModel)]="email" name="email"/>
+                            <label for="email">Email</label>
+                        </div>   
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="username" placeholder=" " required [(ngModel)]="username" name="username"/>
+                            <label for="username">Họ và tên</label>
+                        </div>        
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password" placeholder=" " required [(ngModel)]="password" name="password"/>
+                            <label for="password">Mật khẩu</label>
+                        </div>  
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="passwordcheck" placeholder=" " required [(ngModel)]="passwordCheck" name="passwordCheck"/>
+                            <label for="passwordcheck">Nhập lại mật khẩu</label>
+                        </div>  
+                        <div>
+                            <app-button 
+                                class="login-button"
+                                text="Đăng ký" 
+                                color="#F05A22"
+                                hoverColor="#F05A22"
+                                textColor="#fff"
+                                (click)="onSubmit()">
+                            </app-button>
+                        </div>
                     </form>
+                    
                     <div class="text-center mt-3">
                         <a href="/forgetpassword" class="text-decoration-none" style="color: #F05A22">Quên mật khẩu?</a>
                     </div>

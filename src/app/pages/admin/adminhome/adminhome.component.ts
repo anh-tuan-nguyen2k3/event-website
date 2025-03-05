@@ -8,6 +8,8 @@ import { USERS } from '../../../../data';
 import { Event2Service } from '../../../services/event2.service';
 import { FormsModule } from '@angular/forms';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-adminhome',
   standalone: true,
@@ -33,6 +35,15 @@ export class AdminhomeComponent implements OnInit{
   ];
   participants: any[] = [];
   selectedEventTitle: string = '';
+  events = [
+    {
+      title: 'Sự kiện A',
+      description: 'Mô tả sự kiện A',
+      imageUrl: 'https://via.placeholder.com/300', // Ảnh mẫu
+    },
+    // Thêm sự kiện khác nếu cần
+  ];
+  selectedEvent: any;
   
 
   constructor(private router: Router, private eventSerive: Event2Service) { }
@@ -123,5 +134,33 @@ export class AdminhomeComponent implements OnInit{
           modal.show();
         }
       }
+  
+  openModal(event: any) {
+
+
+    this.selectedEvent = event;
+    const modalElement = document.getElementById('eventDetailModal');
+    if (modalElement) {
+      const modal = new (window as any).bootstrap.Modal(modalElement);
+      modal.show();
+    }
+  
+  }
+
+  approveEvent() {
+    alert('Sự kiện đã được duyệt!');
+    this.closeModal();
+  }
+
+  rejectEvent() {
+    alert('Sự kiện đã bị từ chối!');
+    this.closeModal();
+  }
+
+  closeModal() {
+    let modalElement = document.getElementById('eventDetailModal');
+    let modal = bootstrap.Modal.getInstance(modalElement);
+    modal.hide();
+  }
 
 }

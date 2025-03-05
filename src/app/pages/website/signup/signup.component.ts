@@ -3,16 +3,23 @@ import { HeaderComponent } from '../../partials/header/header.component';
 import { FooterComponent } from '../../partials/footer/footer.component';
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { OnInit, AfterViewInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, ButtonComponent],
+  imports: [HeaderComponent, FooterComponent, ButtonComponent, FormsModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
 export class SignupComponent implements OnInit, AfterViewInit {
   constructor () {}
+
+  email: string = '';
+  username: string = '';
+  password: string = '';
+  passwordCheck: string = '';
+
 
   ngOnInit(): void {
     this.updateContentPadding();
@@ -33,5 +40,8 @@ export class SignupComponent implements OnInit, AfterViewInit {
       const headerHeight = header.offsetHeight;
       content.style.paddingTop = `${headerHeight}px`;
     }
+  }
+  onSubmit() {
+    
   }
 }

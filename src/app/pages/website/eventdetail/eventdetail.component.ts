@@ -6,11 +6,14 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppEvent } from '../../../services/event.service';
 import { ActivatedRoute } from '@angular/router';
 import { APPEVENTS } from '../../../../data';
+import { FormsModule } from '@angular/forms';
+
+declare var bootstrap : any;
 
 @Component({
   selector: 'app-eventdetail',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, ButtonComponent],
+  imports: [HeaderComponent, FooterComponent, ButtonComponent, FormsModule],
   templateUrl: './eventdetail.component.html',
   styleUrl: './eventdetail.component.css'
 })
@@ -93,5 +96,23 @@ export class EventdetailComponent implements OnInit, AfterViewInit{
       const headerHeight = header.offsetHeight;
       content.style.paddingTop = `${headerHeight}px`;
     }
+  }
+  formData = {
+    username: '',
+    email: '',
+    idnumber: '',
+    phone: ''
+  };
+
+  submitForm() {
+    console.log('Dữ liệu form:', this.formData);
+    // alert('Form submitted!'); 
+    let modalElement = document.getElementById('eventDetailModal');
+    if (modalElement) {
+      let modal = bootstrap.Modal.getInstance(modalElement);
+      modal.hide();
+    
+    }
+    
   }
 }
