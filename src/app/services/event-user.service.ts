@@ -20,5 +20,13 @@ export class EventUserService {
            })
          )
         }
+
+    getUserByEvent(id: number): Observable<ApiResponse<any>>{
+            return this.httpClient.get<ApiResponse<any>>(`${this.url}/${id}` ).pipe(
+              map((res: ApiResponse<any>) => {
+                 return res; 
+             })
+           )
+          }
     
 }

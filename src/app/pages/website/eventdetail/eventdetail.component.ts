@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { User2Service } from '../../../services/user2.service';
 import { EventUserService } from '../../../services/event-user.service';
+import { Event2Service } from '../../../services/event2.service';
 
 declare var bootstrap: any;
 
@@ -22,11 +23,12 @@ declare var bootstrap: any;
 })
 export class EventdetailComponent implements OnInit, AfterViewInit {
   isLoggedIn: boolean = false; // Kiểm tra người dùng đã đăng nhập chưa
-  eventID: number | null = null;
+  eventID: any;
   eventDetail: AppEvent | undefined;
   isRegisteredForEvent: boolean = false; // Trạng thái đã đăng ký
   user: any = null;
-  constructor(private route: ActivatedRoute, private authService: AuthService, private userService: User2Service, private eventUserSerivce: EventUserService) { }
+  constructor(private route: ActivatedRoute, private authService: AuthService,
+     private userService: User2Service, private eventUserSerivce: EventUserService,private eventService: Event2Service) { }
 
 
 
@@ -64,6 +66,12 @@ export class EventdetailComponent implements OnInit, AfterViewInit {
     content.style.paddingTop = '80px'
 
     this.eventID = Number(this.route.snapshot.paramMap.get('id'));
+    console.log(typeof this.eventID);
+    this.eventService.getEventById(this.eventID).subscribe(
+      (res) => {
+        this.eventDetail = res.result;
+      }
+    )
     this.eventDetail = APPEVENTS.find(event => event.eventID === this.eventID);
 
     this.checkRegistration();
@@ -76,6 +84,8 @@ export class EventdetailComponent implements OnInit, AfterViewInit {
         }
       )
     }
+
+    
   }
 
   checkRegistration(): void {

@@ -7,6 +7,7 @@ import { User } from '../../../services/user.service';
 import { USERS } from '../../../../data';
 import { Event2Service } from '../../../services/event2.service';
 import { FormsModule } from '@angular/forms';
+import { EventUserService } from '../../../services/event-user.service';
 
 declare var bootstrap: any;
 
@@ -37,7 +38,7 @@ export class AdminhomeComponent implements OnInit{
   selectedEventTitle: string = '';
   selectedEvent: any;
 
-  constructor(private router: Router, private eventSerive: Event2Service) { }
+  constructor(private router: Router, private eventSerive: Event2Service, private eventUserService: EventUserService) { }
 
   ngOnInit(): void {
    this.initialApproveEvents();
@@ -45,7 +46,7 @@ export class AdminhomeComponent implements OnInit{
   }
 
   initialApproveEvents(){
-    this.eventSerive.getAllEventsByStatus("PENDING").subscribe(
+    this.eventSerive.getAllEventsByStatus("APPROVE").subscribe(
       (res) => {
           console.log(res.result);
           this.appEvents = res.result;
@@ -55,7 +56,7 @@ export class AdminhomeComponent implements OnInit{
   }
 
   initialPendingEvents(){
-    this.eventSerive.getAllEventsByStatus("APPROVE").subscribe(
+    this.eventSerive.getAllEventsByStatus("PENDING").subscribe(
       (res) => {
           console.log(res.result);
           this.pendingEvents = res.result;
@@ -114,15 +115,18 @@ export class AdminhomeComponent implements OnInit{
     }
   }
   openParticipantModal(event: any) {
-        this.selectedEventTitle = event.title;
-        this.participants = USERS.filter(user => event.participants.includes(user.idnumber));
-    
+        // this.selectedEventTitle = this.selectedEvent.title;
+        
+        this.eventUserService.getUserByEvent(event.id).subscribe(
+          (res) => {
+              this.participants = res.result;
+          }
+        )
         // Hiển thị modal bằng Bootstrap JS
         const modalElement = document.getElementById('participantModal');
         if (modalElement) {
           const modal = new (window as any).bootstrap.Modal(modalElement);
           modal.show();
-          console.log('Click participantModal')
         }
       }
   

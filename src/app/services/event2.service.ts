@@ -29,7 +29,7 @@ export class Event2Service {
     }
 
     getEventById(id: number): Observable<ApiResponse<any>>{
-      return this.httpClient.get<ApiResponse<any>>(`${this.url}/id/{${id}}`).pipe(
+      return this.httpClient.get<ApiResponse<any>>(`${this.url}/id/${id}`).pipe(
         map((res: ApiResponse<any>) => {
            return res; 
        })

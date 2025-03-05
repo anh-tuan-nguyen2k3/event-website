@@ -246,7 +246,7 @@
         <!-- Pending Events -->
         <div *ngIf="selectedTab === 'pendingevents'">
             <h4 class="mb-4">SỰ KIỆN CHỜ DUYỆT</h4>
-            <div *ngFor="let event of appEvents" class="card p-3 mb-3 rounded-4">
+            <div *ngFor="let event of pendingEvents" class="card p-3 mb-3 rounded-4">
                 <div class="row g-0">
                     <div class="col-md-2 ">
                         <img
@@ -394,8 +394,8 @@
                                 <tbody>
                                 <tr *ngFor="let user of participants; let i = index">
                                     <td>{{ i + 1 }}</td>
-                                    <td>{{ user.idnumber }}</td>
-                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.username }}</td>
                                     <td>{{ user.email }}</td>
                                 </tr>
                                 </tbody>
