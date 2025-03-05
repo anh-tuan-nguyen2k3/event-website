@@ -154,3 +154,6 @@ button {
 	height: 200px;
 	width: auto;
 }
+.modal.ng-hide {
+	display: none !important;
+  }

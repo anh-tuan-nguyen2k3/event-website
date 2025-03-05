@@ -127,12 +127,12 @@ export class EventdetailComponent implements OnInit, AfterViewInit {
       }
     )
 
-    let modalElement = document.getElementById('eventDetailModal');
+    let modalElement = document.getElementById('registerModal');
     if (modalElement) {
       let modal = bootstrap.Modal.getInstance(modalElement);
       modal.hide();
 
     }
-
+    
   }
 }
