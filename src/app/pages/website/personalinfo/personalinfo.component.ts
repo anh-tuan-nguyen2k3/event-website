@@ -23,25 +23,29 @@ export class PersonalinfoComponent implements AfterViewInit, OnInit{
   color = '#F05A22'; // Màu mặc định của nút
   textColor = '#ffffff'; // Màu chữ mặc định
   user?: any;
+  tempName: any;
+  tempPhone: any;
+  tempId: any;
+  isEditing: boolean | undefined;
 
   constructor(private userService: User2Service, private authService: AuthService){}
   ngOnInit(): void {
-    const userId = this.authService.getUserId();
-    if(userId !== null)
-      this.userService.getUserbyId(userId).subscribe(
-        (res) => {
-          this.user = res.result;
-        }
-      )
-    else
-      window.location.href="/login";
+    // const userId = this.authService.getUserId();
+    // if(userId !== null)
+    //   this.userService.getUserbyId(userId).subscribe(
+    //     (res) => {
+    //       this.user = res.result;
+    //     }
+    //   )
+    // else
+    //   window.location.href="/login";
   }
   
 
-  isEditing = false;
-  tempName = this.user.name;
-  tempPhone = this.user.phone;
-  tempId = this.user.idnumber
+  // isEditing = false;
+  // tempName = this.user.name;
+  // tempPhone = this.user.phone;
+  // tempId = this.user.idnumber
 
 
   // toggleEdit() {

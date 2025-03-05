@@ -131,7 +131,7 @@ table, th {
 }
 
 .card:hover {
-    transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi hover */
+    transform: scale(1.01); /* Hiệu ứng phóng to nhẹ khi hover */
 }
 
 .icon {
@@ -150,3 +150,7 @@ button {
 	transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
 	font-size: 16px; /* Kích thước chữ */
   }
+.img-fluid {
+	height: 200px;
+	width: auto;
+}

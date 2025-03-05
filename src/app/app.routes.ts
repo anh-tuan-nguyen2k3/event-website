@@ -22,7 +22,7 @@ import { DashboardComponent } from './pages/website/dashboard/dashboard.componen
 export const routes: Routes = [
     {
         path:'',
-        redirectTo:'login',
+        redirectTo:'personalinfo',
         pathMatch:'full'
     },
     {

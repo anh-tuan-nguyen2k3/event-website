@@ -1,66 +1,65 @@
 <div class="container-fluid">
-  <app-header></app-header>
-  <div class="container vh-100 d-flex justify-content-center align-items-center mt-4 mb-4">
-    <div class="col-12 col-md-6 col-lg-4">
-      <div class="card shadow-lg">
-        <div class="card-body">
-          <h2 class="text-center mb-3" style="color: #144E8C; font-weight: 600;">ĐĂNG NHẬP</h2>
+    <app-header></app-header>
+    <div class="container vh-100 d-flex justify-content-center align-items-center mt-4 mb-4">
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h2 class="text-center mb-3" style="color: #144E8C; font-weight: 600;">ĐĂNG NHẬP</h2>
 
-          <!-- Thông báo lỗi -->
-          <div *ngIf="message" class="alert alert-danger text-center form-control" role="alert">
-            {{ message }}
-          </div>
+                  <!-- Thông báo lỗi -->
+                    <div *ngIf="message" class="alert alert-danger text-center form-control" role="alert">
+                        {{ message }}
+                    </div>
 
-          <img src="https://drive.usercontent.google.com/download?id=1oN--QR7X58EdC8ZqDwI2eScvobymIkGO&export=view&authuser=0" alt="">
-
-          <form>
-            <div class="form-floating mb-3">
-              <input 
-                type="email" 
-                class="form-control" 
-                id="email" 
-                [(ngModel)]="email"
-                name="email"
-                placeholder=" " 
-                required 
-                (input) = "resetMessage()"/>
-              <label for="email">Email</label>
-            </div>          
-            <div class="form-floating mb-3">
-              <input 
-                type="password" 
-                class="form-control" 
-                id="password" 
-                [(ngModel)]="password"
-                name="password"
-                placeholder=" "
-                (input) = "resetMessage()"
-                required />
-              <label for="email">Mật khẩu</label>
-            </div>  
-            <div>
-                <app-button 
-                  class="login-button"
-                  text="Đăng nhập" 
-                  color="#144E8C"
-                  hoverColor="#144E8C"
-                  textColor="#fff"
-                  (click)="login()">
-                </app-button>
+      
+                    <form>
+                        <div class="form-floating mb-3">
+                            <input 
+                              type="email" 
+                              class="form-control" 
+                              id="email" 
+                              [(ngModel)]="email"
+                              name="email"
+                              placeholder=" " 
+                              required 
+                              (input) = "resetMessage()"/>
+                            <label for="email">Email</label>
+                        </div>          
+                        <div class="form-floating mb-3">
+                            <input 
+                                type="password" 
+                                class="form-control" 
+                                id="password" 
+                                [(ngModel)]="password"
+                                name="password"
+                                placeholder=" "
+                                (input) = "resetMessage()"
+                                required />
+                            <label for="email">Mật khẩu</label>
+                        </div>  
+                        <div>
+                            <app-button 
+                              class="login-button"
+                              text="Đăng nhập" 
+                              color="#144E8C"
+                              hoverColor="#144E8C"
+                              textColor="#fff"
+                              (click)="login()">
+                            </app-button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="/forgetpassword" class="text-decoration-none" style="color: #F05A22">Quên mật khẩu?</a>
+                    </div>
+                    <div class="text-center mt-2">
+                        <span>Chưa có tài khoản? </span>
+                        <a href="/signup" class="text-decoration-none" style="color: #F05A22">Đăng ký</a>
+                    </div>
+                </div>
             </div>
-          </form>
-          <div class="text-center mt-3">
-            <a href="/forgetpassword" class="text-decoration-none" style="color: #F05A22">Quên mật khẩu?</a>
-          </div>
-          <div class="text-center mt-2">
-            <span>Chưa có tài khoản? </span>
-            <a href="/signup" class="text-decoration-none" style="color: #F05A22">Đăng ký</a>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <app-footer></app-footer>
+    <app-footer></app-footer>
 </div>
 
 
