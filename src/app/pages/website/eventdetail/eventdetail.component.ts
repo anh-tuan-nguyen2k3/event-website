@@ -7,8 +7,11 @@ import { AppEvent } from '../../../services/event.service';
 import { ActivatedRoute } from '@angular/router';
 import { APPEVENTS } from '../../../../data';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
+import { User2Service } from '../../../services/user2.service';
+import { EventUserService } from '../../../services/event-user.service';
 
-declare var bootstrap : any;
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-eventdetail',
@@ -17,45 +20,44 @@ declare var bootstrap : any;
   templateUrl: './eventdetail.component.html',
   styleUrl: './eventdetail.component.css'
 })
-export class EventdetailComponent implements OnInit, AfterViewInit{
+export class EventdetailComponent implements OnInit, AfterViewInit {
   isLoggedIn: boolean = false; // Kiểm tra người dùng đã đăng nhập chưa
   eventID: number | null = null;
   eventDetail: AppEvent | undefined;
   isRegisteredForEvent: boolean = false; // Trạng thái đã đăng ký
+  user: any = null;
+  constructor(private route: ActivatedRoute, private authService: AuthService, private userService: User2Service, private eventUserSerivce: EventUserService) { }
 
 
-  constructor(private route: ActivatedRoute) {}
+
   openModal() {
     const modalElement = document.getElementById('registerModal')!;
     const modal = new (window as any).bootstrap.Modal(modalElement);
-    const loggedInUser = localStorage.getItem('loggedInUser');
 
     if (this.isRegisteredForEvent) {
       return;
     }
-    
-    if (loggedInUser) {
-    const user = JSON.parse(loggedInUser); // Chuyển đổi từ chuỗi JSON sang đối tượng
-    this.isLoggedIn = true;
-    // Gán thông tin người dùng vào các trường trong form
-    const usernameInput = document.getElementById('username') as HTMLInputElement;
-    const emailInput = document.getElementById('email') as HTMLInputElement;
-    const phone = document.getElementById('phone') as HTMLInputElement;
-    const idnumber = document.getElementById('idnumber') as HTMLInputElement;
 
-    if (usernameInput && emailInput) {
-      usernameInput.value = user.name; // Hiển thị tên người dùng
-      emailInput.value = user.email;  // Hiển thị email
-      phone.value = user.phone;
-      idnumber.value = user.idnumber;
-    }
+    if (this.user !== null) {
+      // Gán thông tin người dùng vào các trường trong form
+      const usernameInput = document.getElementById('username') as HTMLInputElement;
+      const emailInput = document.getElementById('email') as HTMLInputElement;
+      const phone = document.getElementById('phone') as HTMLInputElement;
+      const idnumber = document.getElementById('idnumber') as HTMLInputElement;
+
+      if (usernameInput && emailInput) {
+        usernameInput.value = this.user.username; // Hiển thị tên người dùng
+        emailInput.value = this.user.email;  // Hiển thị email
+        phone.value = this.user.phone;
+        idnumber.value = this.user.id;
+      }
 
     }
 
     modal.show();
 
   }
-  
+
   ngOnInit(): void {
     this.updateContentPadding();
     const content = document.querySelector('.content') as HTMLElement;
@@ -66,6 +68,14 @@ export class EventdetailComponent implements OnInit, AfterViewInit{
 
     this.checkRegistration();
 
+    const loggedInUser = localStorage.getItem('token');
+    if (loggedInUser) {
+      this.userService.getUserbyId(this.authService.getUserId()).subscribe(
+        (res) => {
+          this.user = res.result;
+        }
+      )
+    }
   }
 
   checkRegistration(): void {
@@ -80,7 +90,7 @@ export class EventdetailComponent implements OnInit, AfterViewInit{
     }
     console.log(this.eventID);
     console.log(this.isRegisteredForEvent);
-          
+
   }
 
   ngAfterViewInit(): void {
@@ -107,12 +117,22 @@ export class EventdetailComponent implements OnInit, AfterViewInit{
   submitForm() {
     console.log('Dữ liệu form:', this.formData);
     // alert('Form submitted!'); 
+    const data = {
+      event_id: this.eventID,
+      user_id: this.user.id,
+    }
+    this.eventUserSerivce.reisterEvent(data).subscribe(
+      (res) => {
+          alert("Đăng ký sự kiện thành công")
+      }
+    )
+
     let modalElement = document.getElementById('eventDetailModal');
     if (modalElement) {
       let modal = bootstrap.Modal.getInstance(modalElement);
       modal.hide();
-    
+
     }
-    
+
   }
 }

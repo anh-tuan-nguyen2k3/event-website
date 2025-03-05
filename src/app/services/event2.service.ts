@@ -21,7 +21,7 @@ export class Event2Service {
     }
 
     getAllEventsByStatus(status: string): Observable<ApiResponse<any>>{
-      return this.httpClient.get<ApiResponse<any>>(`${this.url}/${status}`).pipe(
+      return this.httpClient.get<ApiResponse<any>>(`${this.url}?status=${status}`).pipe(
          map((res: ApiResponse<any>) => {
             return res; 
         })
@@ -38,6 +38,14 @@ export class Event2Service {
 
     save(data: any): Observable<ApiResponse<any>>{
       return this.httpClient.post<ApiResponse<any>>(`${this.url}`, data).pipe(
+        map((res: ApiResponse<any>) => {
+           return res; 
+       })
+     )
+    }
+
+    updateStatus(id: number, status: string): Observable<ApiResponse<any>>{
+      return this.httpClient.post<ApiResponse<any>>(`${this.url}/status?id=${id}&status=${status}`, null).pipe(
         map((res: ApiResponse<any>) => {
            return res; 
        })

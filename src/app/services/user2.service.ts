@@ -30,4 +30,12 @@ export class User2Service {
          })
        )
     }
+
+    register(data: any){
+      return this.httpClient.post<ApiResponse<any>>(`${this.url}`, data).pipe(
+        map((res: ApiResponse<any>) => {
+           return res; 
+       })
+     )
+    }
 }

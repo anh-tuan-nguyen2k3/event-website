@@ -4,17 +4,19 @@ import { FooterComponent } from '../../partials/footer/footer.component';
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { OnInit, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { User2Service } from '../../../services/user2.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, ButtonComponent, FormsModule],
+  imports: [HeaderComponent, FooterComponent, ButtonComponent, FormsModule, CommonModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
 export class SignupComponent implements OnInit, AfterViewInit {
-  constructor () {}
-
+  constructor (private userService: User2Service) {}
+  message: string = '';
   email: string = '';
   username: string = '';
   password: string = '';
@@ -42,6 +44,19 @@ export class SignupComponent implements OnInit, AfterViewInit {
     }
   }
   onSubmit() {
-    
+    if(this.password != this.passwordCheck){
+      this.message="Mật khẩu không trùng khớp!";
+    }else{
+      const data = {
+        email: this.email,
+        username: this.username,
+        password: this.password,
+      }
+      this.userService.register(data).subscribe(
+        (res)=> {
+          window.location.href='/home';
+        }
+      );
+    }  
   }
 }

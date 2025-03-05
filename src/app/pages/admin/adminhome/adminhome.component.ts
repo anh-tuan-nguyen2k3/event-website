@@ -20,7 +20,7 @@ declare var bootstrap: any;
 export class AdminhomeComponent implements OnInit{
   isLoggedIn: boolean = false;
   appEvents: AppEvent[] = [];
-  pendingEvents: AppEvent[] = [];
+  pendingEvents: any = [];
   selectedTab: string = '';
   eventID = 4; 
   color = '#F05A22'; // Màu mặc định của nút
@@ -35,37 +35,27 @@ export class AdminhomeComponent implements OnInit{
   ];
   participants: any[] = [];
   selectedEventTitle: string = '';
-  events = [
-    {
-      title: 'Sự kiện A',
-      description: 'Mô tả sự kiện A',
-      imageUrl: 'https://via.placeholder.com/300', // Ảnh mẫu
-    },
-    // Thêm sự kiện khác nếu cần
-  ];
   selectedEvent: any;
-  
 
   constructor(private router: Router, private eventSerive: Event2Service) { }
 
   ngOnInit(): void {
    this.initialApproveEvents();
    this.initialPendingEvents(); 
-   
   }
 
   initialApproveEvents(){
-    // this.eventSerive.getAllEventsByStatus("approved").subscribe(
-    //   (res) => {
-    //       console.log(res.result);
-    //       this.appEvents = res.result;
-    //   }
-    // )
-    this.appEvents = APPEVENTS;
+    this.eventSerive.getAllEventsByStatus("PENDING").subscribe(
+      (res) => {
+          console.log(res.result);
+          this.appEvents = res.result;
+      }
+    )
+    // this.appEvents = APPEVENTS;
   }
 
   initialPendingEvents(){
-    this.eventSerive.getAllEventsByStatus("pending").subscribe(
+    this.eventSerive.getAllEventsByStatus("APPROVE").subscribe(
       (res) => {
           console.log(res.result);
           this.pendingEvents = res.result;
@@ -136,25 +126,49 @@ export class AdminhomeComponent implements OnInit{
       }
   
   openModal(event: any) {
-
-
     this.selectedEvent = event;
     const modalElement = document.getElementById('eventDetailModal');
     if (modalElement) {
-      const modal = new (window as any).bootstrap.Modal(modalElement);
-      modal.show();
+      // Ensure Bootstrap is available and correctly initialized
+      const bootstrap = (window as any).bootstrap;
+      if (bootstrap && bootstrap.Modal) {
+        const modal = new bootstrap.Modal(modalElement);
+        modal.show();
+      } else {
+        console.error('Bootstrap Modal is not initialized correctly.');
+      }
+    } else {
+      console.error('Modal element not found.');
     }
+    
+
+  //   this.selectedEvent = event;
+  //   const modalElement = document.getElementById('eventDetailModal');
+  //   if (modalElement) {
+  //     const modal = new (window as any).bootstrap.Modal(modalElement);
+  //     modal.show();
+  //   }
   
   }
+  
 
   approveEvent() {
-    alert('Sự kiện đã được duyệt!');
-    this.closeModal();
+   // alert('Sự kiện đã được duyệt!');
+    console.log(this.selectedEvent);
+    this.eventSerive.updateStatus(this.selectedEvent.id, "APPROVE").subscribe(
+      (res) => {
+        window.location.href = '/admin';
+      }
+    )
   }
 
   rejectEvent() {
-    alert('Sự kiện đã bị từ chối!');
-    this.closeModal();
+    //alert('Sự kiện đã bị từ chối!');
+    this.eventSerive.updateStatus(this.selectedEvent.id, "REJECT").subscribe(
+      (res) => {
+        window.location.href = '/admin';
+      }
+    )
   }
 
   closeModal() {

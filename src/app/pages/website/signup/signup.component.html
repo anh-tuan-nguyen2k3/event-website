@@ -33,6 +33,9 @@
                         </div>
                     </form> -->
                     <form (ngSubmit)="onSubmit()">
+                        <div *ngIf="message" class="alert alert-danger text-center form-control" role="alert">
+                            {{ message }}
+                        </div>
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="email" placeholder=" " required [(ngModel)]="email" name="email"/>
                             <label for="email">Email</label>

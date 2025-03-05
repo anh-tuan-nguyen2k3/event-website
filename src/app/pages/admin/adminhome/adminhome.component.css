@@ -129,10 +129,10 @@ table, th {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng bóng */
     transition: transform 0.2s ease-in-out;
 }
-
-.card:hover {
-    transform: scale(1.01); /* Hiệu ứng phóng to nhẹ khi hover */
-}
+ /* Hiệu ứng phóng to nhẹ khi hover */
+/* .card:hover {
+    transform: scale(1.01);
+} */
 
 .icon {
     font-size: 1.5rem;
