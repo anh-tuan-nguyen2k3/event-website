@@ -31,6 +31,8 @@ export class AdminhomeComponent implements OnInit{
     { email: 'robotics@example.com', faculty_name: 'Robotics Club' },
     { email: 'environment@example.com', faculty_name: 'Environment Club' }
   ];
+  participants: any[] = [];
+  selectedEventTitle: string = '';
   
 
   constructor(private router: Router, private eventSerive: Event2Service) { }
@@ -42,12 +44,13 @@ export class AdminhomeComponent implements OnInit{
   }
 
   initialApproveEvents(){
-    this.eventSerive.getAllEventsByStatus("approved").subscribe(
-      (res) => {
-          console.log(res.result);
-          this.appEvents = res.result;
-      }
-    )
+    // this.eventSerive.getAllEventsByStatus("approved").subscribe(
+    //   (res) => {
+    //       console.log(res.result);
+    //       this.appEvents = res.result;
+    //   }
+    // )
+    this.appEvents = APPEVENTS;
   }
 
   initialPendingEvents(){
@@ -109,5 +112,16 @@ export class AdminhomeComponent implements OnInit{
       alert('Vui lòng nhập đầy đủ thông tin!');
     }
   }
+  openParticipantModal(event: any) {
+        this.selectedEventTitle = event.title;
+        this.participants = USERS.filter(user => event.participants.includes(user.idnumber));
+    
+        // Hiển thị modal bằng Bootstrap JS
+        const modalElement = document.getElementById('participantModal');
+        if (modalElement) {
+          const modal = new (window as any).bootstrap.Modal(modalElement);
+          modal.show();
+        }
+      }
 
 }

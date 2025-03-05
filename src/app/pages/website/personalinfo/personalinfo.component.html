@@ -3,31 +3,29 @@
     <div class="container content">
         <div class="row">
           <!-- Sidebar Menu -->
-          <div class="col-md-3 p-4 navbar-left">
-            <div class="list-group">
-              <a
+            <div class="col-md-3 p-4 navbar-left">
+                <div class="list-group">
+                    <a
+                        href="#"
+                        class="list-group-item list-item"
+                        id="personal-info-tab"
+                        [ngClass]="{ 'active': selectedTab === 'personal-info' }"
+                        (click)="selectTab('personal-info', $event)"
+                      >
+                        Thông tin tài khoản
+                    </a>
+                    <a
+                        href="#"
+                        class="list-group-item list-item"
+                        id="my-events-tab"
+                        [ngClass]="{ 'active': selectedTab === 'my-events' }"
+                        (click)="selectTab('my-events', $event)"
+                    >
+                        Sự kiện của tôi
+                    </a>
 
-                href="#"
-                class="list-group-item list-item"
-                
-                id="personal-info-tab"
-                [ngClass]="{ 'active': selectedTab === 'personal-info' }"
-                (click)="selectTab('personal-info', $event)"
-              >
-                Thông tin tài khoản
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-item"
-                id="my-events-tab"
-                [ngClass]="{ 'active': selectedTab === 'my-events' }"
-                (click)="selectTab('my-events', $event)"
-              >
-                Sự kiện của tôi
-              </a>
-
+                </div>
             </div>
-          </div>
       
           <!-- Content Area -->
           <div class="col-md-9 p-4">

@@ -1,18 +1,17 @@
-/* Thêm màu nền và kiểu chữ cho tab đang được chọn */
-.active-tab {
-    /* background-color: #144E8C; 
-    color: #ffffff;  */
-  }
-  
-/* Tùy chọn: Thay đổi màu chữ khi di chuột qua các thẻ */
 .list-item {
   border: none !important; 
   box-shadow: none !important; 
   border-radius: 10px !important; 
   background-color: transparent !important;
+  width: 100%;
+  margin: 0px !important;
+}
+.list-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Căn giữa nội dung theo chiều ngang */
 }
 
-/* Khi được chọn: nền xanh #144E8C */
 .list-group-item.list-item.active {
   background-color: #144E8C !important;
   color: #fff !important;
@@ -43,11 +42,18 @@ button {
 }
 .navbar-left{
   min-height: 100vh; 
-    background-color: #ffffff;
-    display: flex;
-    align-items: flex-start; 
-    padding-top: 20px; 
+  background-color: #ffffff;
+  /* display: flex;
+  align-items: flex-start;  */
+  padding-top: 20px; 
 }
+@media (max-width: 1080px) {
+  .navbar-left {
+    min-height: auto; /* Bỏ min-height */
+    padding-top: 10px; /* Có thể giảm padding nếu cần */
+  }
+}
+
 .background {
   background-color: #F5F5F5;
 }
