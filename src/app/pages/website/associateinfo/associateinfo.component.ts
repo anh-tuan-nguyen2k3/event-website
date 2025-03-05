@@ -1,17 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, NgModule, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../partials/header/header.component';
 import { FooterComponent } from '../../partials/footer/footer.component';
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { APPEVENTS, USERS } from '../../../../data';
 import { AppEvent } from '../../../services/event.service';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from '../../../services/auth.service';
+import { FormsModule } from '@angular/forms';
+import { Event2Service } from '../../../services/event2.service';
 declare var bootstrap: any; // Để sử dụng Bootstrap modal
 
 @Component({
   selector: 'app-associateinfo',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, FooterComponent, ButtonComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent, ButtonComponent, FormsModule],
   templateUrl: './associateinfo.component.html',
   styleUrl: './associateinfo.component.css'
 })
@@ -23,7 +26,32 @@ export class AssociateinfoComponent implements AfterViewInit{
     textColor = '#ffffff'; // Màu chữ mặc định
     participants: any[] = [];
     selectedEventTitle: string = '';
-    constructor (private dialog: MatDialog) {}
+    test: any;
+    user: any;
+
+    event = {
+      faculty_id: -1,
+      title: '',
+      startDate: '',
+      endDate: '',
+      location: '',
+      participants: 0,
+      catgoryId: 0,
+      description: '',
+      bannerUrl: null,
+      imageUrl: null
+    };
+  
+    onFileSelect(event: any) {
+      const file = event.target.files[0];
+      if (event.target.name === 'image-banner') {
+        this.event.bannerUrl = file;
+      } else if (event.target.name === 'image-avatar') {
+        this.event.imageUrl = file;
+      }
+      console.log(file)
+    }  
+    constructor (private dialog: MatDialog, private authService: AuthService, private eventService: Event2Service) {}
 
     ngAfterViewInit(): void {
      this.initdata();
@@ -35,18 +63,17 @@ export class AssociateinfoComponent implements AfterViewInit{
       this.initdata();
       console.log(`Tab được chọn: ${tab}`);
     }
-    test: any;
-    user: any;
+
+
     initdata() {
-      const loggedInUser = localStorage.getItem('loggedInUser');
+      const loggedInUser = localStorage.getItem('token');
       if (loggedInUser) {
-        this.user = JSON.parse(loggedInUser); // Chuyển đổi từ chuỗi JSON sang đối tượng
         this.isLoggedIn = true;
-  
-        console.log(this.user, 123)
-        }
-        this.loadEvents();
+        this.event.faculty_id = this.authService.getUserId();
+      }
+      this.loadEvents();
     }
+
     loadEvents() {
       if (this.isLoggedIn && this.user) {
         this.appEvents = APPEVENTS.filter(event => event.participants.includes(this.user.idnumber));
@@ -57,10 +84,10 @@ export class AssociateinfoComponent implements AfterViewInit{
     onClick() {
       console.log("Add event button is clicked");
       const modalElement = document.getElementById('eventModal');
-    if (modalElement) {
-      const modal = new (window as any).bootstrap.Modal(modalElement);      
-      modal.show();
-    }
+      if (modalElement) {
+        const modal = new (window as any).bootstrap.Modal(modalElement);      
+        modal.show();
+      }
     }
     
     onMouseOver() {
@@ -81,5 +108,39 @@ export class AssociateinfoComponent implements AfterViewInit{
         const modal = new bootstrap.Modal(modalElement);
         modal.show();
       }
+    }
+
+    onSubmit() {
+      const formData = new FormData();
+      formData.append('faculty_id', this.event.faculty_id.toString());
+      formData.append('title', this.event.title);
+      formData.append('description', this.event.description);
+      formData.append('startDate', this.event.startDate);
+      formData.append('endDate', this.event.endDate);
+      formData.append('location', this.event.location);
+      formData.append('participants', this.event.participants.toString());
+      formData.append('catgoryId', this.event.catgoryId.toString());
+      if(this.event.bannerUrl !== null)
+        formData.append('bannerUrl', this.event.bannerUrl);
+      if(this.event.imageUrl !== null)
+      formData.append('imageUrl', this.event.imageUrl);
+
+      console.log(formData);
+
+      this.eventService.save(formData).subscribe(
+        (res) => {
+          if(res.code === 1000){
+            console.log("success!");
+          }
+        }
+      )
+    }
+  
+    onCancel() {
+      // Add your logic to handle the cancel action here
+    }
+
+    onCategoryChange(event: any) {
+      this.event.catgoryId = +event.target.value;
     }
 }

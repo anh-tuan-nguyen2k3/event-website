@@ -51,7 +51,7 @@ export class PersonalinfoComponent implements AfterViewInit, OnInit{
   //   }
   // }
   startEditing() {
-    this.tempName = this.user.name; // Lưu giá trị ban đầu
+    this.tempName = this.user.username; // Lưu giá trị ban đầu
     this.tempPhone = this.user.phone
     this.tempId = this.user.idnumber
     this.isEditing = true; // Bật chế độ chỉnh sửa

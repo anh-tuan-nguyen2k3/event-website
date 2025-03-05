@@ -35,4 +35,12 @@ export class Event2Service {
        })
      )
     }
+
+    save(data: any): Observable<ApiResponse<any>>{
+      return this.httpClient.post<ApiResponse<any>>(`${this.url}`, data).pipe(
+        map((res: ApiResponse<any>) => {
+           return res; 
+       })
+     )
+    }
 }
