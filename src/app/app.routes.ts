@@ -16,6 +16,9 @@ import { AdminhomeComponent } from './pages/admin/adminhome/adminhome.component'
 import { AssociateinfoComponent } from './pages/website/associateinfo/associateinfo.component';
 import { FacultyComponent } from './pages/website/faculty/faculty.component';
 import { DashboardComponent } from './pages/website/dashboard/dashboard.component';
+import { AuthGuard } from './guard/auth.guard';
+import { AssociateGuard } from './guard/associate.guard';
+import { UserGuard } from './guard/user.guard';
 import { ErrorComponent } from './pages/website/404/404.component';
 
 
@@ -72,19 +75,22 @@ export const routes: Routes = [
     },
     {
         path:'personalinfo',
-        component: PersonalinfoComponent
+        component: PersonalinfoComponent,
+        canActivate: [UserGuard]
     },
     {
         path:'admin',
-        component: AdminhomeComponent
+        component: AdminhomeComponent,
+        canActivate: [AuthGuard]
     },
     {
         path:'associateinfo',
-        component: AssociateinfoComponent
+        component: AssociateinfoComponent,
+        canActivate: [AssociateGuard]
     },
     {
-        path:'faculty',
-        component: FacultyComponent
+        path:'faculty/:id',
+        component: FacultyComponent,
     },
     {
         path:'dashboard',
