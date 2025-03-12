@@ -31,6 +31,9 @@
                 <input type="file" (change)="onFileSelect($event)" name="image-account" id="image-account">
               </div>
             </div>
+            <div class="">
+              <img [src]="user?.facultyLogo" class="club-logo" [alt]="user.facultyName" *ngIf="!isEditing"/>
+            </div>
             <div class="mb-2">
               <span><strong>Tài khoản tổ chức:</strong></span>
               <span *ngIf="!isEditing" id="useremail" style="margin-left: 6px;">
@@ -132,6 +135,7 @@
                 </select>
               </div>
               <!-- Dropdown Đơn vị tổ chức -->
+
               <!-- Ô chọn ngày -->
               <div class="col-md-4 col-4">
                 <input type="date" class="form-control">

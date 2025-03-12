@@ -68,3 +68,17 @@ button {
 .background {
   background-color: #F5F5F5;
 }
+.club-logo {
+  width: 100px; 
+  height: 100px;
+  border-radius: 50%; 
+  object-fit: cover; 
+  border: 3px solid rgba(0, 0, 0, 0.1); 
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 16px;
+}
+.form-control {
+	padding: 13px 16px; /* Kích thước nút */
+	border-radius: 10px; /* Góc bo tròn */
+	font-size: 16px; /* Kích thước chữ */
+  }
