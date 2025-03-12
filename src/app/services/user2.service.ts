@@ -38,4 +38,13 @@ export class User2Service {
        })
      )
     }
+
+    saveFaculty(data: any): Observable<ApiResponse<any>>{
+      //fix
+      return this.httpClient.post<ApiResponse<any>>(`${this.url}/faculty`, data).pipe(
+         map((res: ApiResponse<any>) => {
+            return res; 
+        })
+      )
+    }
 }

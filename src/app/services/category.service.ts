@@ -7,19 +7,16 @@ import { AuthService } from "./auth.service";
 @Injectable({
     providedIn: 'root'
 })
-export class FacultyService {
-    private url : string = "http://localhost:8080/eventapp-service/users/role";
+export class CategoryService {
+    private url : string = "http://localhost:8080/eventapp-service/categories";
 
-    constructor(private httpClient: HttpClient, private authService: AuthService){}
+     constructor(private httpClient: HttpClient, private authService: AuthService){}
 
-    getAllFaculty(): Observable<ApiResponse<any>>{
-        //fix
-        return this.httpClient.get<ApiResponse<any>>(`${this.url}/ASSOCIATE`).pipe(
+     getAllEvents(): Observable<ApiResponse<any>>{
+        return this.httpClient.get<ApiResponse<any>>(this.url).pipe(
            map((res: ApiResponse<any>) => {
               return res; 
           })
         )
-      }
-
-    
+    }
 }

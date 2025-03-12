@@ -20,8 +20,8 @@ import { FacultyService } from '../../../services/faculty.service';
 })
 export class HomepageComponent implements OnInit, AfterViewInit {
   constructor (private eventService: Event2Service, private facultyService: FacultyService  ) {}
-  appEvents: any =  [];
-  faculties: any = [];
+  appEvents: any ;
+  faculties: any ;
 
   ngOnInit(): void {
     this.updateContentPadding();

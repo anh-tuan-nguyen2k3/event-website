@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 
 export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
   // Bỏ qua các yêu cầu đến đường dẫn chứa /auth
-  if (req.url.includes('/auth') || (req.url.includes('/users') && req.method === "POST")) {
+  if (req.url.includes('/auth') ||  (req.url.includes('/users') && req.url.endsWith('/users') && req.method === "POST")) {
     console.log('Request URL:', req.url);
     return next(req);
   }

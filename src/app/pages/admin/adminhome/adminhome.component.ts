@@ -8,9 +8,8 @@ import { USERS } from '../../../../data';
 import { Event2Service } from '../../../services/event2.service';
 import { FormsModule } from '@angular/forms';
 import { EventUserService } from '../../../services/event-user.service';
-import { ChangeDetectorRef } from '@angular/core';
 import { User2Service } from '../../../services/user2.service';
-
+import { FacultyService } from '../../../services/faculty.service';
 
 declare var bootstrap: any;
 
@@ -21,7 +20,7 @@ declare var bootstrap: any;
   templateUrl: './adminhome.component.html',
   styleUrl: './adminhome.component.css'
 })
-export class AdminhomeComponent implements OnInit{
+export class AdminhomeComponent implements OnInit {
   isLoggedIn: boolean = false;
   appEvents: AppEvent[] = [];
   pendingEvents: any = [];
@@ -32,12 +31,7 @@ export class AdminhomeComponent implements OnInit{
   // faculties : User[] = []
   organizationName: string = '';
   organizationEmail: string = '';
-  // faculties: any[] = [
-  //   { email: 'artclub@example.com', faculty_name: 'Art Club' },
-  //   { email: 'robotics@example.com', faculty_name: 'Robotics Club' },
-  //   { email: 'environment@example.com', faculty_name: 'Environment Club' }
-  // ];
-  faculties: any[] = [];
+  faculties: any;
   participants: any[] = [];
   selectedEventTitle: string = '';
   selectedEvent: any;
@@ -46,29 +40,41 @@ export class AdminhomeComponent implements OnInit{
   cdRef: any;
   message: string = '';
 
-  constructor(private router: Router, private eventService: Event2Service, private eventUserService: EventUserService, private userService : User2Service) { }
+  constructor(private router: Router, private eventSerive: Event2Service, private eventUserService: EventUserService, 
+    private userService: User2Service, private facultyService: FacultyService
+  ) { }
 
   ngOnInit(): void {
-   this.initialApproveEvents();
-   this.initialPendingEvents(); 
-   this.initialFaculties();
+    this.initialApproveEvents();
+    this.initialPendingEvents();
+    this.getFaculities();
   }
 
-  initialApproveEvents(){
-    this.eventService.getAllEventsByStatus("APPROVE").subscribe(
+  getFaculities(){
+    this.facultyService.getAllFaculty().subscribe(
       (res) => {
-          console.log(res.result);
-          this.appEvents = res.result;
+        this.faculties = res.result;
+      }
+    )
+      
+    
+  }
+
+  initialApproveEvents() {
+    this.eventSerive.getAllEventsByStatus("APPROVE").subscribe(
+      (res) => {
+        console.log(res.result);
+        this.appEvents = res.result;
       }
     )
     // this.appEvents = APPEVENTS;
   }
 
-  initialPendingEvents(){
-    this.eventService.getAllEventsByStatus("PENDING").subscribe(
+  initialPendingEvents() {
+    this.eventSerive.getAllEventsByStatus("PENDING").subscribe(
       (res) => {
-          console.log(res.result);
-          this.pendingEvents = res.result;
+        console.log(res.result);
+        this.pendingEvents = res.result;
       }
     )
   }
@@ -95,19 +101,19 @@ export class AdminhomeComponent implements OnInit{
   }
   onClick() {
     const modalElement = document.getElementById('organizationModal');
-  if (modalElement) {
-    const modal = new (window as any).bootstrap.Modal(modalElement);      
-    modal.show();
-  }
+    if (modalElement) {
+      const modal = new (window as any).bootstrap.Modal(modalElement);
+      modal.show();
+    }
   }
   onMouseOver() {
-      
+
   }
-  
+
   onMouseOut() {
-   
+
   }
-  
+
 
   addOrganization() {
     if (!this.isEmailValid(this.organizationEmail)) {
@@ -140,23 +146,47 @@ export class AdminhomeComponent implements OnInit{
 
     } 
     
+    if (this.organizationName.trim() && this.organizationEmail.trim()) {
+      const data = {
+        email: this.organizationEmail,
+        facultyName: this.organizationName
+      }
+      // Thêm tổ chức mới vào danh sách
+      this.userService.saveFaculty(data).subscribe(
+        (res) => {
+          this.organizationName = '';
+          this.organizationEmail = '';
+
+          // Đóng modal sau khi thêm thành công
+          const modalElement = document.getElementById('organizationModal');
+          if (modalElement) {
+            const modal = new (window as any).bootstrap.Modal(modalElement);
+            modal.hide();
+          }
+
+          window.location.href="/admin"
+        }
+      )
+    } else {
+      alert('Vui lòng nhập đầy đủ thông tin!');
+    }
   }
   openParticipantModal(event: any) {
-        // this.selectedEventTitle = this.selectedEvent.title;
-        
-        this.eventUserService.getUserByEvent(event.id).subscribe(
-          (res) => {
-              this.participants = res.result;
-          }
-        )
-        // Hiển thị modal bằng Bootstrap JS
-        const modalElement = document.getElementById('participantModal');
-        if (modalElement) {
-          const modal = new (window as any).bootstrap.Modal(modalElement);
-          modal.show();
-        }
+    // this.selectedEventTitle = this.selectedEvent.title;
+
+    this.eventUserService.getUserByEvent(event.id).subscribe(
+      (res) => {
+        this.participants = res.result;
       }
-  
+    )
+    // Hiển thị modal bằng Bootstrap JS
+    const modalElement = document.getElementById('participantModal');
+    if (modalElement) {
+      const modal = new (window as any).bootstrap.Modal(modalElement);
+      modal.show();
+    }
+  }
+
   openModal(event: any) {
     this.selectedEvent = event;
     const modalElement = document.getElementById('eventDetailModal');
@@ -173,12 +203,20 @@ export class AdminhomeComponent implements OnInit{
     } else {
       console.error('Modal element not found.');
     }
-  
+
+
+    //   this.selectedEvent = event;
+    //   const modalElement = document.getElementById('eventDetailModal');
+    //   if (modalElement) {
+    //     const modal = new (window as any).bootstrap.Modal(modalElement);
+    //     modal.show();
+    //   }
+
   }
-  
+
 
   approveEvent() {
-   // alert('Sự kiện đã được duyệt!');
+    // alert('Sự kiện đã được duyệt!');
     console.log(this.selectedEvent);
     this.eventService.updateStatus(this.selectedEvent.id, "APPROVE").subscribe(
       (res) => {
