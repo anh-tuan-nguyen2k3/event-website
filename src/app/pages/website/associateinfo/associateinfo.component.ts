@@ -248,6 +248,7 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
           }
         }
       )
+      this.isEditing = false;
     }
 
     initialEvents(){

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { routes } from '../../../app.routes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-404',
@@ -8,5 +10,8 @@ import { Component } from '@angular/core';
   styleUrl: './404.component.css'
 })
 export class ErrorComponent {
-
+  constructor( private router: Router) {}
+  onclick() {
+    this.router.navigate(['/home'])
+  }
 }
