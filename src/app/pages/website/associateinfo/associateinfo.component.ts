@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { Event2Service } from '../../../services/event2.service';
 import { User2Service } from '../../../services/user2.service';
 import { CategoryService } from '../../../services/category.service';
+import { EventUserService } from '../../../services/event-user.service';
 declare var bootstrap: any; // Để sử dụng Bootstrap modal
 
 @Component({
@@ -38,12 +39,12 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
     avatar: any= null;
     user: any;
     selectedStatus: any = ''; // Lưu giá trị đơn vị được chọn
-    selectedCategory: any = "";
-    sql = "http://localhost:8080/eventapp-service/events";
+    selectedCategory: any = '';
+    sql :any;
     categories: any;
     constructor (private dialog: MatDialog, private authService: AuthService, 
       private eventService: Event2Service, private userService: User2Service,
-    private categoryService: CategoryService) {}
+    private categoryService: CategoryService, private regisEventService: EventUserService) {}
 
     ngOnInit(): void {
       const userId = this.authService.getUserId();
@@ -57,8 +58,10 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
           (res) => {
             this.user = res.result;
             console.log('user:',this.user)
+            this.sql ="http://localhost:8080/eventapp-service/event-user?faculty_id=" + this.user.id;
           }
         )
+      
     }
 
 
@@ -288,23 +291,19 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
     }
   
     check(): string {
-      if(this.selectedCategory === "" && this.selectedStatus === ""){
-        return this.sql;
+      let tmp = "";
+      if(this.selectedCategory !== "" ){
+        tmp = tmp +  "&categoryId=" + this.selectedCategory;
       }
   
-      if(this.selectedCategory !== "" && this.selectedStatus === ""){
-        return this.sql + "?categoryId=" + this.selectedCategory;
+      if(this.selectedStatus !== ""){
+        tmp = tmp + "&status=" + this.selectedStatus;
       }
-  
-      if(this.selectedCategory === "" && this.selectedStatus !== ""){
-        return this.sql + "?status=" + this.selectedStatus;
-      }
-  
-      return this.sql + "?status=" + this.selectedStatus + "&categoryId=" + this.selectedCategory;
+      return this.sql + tmp;
     }
   
     filter(sql: string){
-      this.eventService.filter(sql).subscribe(
+      this.regisEventService.getEventRegister(sql).subscribe(
         (res) => {
           this.appEvents = res.result;
         }

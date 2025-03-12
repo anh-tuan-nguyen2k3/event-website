@@ -1,222 +1,191 @@
 <div class="container-fluid m-0 p-0 background">
-    <app-header></app-header>
-    <div class="container content">
-        <div class="row">
-          <!-- Sidebar Menu -->
-            <div class="col-md-3 p-4 navbar-left">
-                <div class="list-group">
-                    <a
-                        href="#"
-                        class="list-group-item list-item"
-                        id="personal-info-tab"
-                        [ngClass]="{ 'active': selectedTab === 'personal-info' }"
-                        (click)="selectTab('personal-info', $event)"
-                      >
-                        Thông tin tài khoản
-                    </a>
-                    <a
-                        href="#"
-                        class="list-group-item list-item"
-                        id="my-events-tab"
-                        [ngClass]="{ 'active': selectedTab === 'my-events' }"
-                        (click)="selectTab('my-events', $event)"
-                    >
-                        Sự kiện của tôi
-                    </a>
-                    <a 
-                        href="#" 
-                        class="list-group-item list-item" 
-                        id="my-events-tab"
-                        [ngClass]="{ 'active': selectedTab === 'changepassword' }" 
-                        (click)="selectTab('changepassword', $event)"
-                      >
-                        Đổi mật khẩu
-                    </a>
+  <app-header></app-header>
+  <div class="container content">
+    <div class="row">
+      <!-- Sidebar Menu -->
+      <div class="col-md-3 p-4 navbar-left">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-item" id="personal-info-tab"
+            [ngClass]="{ 'active': selectedTab === 'personal-info' }" (click)="selectTab('personal-info', $event)">
+            Thông tin tài khoản
+          </a>
+          <a href="#" class="list-group-item list-item" id="my-events-tab"
+            [ngClass]="{ 'active': selectedTab === 'my-events' }" (click)="selectTab('my-events', $event)">
+            Sự kiện của tôi
+          </a>
+          <a href="#" class="list-group-item list-item" id="my-events-tab"
+            [ngClass]="{ 'active': selectedTab === 'changepassword' }" (click)="selectTab('changepassword', $event)">
+            Đổi mật khẩu
+          </a>
 
-                </div>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="col-md-9 p-4">
+        <div *ngIf="selectedTab === 'personal-info'">
+          <h4 class="mb-4">THÔNG TIN TÀI KHOẢN</h4>
+          <div class="card p-4 rounded-4">
+            <div class="mb-2">
+              <span><strong>Tài khoản sinh viên:</strong></span>
+              <span id="email" style="margin-left: 6px;">{{user?.email || 'Chưa cập nhật'}}</span>
             </div>
-      
-          <!-- Content Area -->
-            <div class="col-md-9 p-4">
-                <div *ngIf="selectedTab === 'personal-info'">
-                    <h4 class="mb-4">THÔNG TIN TÀI KHOẢN</h4>
-                    <div class="card p-4 rounded-4">
-                        <div class="mb-2">
-                          <span ><strong>Tài khoản sinh viên:</strong></span>
-                          <span id="email" style="margin-left: 6px;">{{user?.email || 'Chưa cập nhật'}}</span>
-                        </div>
-                        <!-- <div class="mb-2">
+            <!-- <div class="mb-2">
                           <span><strong>Họ và tên:</strong></span>
                           <span id="username" style="margin-left: 6px;">{{user?.name || 'Chưa cập nhật'}}</span>
                           <input *ngIf="isEditing" type="text" [(ngModel)]="tempName" class="form-control d-inline w-auto">
 
                         </div> -->
-                        <div class="mb-2">
-                            <span><strong>Họ và tên:</strong></span>
-                        
-                            <!-- Chỉ hiển thị nếu không ở chế độ chỉnh sửa -->
-                            <span *ngIf="!isEditing" id="username" style="margin-left: 6px;">
-                              {{ user?.username || 'Chưa cập nhật' }}
-                            </span>
-                          
-                            <!-- Hiển thị ô input khi isEditing = true -->
-                            <input *ngIf="isEditing" type="text" [(ngModel)]="tempName"
-                                  class="form-control d-inline w-auto ms-2">
-                        
-                        </div>
-                        <div class="mb-2">
-                            <span><strong>Mã số sinh viên:</strong></span>
-                          
-                            <span *ngIf="!isEditing" id="idnumber" style="margin-left: 6px;">
-                                {{ user?.idnumber || 'Chưa cập nhật' }}
-                            </span>
-                        
-                          <!-- Hiển thị ô input khi isEditing = true -->
-                            <input *ngIf="isEditing" type="text" [(ngModel)]="tempId"
-                                class="form-control d-inline w-auto ms-2">
-                        </div>
+            <div class="mb-2">
+              <span><strong>Họ và tên:</strong></span>
 
+              <!-- Chỉ hiển thị nếu không ở chế độ chỉnh sửa -->
+              <span *ngIf="!isEditing" id="username" style="margin-left: 6px;">
+                {{ user?.username || 'Chưa cập nhật' }}
+              </span>
 
-
-
-                        <div class="mb-2">
-                            <span><strong>Số điện thoại:</strong></span>
-
-                            <span *ngIf="!isEditing" id="phone" style="margin-left: 6px;">
-                                {{user?.phone || 'Chưa cập nhật'}}
-                            </span>
-                          
-                            <!-- Hiển thị ô input khi isEditing = true -->
-                            <input *ngIf="isEditing" type="text" [(ngModel)]="tempPhone"
-                                  class="form-control d-inline w-auto ms-2">
-                        </div>
-
-                        <app-button *ngIf="!isEditing" (click)="startEditing()"
-                            class="login-button mt-2 btn-edit"
-                            text="Chỉnh sửa"
-                            color="#F05A22"
-                            hoverColor="#FB8357"
-                            textColor="#fff">
-                        </app-button>
-
-                        <app-button *ngIf="isEditing" (click)="saveChanges()"
-                                    class="login-button mt-2 btn-edit"
-                                    text="Lưu"
-                                    color="#28a745"
-                                    hoverColor="#58d68d"
-                                    textColor="#fff">
-                        </app-button>
-                    </div>
-                </div>
-            <!-- Sự kiện của tôi -->
-                <div *ngIf="selectedTab === 'my-events'">
-                  <!-- <h4 class="mb-4">SỰ KIỆN CỦA TÔI</h4> -->
-                  <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h4 class="m-0">SỰ KIỆN CỦA TÔI</h4>
-                  </div>
-                  <!-- filter -->
-                  <div class="container mb-4 p-0">
-                    <div class="row g-2 align-items-center">
-                      <!-- Dropdown Thể loại -->
-                      <div class="col-3 col-md-4">
-                        <select class="form-select form-control">
-                          <option selected>Thể loại</option>
-                          <option value="1">Cuộc thi</option>
-                          <option value="2">Hoạt động tình nguyện</option>
-                          <option value="3">Hội thảo/ Workshop</option>
-                          <option value="4">Khác</option>
-                        </select>
-                      </div>
-                      <!-- Dropdown Đơn vị tổ chức -->
-                       
-                      <!-- Ô chọn ngày -->
-                      <div class="col-md-4 col-4">
-                        <input type="date" class="form-control">
-                      </div>
-                      <div class="col-md-4 col-4">
-                        <select class="form-select form-control">
-                          <option selected>Trạng thái</option>
-                          <option value="1">Đã nộp</option>
-                          <option value="2">Đã được duyệt</option>
-                          <option value="3">Đã bị từ chối</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  
-
-
-                  <div *ngFor="let event of appEvents" class="card p-3 mb-3 rounded-4">
-                    <div class="row g-0">
-                      <div class="col-md-3 ">
-                        <img
-                          [src]="event.imageUrl"
-                          class="img-fluid rounded-start rounded-4"
-                          alt="Event Image"
-                        />
-                      </div>
-                      <div class="col-md-9">
-                        <div class="card-body">
-                          <h5 class="card-title">{{ event.title }}</h5>
-                          <ul class="list-unstyled">
-                            <li>
-                              <i class="fas fa-clock"></i>
-                              {{ event.startDate | date: 'short' }} - {{ event.endDate | date: 'short' }}
-                            </li>
-                            <li>
-                              <i class="fas fa-users"></i>
-                              Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
-                            </li>
-                          </ul>
-                          <div class="d-flex flex-row align-items-center gap-2">
-                            <p class="m-0">Trạng thái: </p>
-                          <p class="card-text">
-                            <span
-                              class="badge bg-success"
-
-                            >
-                              <!-- {{ event.status }} --> Đã đăng ký
-                            </span>
-                          </p>
-                          
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="selectedTab === 'changepassword'">
-                  <h4 class="mb-4">ĐỔI MẬT KHẨU</h4>
-                  <div class="card p-4 rounded-4">
-                      <form (ngSubmit)="changePassword()">
-                        <!-- Mật khẩu hiện tại -->
-                          <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="currentPassword" placeholder=" " required [(ngModel)]="passwordData.currentPassword" name="currentPassword"/>
-                            <label for="currentPassword">Mật khẩu hiện tại</label>
-                          </div>
-                  
-                        <!-- Mật khẩu mới -->
-                          <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="newPassword" placeholder=" " required [(ngModel)]="passwordData.newPassword" name="newPassword"/>
-                            <label for="newPassword">Nhập mật khẩu mới</label>
-                          </div>
-                    
-                        <!-- Nhập lại mật khẩu mới -->
-                          <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="confirmPassword" placeholder=" " required [(ngModel)]="passwordData.confirmPassword" name="confirmPassword"/>
-                            <label for="confirmPassword">Nhập lại mật khẩu mới</label>
-                          </div>
-                  
-                          <app-button class="login-button mt-2 btn-edit" text="Đổi mật khẩu" color="#F05A22" hoverColor="#FB8357" textColor="#fff" type="submit">
-                          </app-button>
-                      </form>
-                  </div>
-              </div>
-              
+              <!-- Hiển thị ô input khi isEditing = true -->
+              <input *ngIf="isEditing" type="text" [(ngModel)]="tempName" class="form-control d-inline w-auto ms-2">
 
             </div>
+            <div class="mb-2">
+              <span><strong>Mã số sinh viên:</strong></span>
+
+              <span *ngIf="!isEditing" id="idnumber" style="margin-left: 6px;">
+                {{ user?.idnumber || 'Chưa cập nhật' }}
+              </span>
+
+              <!-- Hiển thị ô input khi isEditing = true -->
+              <input *ngIf="isEditing" type="text" [(ngModel)]="tempId" class="form-control d-inline w-auto ms-2">
+            </div>
+
+
+
+
+            <div class="mb-2">
+              <span><strong>Số điện thoại:</strong></span>
+
+              <span *ngIf="!isEditing" id="phone" style="margin-left: 6px;">
+                {{user?.phone || 'Chưa cập nhật'}}
+              </span>
+
+              <!-- Hiển thị ô input khi isEditing = true -->
+              <input *ngIf="isEditing" type="text" [(ngModel)]="tempPhone" class="form-control d-inline w-auto ms-2">
+            </div>
+
+            <app-button *ngIf="!isEditing" (click)="startEditing()" class="login-button mt-2 btn-edit" text="Chỉnh sửa"
+              color="#F05A22" hoverColor="#FB8357" textColor="#fff">
+            </app-button>
+
+            <app-button *ngIf="isEditing" (click)="saveChanges()" class="login-button mt-2 btn-edit" text="Lưu"
+              color="#28a745" hoverColor="#58d68d" textColor="#fff">
+            </app-button>
+          </div>
         </div>
+        <!-- Sự kiện của tôi -->
+        <div *ngIf="selectedTab === 'my-events'">
+          <!-- <h4 class="mb-4">SỰ KIỆN CỦA TÔI</h4> -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="m-0">SỰ KIỆN CỦA TÔI</h4>
+          </div>
+          <!-- filter -->
+          <div class="container mb-4 p-0">
+            <div class="row g-2 align-items-center">
+              <!-- Dropdown Thể loại -->
+              <div class="col-3 col-md-4">
+                <select class="form-select form-control" [(ngModel)]="selectedCategory" (change)="changeCategory()">
+                  <option value="" selected>Toàn bộ</option>
+                  <option *ngFor="let category of categories" [value]="category.id">
+                    {{ category.categoryName }}
+                  </option>
+                </select>
+              </div>
+              <!-- Dropdown Đơn vị tổ chức -->
+
+              <!-- Ô chọn ngày -->
+              <div class="col-md-4 col-4">
+                <input type="date" class="form-control">
+              </div>
+              <div class="col-md-4 col-4">
+                <select class="form-select form-control" [(ngModel)]="selectedStatus" (change)="changeStatus()">
+                  <option value="">Trạng thái</option>
+                  <option value="REGISTERED">Đã đăng ký</option>
+                  <option value="ATTEND">Đã tham gia</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div *ngFor="let event of appEvents" class="card p-3 mb-3 rounded-4">
+            <div class="row g-0">
+              <div class="col-md-3 ">
+                <img [src]="event.imageUrl" class="img-fluid rounded-start rounded-4" alt="Event Image" />
+              </div>
+              <div class="col-md-9">
+                <div class="card-body">
+                  <h5 class="card-title">{{ event.title }}</h5>
+                  <ul class="list-unstyled">
+                    <li>
+                      <i class="fas fa-clock"></i>
+                      {{ event.startDate | date: 'short' }} - {{ event.endDate | date: 'short' }}
+                    </li>
+                    <li>
+                      <i class="fas fa-users"></i>
+                      Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
+                    </li>
+                  </ul>
+                  <div class="d-flex flex-row align-items-center gap-2">
+                    <p class="m-0">Trạng thái: </p>
+                    <p class="card-text">
+                      <span class="badge bg-success">
+                        <!-- {{ event.status }} --> Đã đăng ký
+                      </span>
+                    </p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="selectedTab === 'changepassword'">
+          <h4 class="mb-4">ĐỔI MẬT KHẨU</h4>
+          <div class="card p-4 rounded-4">
+            <form (ngSubmit)="changePassword()">
+              <!-- Mật khẩu hiện tại -->
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="currentPassword" placeholder=" " required
+                  [(ngModel)]="passwordData.currentPassword" name="currentPassword" />
+                <label for="currentPassword">Mật khẩu hiện tại</label>
+              </div>
+
+              <!-- Mật khẩu mới -->
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="newPassword" placeholder=" " required
+                  [(ngModel)]="passwordData.newPassword" name="newPassword" />
+                <label for="newPassword">Nhập mật khẩu mới</label>
+              </div>
+
+              <!-- Nhập lại mật khẩu mới -->
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="confirmPassword" placeholder=" " required
+                  [(ngModel)]="passwordData.confirmPassword" name="confirmPassword" />
+                <label for="confirmPassword">Nhập lại mật khẩu mới</label>
+              </div>
+
+              <app-button class="login-button mt-2 btn-edit" text="Đổi mật khẩu" color="#F05A22" hoverColor="#FB8357"
+                textColor="#fff" type="submit">
+              </app-button>
+            </form>
+          </div>
+        </div>
+
+
       </div>
-      <app-footer></app-footer>
-      
+    </div>
+  </div>
+  <app-footer></app-footer>
+
 </div>
