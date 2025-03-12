@@ -14,6 +14,14 @@ export class User2Service {
 
      }
 
+    updateFaculty(id: number, data: any){
+      return this.httpClient.put<ApiResponse<any>>(`${this.url}/faculty/${id}`, data).pipe(
+        map((res: ApiResponse<any>) => {
+           return res; 
+       })
+     )
+    }
+
      //update user
     updateAccount(id: number, data: any): Observable<ApiResponse<any>>{
         return this.httpClient.put<ApiResponse<any>>(`${this.url}/${id}`, data).pipe(

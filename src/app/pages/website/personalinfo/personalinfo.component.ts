@@ -16,7 +16,7 @@ import { AuthService } from '../../../services/auth.service';
   templateUrl: './personalinfo.component.html',
   styleUrl: './personalinfo.component.css'
 })
-export class PersonalinfoComponent implements AfterViewInit, OnInit{
+export class PersonalinfoComponent implements AfterViewInit, OnInit {
   selectedTab: string = 'personal-info';
   isLoggedIn: boolean = false; // Kiểm tra người dùng đã đăng nhập chưa
   appEvents: AppEvent[] = [];
@@ -28,67 +28,61 @@ export class PersonalinfoComponent implements AfterViewInit, OnInit{
   tempId: any;
   isEditing: boolean | undefined;
 
-  user: any = {
-    email: 'nguyenanhtuan1.442003@gmail.com',
-    name: '',
-    phone: '',
-    idnumber: ''
-  };
-  // user?: any;
+  user: any  // user?: any;
 
-  constructor(private userService: User2Service, private authService: AuthService){}
+  constructor(private userService: User2Service, private authService: AuthService) { }
   ngOnInit(): void {
     const userId = this.authService.getUserId();
-    if(userId !== null)
+    if (userId !== null)
       this.userService.getUserbyId(userId).subscribe(
         (res) => {
           this.user = res.result;
-          console.log('user:',this.user)
+          console.log('user:', this.user)
         }
       )
     else
-      window.location.href="/login";
+      window.location.href = "/login";
   }
-  
 
-  // isEditing = false;
-  // tempName = this.user.name;
-  // tempPhone = this.user.phone;
-  // tempId = this.user.idnumber
-
-
-  // toggleEdit() {
-  //   this.isEditing = !this.isEditing;
-  //   if (!this.isEditing) {
-  //     this.user.name = this.tempName; // Lưu lại khi ấn "Lưu"
-  //   }
-  // }
   startEditing() {
     this.tempName = this.user.username; // Lưu giá trị ban đầu
     this.tempPhone = this.user.phone
     this.tempId = this.user.idnumber
     this.isEditing = true; // Bật chế độ chỉnh sửa
+
   }
 
   saveChanges() {
-    if (this.tempName.trim()) {
-      this.user.name = this.tempName; // Cập nhật dữ liệu mới
+    const data = {
+      username: this.tempName,
+      phone: this.tempPhone
     }
-    if (this.tempPhone.trim()) {
-      this.user.phone = this.tempPhone // Cập nhật dữ liệu mới
-    }
-    if (this.tempId.trim()) {
-      this.user.idnumber = this.tempId // Cập nhật dữ liệu mới
-    }
-     
-     
-    
+    console.log(data);
+    this.userService.updateAccount(this.user.id, data).subscribe(
+      (res) => {
+        if (res.code === 1000)
+          alert("Cập nhật thành công !!!");
+        if (this.tempName.trim()) {
+          this.user.name = this.tempName; // Cập nhật dữ liệu mới
+        }
+        if (this.tempPhone.trim()) {
+          this.user.phone = this.tempPhone // Cập nhật dữ liệu mới
+        }
+        if (this.tempId.trim()) {
+          this.user.idnumber = this.tempId // Cập nhật dữ liệu mới
+        }
+      }
+    )
+
+
+
+
     this.isEditing = false; // Ẩn input, hiển thị lại span
   }
 
 
   ngAfterViewInit(): void {
-   this.initdata();
+    this.initdata();
   }
 
   selectTab(tab: string, event: Event) {
@@ -113,40 +107,53 @@ export class PersonalinfoComponent implements AfterViewInit, OnInit{
       this.appEvents = APPEVENTS.filter(event => event.participants.includes(this.user.idnumber));
     } else {
       this.appEvents = [];
-    }  }
+    }
+  }
 
   onClick() {
     console.log("Button Thêm sự kiện được nhấn!");
     // Thêm logic mở modal/tạo sự kiện ở đây
   }
-  
+
   onMouseOver() {
-    
+
   }
-  
+
   onMouseOut() {
-   
+
   }
   passwordData = {
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
   };
-  
+
   changePassword() {
     if (!this.passwordData.currentPassword || !this.passwordData.newPassword || !this.passwordData.confirmPassword) {
       alert("Vui lòng nhập đầy đủ thông tin!");
       return;
     }
-  
+
     if (this.passwordData.newPassword !== this.passwordData.confirmPassword) {
       alert("Mật khẩu mới và nhập lại không khớp!");
       return;
     }
-  
+
     console.log("Đổi mật khẩu thành công!", this.passwordData);
     alert("Mật khẩu đã được thay đổi!");
-    
+
+    const data = {
+      password: this.passwordData.newPassword
+    }
+    console.log(this.user.id);
+    this.userService.updateAccount(this.user.id, data).subscribe(
+      (res) => {
+        if(res.code === 1000){
+          alert("Đổi mật khẩu thành công!");
+        }
+      }
+    )
+
     // Reset form
     this.passwordData = {
       currentPassword: '',

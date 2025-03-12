@@ -22,7 +22,7 @@ export class EventsComponent implements OnInit{
   organizationUnits: any;
   categories: any;
   appEvents: any; 
-  sql = "http://localhost:8080/eventapp-service/events?";
+  sql = "http://localhost:8080/eventapp-service/events";
 
 
   constructor(private CategoryService: CategoryService, private facultyService: FacultyService, private eventService: Event2Service){}
@@ -56,8 +56,7 @@ export class EventsComponent implements OnInit{
 
   changeOrg(){
     console.log(this.selectedUnit);
-   
-    this.filter( this.check());
+    this.filter(this.check());
   }
 
   check(): string {
@@ -75,6 +74,7 @@ export class EventsComponent implements OnInit{
 
     return this.sql + "?faculty_id=" + this.selectedUnit + "&categoryId=" + this.selectedCategory;
   }
+
   filter(sql: string){
     this.eventService.filter(sql).subscribe(
       (res) => {

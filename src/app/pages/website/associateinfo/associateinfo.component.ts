@@ -10,6 +10,7 @@ import { AuthService } from '../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Event2Service } from '../../../services/event2.service';
 import { User2Service } from '../../../services/user2.service';
+import { CategoryService } from '../../../services/category.service';
 declare var bootstrap: any; // Để sử dụng Bootstrap modal
 
 @Component({
@@ -34,10 +35,23 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
     tempEmail: any;
     tempdescription: any;
     showRejectReason = false;
-    constructor (private dialog: MatDialog, private authService: AuthService, private eventService: Event2Service, private userService: User2Service) {}
+    avatar: any= null;
+    user: any;
+    selectedStatus: any = ''; // Lưu giá trị đơn vị được chọn
+    selectedCategory: any = "";
+    sql = "http://localhost:8080/eventapp-service/events";
+    categories: any;
+    constructor (private dialog: MatDialog, private authService: AuthService, 
+      private eventService: Event2Service, private userService: User2Service,
+    private categoryService: CategoryService) {}
 
     ngOnInit(): void {
       const userId = this.authService.getUserId();
+      this.categoryService.getAllEvents().subscribe(
+        (res)=> {
+          this.categories = res.result
+        }
+      )
       if(userId !== null)
         this.userService.getUserbyId(userId).subscribe(
           (res) => {
@@ -49,11 +63,11 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
 
 
 
-    user: any = {
-      email: 'nguyenanhtuan1.442003@gmail.com',
-      name: 'Đoàn khoa Hệ thống thông tin',
-      faculty_description: '',
-    };
+    // user: any = {
+    //   email: 'nguyenanhtuan1.442003@gmail.com',
+    //   name: 'Đoàn khoa Hệ thống thông tin',
+    //   faculty_description: '',
+    // };
 
     event = {
       faculty_id: -1,
@@ -75,6 +89,8 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
         this.event.bannerUrl = file;
       } else if (event.target.name === 'image-avatar') {
         this.event.imageUrl = file;
+      }else if (event.target.name === 'image-account') {
+        this.avatar = file;
       }
       console.log(file)
     }  
@@ -188,9 +204,17 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
         alert("Mật khẩu mới và nhập lại không khớp!");
         return;
       }
-    
-      console.log("Đổi mật khẩu thành công!", this.passwordData);
-      alert("Mật khẩu đã được thay đổi!");
+      const data = {
+        password: this.passwordData.newPassword
+      }
+      console.log(this.user.id);
+      this.userService.updateAccount(this.user.id, data).subscribe(
+        (res) => {
+          if(res.code === 1000){
+            alert("Đổi mật khẩu thành công!");
+          }
+        }
+      )
       
       // Reset form
       this.passwordData = {
@@ -208,13 +232,22 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
     }
   
     saveChanges() {
-      if (this.tempName.trim()) {
-        this.user.name = this.tempName; // Cập nhật dữ liệu mới
-      }
-      if (this.tempEmail.trim()) {
-        this.user.email = this.tempEmail // Cập nhật dữ liệu mới
-      }
-      this.isEditing = false; // Ẩn input, hiển thị lại span
+      const formData = new FormData();
+      formData.append('faculty_id', this.user.id);
+      formData.append('facultyName', this.tempName);
+      formData.append('facultyDescription', this.tempdescription);
+      if(this.avatar != null)
+        formData.append('facultyLogo', this.avatar);
+
+      console.log(formData);
+
+      this.userService.updateFaculty(this.user.id, formData).subscribe(
+        (res) => {
+          if(res.code === 1000){
+            console.log("success!");
+          }
+        }
+      )
     }
 
     initialEvents(){
@@ -242,5 +275,39 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
         console.error('Modal element not found.');
       }
     
+    }
+
+    changeCategory(){
+      console.log(this.selectedCategory);
+      this.filter(this.check());
+    }
+  
+    changeStatus(){
+      console.log(this.selectedStatus);
+      this.filter(this.check());
+    }
+  
+    check(): string {
+      if(this.selectedCategory === "" && this.selectedStatus === ""){
+        return this.sql;
+      }
+  
+      if(this.selectedCategory !== "" && this.selectedStatus === ""){
+        return this.sql + "?categoryId=" + this.selectedCategory;
+      }
+  
+      if(this.selectedCategory === "" && this.selectedStatus !== ""){
+        return this.sql + "?status=" + this.selectedStatus;
+      }
+  
+      return this.sql + "?status=" + this.selectedStatus + "&categoryId=" + this.selectedCategory;
+    }
+  
+    filter(sql: string){
+      this.eventService.filter(sql).subscribe(
+        (res) => {
+          this.appEvents = res.result;
+        }
+      )
     }
 }
