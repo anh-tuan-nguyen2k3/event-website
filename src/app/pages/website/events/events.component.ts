@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../partials/header/header.component';
 import { FooterComponent } from '../../partials/footer/footer.component';
 import { FormsModule } from '@angular/forms';
@@ -14,13 +14,14 @@ import { RouterModule } from '@angular/router';
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
 })
-export class EventsComponent implements OnInit{
+export class EventsComponent implements OnInit, AfterViewInit{
   
   selectedUnit: string = ''; // Lưu giá trị đơn vị được chọn
   organizationUnits = ['DV1', 'DV2', 'DV3'];
   appEvents: any;
 
-  constructor (private eventService: Event2Service) {};
+  constructor (private eventService: Event2Service) {}
+;
   ngOnInit(): void {
     this.eventService.getAllEventsByStatus("APPROVE").subscribe(
       (res) => {
@@ -28,5 +29,8 @@ export class EventsComponent implements OnInit{
           this.appEvents = res.result;
       }
     )
+  }
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
   }
 }

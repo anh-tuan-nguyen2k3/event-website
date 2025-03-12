@@ -35,3 +35,11 @@ color: #F05A22;
 .cardevent {
   text-decoration: none;
 }
+.content {
+  margin-bottom: 24px;
+}
+.fixed-header {
+  position: fixed;
+  width: 100%;
+  z-index: 1030;
+}
