@@ -19,6 +19,7 @@ import { DashboardComponent } from './pages/website/dashboard/dashboard.componen
 import { AuthGuard } from './guard/auth.guard';
 import { AssociateGuard } from './guard/associate.guard';
 import { UserGuard } from './guard/user.guard';
+import { ErrorComponent } from './pages/website/404/404.component';
 
 
 
@@ -94,7 +95,12 @@ export const routes: Routes = [
     {
         path:'dashboard',
         component: DashboardComponent
+    },
+    {
+        path:'404',
+        component: ErrorComponent,
     }
+    
 ];
 
 @NgModule({

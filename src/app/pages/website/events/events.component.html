@@ -47,7 +47,13 @@
                         <option *ngFor="let category of categories" [value]="category.id">
                           {{ category.categoryName }}
                         </option>
-                      </select>  
+                      <select class="form-select form-control">
+                          <option selected>Thể loại</option>
+                          <option value="1">Cuộc thi</option>
+                          <option value="2">Hoạt động tình nguyện</option>
+                          <option value="3">Hội thảo/ Workshop</option>
+                          <option value="4">Khác</option>
+                      </select>
                   </div>
                   <!-- Dropdown Đơn vị tổ chức -->
                   <div class="col-md-2 col-6">

@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Event2Service } from '../../../services/event2.service';
+import { User2Service } from '../../../services/user2.service';
 declare var bootstrap: any; // Để sử dụng Bootstrap modal
 
 @Component({
@@ -18,7 +19,7 @@ declare var bootstrap: any; // Để sử dụng Bootstrap modal
   templateUrl: './associateinfo.component.html',
   styleUrl: './associateinfo.component.css'
 })
-export class AssociateinfoComponent implements AfterViewInit{
+export class AssociateinfoComponent implements OnInit, AfterViewInit{
     selectedTab: string = 'personal-info';
     isLoggedIn: boolean = false; // Kiểm tra người dùng đã đăng nhập chưa
     appEvents: AppEvent[] = [];
@@ -31,12 +32,27 @@ export class AssociateinfoComponent implements AfterViewInit{
     isEditing: boolean | undefined;
     tempName: any;
     tempEmail: any;
+    tempdescription: any;
     showRejectReason = false;
+    constructor (private dialog: MatDialog, private authService: AuthService, private eventService: Event2Service, private userService: User2Service) {}
+
+    ngOnInit(): void {
+      const userId = this.authService.getUserId();
+      if(userId !== null)
+        this.userService.getUserbyId(userId).subscribe(
+          (res) => {
+            this.user = res.result;
+            console.log('user:',this.user)
+          }
+        )
+    }
+
 
 
     user: any = {
       email: 'nguyenanhtuan1.442003@gmail.com',
       name: 'Đoàn khoa Hệ thống thông tin',
+      faculty_description: '',
     };
 
     event = {
@@ -62,7 +78,6 @@ export class AssociateinfoComponent implements AfterViewInit{
       }
       console.log(file)
     }  
-    constructor (private dialog: MatDialog, private authService: AuthService, private eventService: Event2Service) {}
 
     ngAfterViewInit(): void {
       this.initdata();
@@ -186,9 +201,9 @@ export class AssociateinfoComponent implements AfterViewInit{
     }
     
     startEditing() {
-      this.tempName = this.user.name; // Lưu giá trị ban đầu
-      
+      this.tempName = this.user.facultyName; // Lưu giá trị ban đầu
       this.tempEmail = this.user.email;
+      this.tempdescription = this.user.facultyDescription;
       this.isEditing = true; // Bật chế độ chỉnh sửa
     }
   
