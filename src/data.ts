@@ -45,7 +45,13 @@ export const APPEVENTS: AppEvent[] = [
     {
       eventID: 2,
       title: "CHƯƠNG TRÌNH HỘI NGHỊ KHOA HỌC 2024",
-      description: "Hội nghị về những tiến bộ khoa học kỹ thuật.",
+      description: `Hội nghị về những tiến bộ khoa học kỹ thuật là sự kiện quan trọng nhằm cập nhật, thảo luận và chia sẻ những thành tựu mới nhất trong lĩnh vực khoa học và công nghệ. Đây là dịp để các nhà khoa học, chuyên gia, nhà nghiên cứu và doanh nghiệp gặp gỡ, trao đổi ý tưởng, cũng như tìm kiếm cơ hội hợp tác phát triển.
+
+Tại hội nghị, nhiều công trình nghiên cứu tiên tiến được giới thiệu, từ trí tuệ nhân tạo, công nghệ sinh học, vật liệu mới đến năng lượng tái tạo và tự động hóa. Các báo cáo khoa học không chỉ trình bày những khám phá mới mà còn phân tích tác động của chúng đối với xã hội, kinh tế và môi trường. Điều này giúp các tổ chức, doanh nghiệp có cái nhìn rõ hơn về xu hướng công nghệ, từ đó đưa ra chiến lược ứng dụng phù hợp.
+
+Ngoài ra, hội nghị còn tạo ra diễn đàn để các chuyên gia thảo luận về những thách thức hiện nay như bảo mật dữ liệu, biến đổi khí hậu hay phát triển bền vững. Việc kết nối giữa các nhà nghiên cứu với doanh nghiệp cũng thúc đẩy quá trình thương mại hóa công nghệ, đưa các phát minh từ phòng thí nghiệm vào thực tiễn cuộc sống.
+
+Nhìn chung, hội nghị về những tiến bộ khoa học kỹ thuật không chỉ góp phần thúc đẩy sự phát triển của khoa học mà còn tạo điều kiện để công nghệ phục vụ tốt hơn cho đời sống con người. Đây là nền tảng quan trọng giúp xã hội tiến xa hơn trong kỷ nguyên số hóa và đổi mới sáng tạo.`,
       startDate: new Date("2024-12-10T09:00:00"),
       endDate: new Date("2024-12-10T17:00:00"),
       status: "Pending",

@@ -23,6 +23,15 @@
                     >
                         Sự kiện của tôi
                     </a>
+                    <a 
+                        href="#" 
+                        class="list-group-item list-item" 
+                        id="my-events-tab"
+                        [ngClass]="{ 'active': selectedTab === 'changepassword' }" 
+                        (click)="selectTab('changepassword', $event)"
+                      >
+                        Đổi mật khẩu
+                    </a>
 
                 </div>
             </div>
@@ -47,7 +56,7 @@
                         
                             <!-- Chỉ hiển thị nếu không ở chế độ chỉnh sửa -->
                             <span *ngIf="!isEditing" id="username" style="margin-left: 6px;">
-                              {{ user?.name || 'Chưa cập nhật' }}
+                              {{ user?.username || 'Chưa cập nhật' }}
                             </span>
                           
                             <!-- Hiển thị ô input khi isEditing = true -->
@@ -147,6 +156,33 @@
                     </div>
                   </div>
                 </div>
+                <div *ngIf="selectedTab === 'changepassword'">
+                  <h4 class="mb-4">ĐỔI MẬT KHẨU</h4>
+                  <div class="card p-4 rounded-4">
+                      <form (ngSubmit)="changePassword()">
+                        <!-- Mật khẩu hiện tại -->
+                          <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="currentPassword" placeholder=" " required [(ngModel)]="passwordData.currentPassword" name="currentPassword"/>
+                            <label for="currentPassword">Mật khẩu hiện tại</label>
+                          </div>
+                  
+                        <!-- Mật khẩu mới -->
+                          <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="newPassword" placeholder=" " required [(ngModel)]="passwordData.newPassword" name="newPassword"/>
+                            <label for="newPassword">Nhập mật khẩu mới</label>
+                          </div>
+                    
+                        <!-- Nhập lại mật khẩu mới -->
+                          <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="confirmPassword" placeholder=" " required [(ngModel)]="passwordData.confirmPassword" name="confirmPassword"/>
+                            <label for="confirmPassword">Nhập lại mật khẩu mới</label>
+                          </div>
+                  
+                          <app-button class="login-button mt-2 btn-edit" text="Đổi mật khẩu" color="#F05A22" hoverColor="#FB8357" textColor="#fff" type="submit">
+                          </app-button>
+                      </form>
+                  </div>
+              </div>
               
 
             </div>

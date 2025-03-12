@@ -34,19 +34,20 @@ export class PersonalinfoComponent implements AfterViewInit, OnInit{
     phone: '',
     idnumber: ''
   };
-  
+  // user?: any;
 
   constructor(private userService: User2Service, private authService: AuthService){}
   ngOnInit(): void {
-    // const userId = this.authService.getUserId();
-    // if(userId !== null)
-    //   this.userService.getUserbyId(userId).subscribe(
-    //     (res) => {
-    //       this.user = res.result;
-    //     }
-    //   )
-    // else
-    //   window.location.href="/login";
+    const userId = this.authService.getUserId();
+    if(userId !== null)
+      this.userService.getUserbyId(userId).subscribe(
+        (res) => {
+          this.user = res.result;
+          console.log('user:',this.user)
+        }
+      )
+    else
+      window.location.href="/login";
   }
   
 
@@ -98,14 +99,14 @@ export class PersonalinfoComponent implements AfterViewInit, OnInit{
   }
   // user: any;
   initdata() {
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    if (loggedInUser) {
-      this.user = JSON.parse(loggedInUser); // Chuyển đổi từ chuỗi JSON sang đối tượng
-      this.isLoggedIn = true;
+    // const loggedInUser = localStorage.getItem('loggedInUser');
+    // if (loggedInUser) {
+    //   this.user = JSON.parse(loggedInUser); // Chuyển đổi từ chuỗi JSON sang đối tượng
+    //   this.isLoggedIn = true;
 
-      console.log(this.user, 123)
-      }
-      this.loadEvents();
+    //   console.log(this.user)
+    //   }
+    //   this.loadEvents();
   }
   loadEvents() {
     if (this.isLoggedIn && this.user) {
@@ -125,6 +126,33 @@ export class PersonalinfoComponent implements AfterViewInit, OnInit{
   
   onMouseOut() {
    
+  }
+  passwordData = {
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  };
+  
+  changePassword() {
+    if (!this.passwordData.currentPassword || !this.passwordData.newPassword || !this.passwordData.confirmPassword) {
+      alert("Vui lòng nhập đầy đủ thông tin!");
+      return;
+    }
+  
+    if (this.passwordData.newPassword !== this.passwordData.confirmPassword) {
+      alert("Mật khẩu mới và nhập lại không khớp!");
+      return;
+    }
+  
+    console.log("Đổi mật khẩu thành công!", this.passwordData);
+    alert("Mật khẩu đã được thay đổi!");
+    
+    // Reset form
+    this.passwordData = {
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    };
   }
 
 }

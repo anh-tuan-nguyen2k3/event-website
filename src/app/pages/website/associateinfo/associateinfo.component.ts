@@ -26,8 +26,18 @@ export class AssociateinfoComponent implements AfterViewInit{
     textColor = '#ffffff'; // Màu chữ mặc định
     participants: any[] = [];
     selectedEventTitle: string = '';
+    selectedEvent: any;
     test: any;
-    user: any;
+    isEditing: boolean | undefined;
+    tempName: any;
+    tempEmail: any;
+    showRejectReason = false;
+
+
+    user: any = {
+      email: 'nguyenanhtuan1.442003@gmail.com',
+      name: 'Đoàn khoa Hệ thống thông tin',
+    };
 
     event = {
       faculty_id: -1,
@@ -42,6 +52,7 @@ export class AssociateinfoComponent implements AfterViewInit{
       imageUrl: null
     };
   
+
     onFileSelect(event: any) {
       const file = event.target.files[0];
       if (event.target.name === 'image-banner') {
@@ -54,7 +65,9 @@ export class AssociateinfoComponent implements AfterViewInit{
     constructor (private dialog: MatDialog, private authService: AuthService, private eventService: Event2Service) {}
 
     ngAfterViewInit(): void {
-     this.initdata();
+      this.initdata();
+      this.initialEvents()
+
     }
   
     selectTab(tab: string, event: Event) {
@@ -70,8 +83,9 @@ export class AssociateinfoComponent implements AfterViewInit{
       if (loggedInUser) {
         this.isLoggedIn = true;
         this.event.faculty_id = this.authService.getUserId();
+        console.log(this.event.faculty_id)
       }
-      this.loadEvents();
+      // this.loadEvents();
     }
 
     loadEvents() {
@@ -171,4 +185,47 @@ export class AssociateinfoComponent implements AfterViewInit{
       };
     }
     
+    startEditing() {
+      this.tempName = this.user.name; // Lưu giá trị ban đầu
+      
+      this.tempEmail = this.user.email;
+      this.isEditing = true; // Bật chế độ chỉnh sửa
+    }
+  
+    saveChanges() {
+      if (this.tempName.trim()) {
+        this.user.name = this.tempName; // Cập nhật dữ liệu mới
+      }
+      if (this.tempEmail.trim()) {
+        this.user.email = this.tempEmail // Cập nhật dữ liệu mới
+      }
+      this.isEditing = false; // Ẩn input, hiển thị lại span
+    }
+
+    initialEvents(){
+      this.eventService.getAllEvents().subscribe(
+        (res) => {
+            console.log('all events: ',res.result);
+            this.appEvents = res.result;
+        }
+      )
+    }
+    openModal(event: any) {
+      this.selectedEvent = event;
+      const modalElement = document.getElementById('eventDetailModal');
+      if (modalElement) {
+        // Ensure Bootstrap is available and correctly initialized
+        const bootstrap = (window as any).bootstrap;
+        this.showRejectReason = false;
+        if (bootstrap && bootstrap.Modal) {
+          const modal = new bootstrap.Modal(modalElement);
+          modal.show();
+        } else {
+          console.error('Bootstrap Modal is not initialized correctly.');
+        }
+      } else {
+        console.error('Modal element not found.');
+      }
+    
+    }
 }

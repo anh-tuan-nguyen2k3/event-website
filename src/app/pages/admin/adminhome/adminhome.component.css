@@ -61,11 +61,20 @@ body {
 
 
 #sidebar a:hover span {
-    color: #000000; /* Đổi màu chữ khi hover vào link */
+    color: #000000;
 }
 #sidebar .nav-item:hover {
     border-radius: 10px;
     background-color: #FFFFFF; /* Nền chuyển thành màu trắng khi hover */
+}
+.nav-link.active {
+    color: #000000 !important;  /* Đổi màu chữ */
+    background-color: #FFFFFF !important; /* Đổi màu nền */
+    border-radius: 10px; /* Bo góc */
+}
+
+.nav-link.active span{
+    color: #000000 !important;  /* Đổi màu chữ */
 }
 
 
@@ -129,11 +138,6 @@ table, th {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng bóng */
     transition: transform 0.2s ease-in-out;
 }
- /* Hiệu ứng phóng to nhẹ khi hover */
-/* .card:hover {
-    transform: scale(1.01);
-} */
-
 .icon {
     font-size: 1.5rem;
     color: #6c757d; /* Màu xám của Bootstrap */
@@ -143,12 +147,12 @@ table, th {
 	border-radius: 30px;
 }
 button {
-	padding: 13px 16px; /* Kích thước nút */
-	border: none; /* Loại bỏ viền */
-	border-radius: 10px; /* Góc bo tròn */
-	cursor: pointer; /* Con trỏ chuyển thành tay khi rê chuột */
-	transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
-	font-size: 16px; /* Kích thước chữ */
+	padding: 13px 16px; 
+	border: none; 
+	border-radius: 10px;
+	cursor: pointer; 
+	transition: background-color 0.3s ease; 
+	font-size: 16px; 
   }
 .img-fluid {
 	height: 200px;
@@ -156,4 +160,10 @@ button {
 }
 .modal.ng-hide {
 	display: none !important;
+  }
+
+.form-control {
+	padding: 13px 16px; /* Kích thước nút */
+	border-radius: 10px; /* Góc bo tròn */
+	font-size: 16px; /* Kích thước chữ */
   }

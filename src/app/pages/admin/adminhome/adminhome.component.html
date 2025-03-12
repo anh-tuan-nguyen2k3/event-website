@@ -55,7 +55,7 @@
 <section id="content" class="flex-grow-1 p-3">
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container-fluid">
-            <a href="#" class="" style="text-decoration: none; font-family: 'Lato'; margin-left: auto; text-align: end;">Trang chủ</a>
+            <a href="/home" class="" style="text-decoration: none; font-family: 'Lato'; margin-left: auto; text-align: end;">Trang chủ</a>
         </div>
     </nav>
     <main class="mt-4">
@@ -67,7 +67,7 @@
                 <div class="row g-2 align-items-center">           
                     <!-- Dropdown Thể loại -->
                     <div class="col-md-3 col-6">
-                        <select class="form-select rounded-3">
+                        <select class="form-select form-control">
                             <option selected>Thể loại</option>
                             <option value="1">Cuộc thi</option>
                             <option value="2">Hoạt động tình nguyện</option>
@@ -230,8 +230,17 @@
                             <p>{{ selectedEvent?.description }}</p>
                             </div>
                             <div class="modal-footer">
-                            <button type="button" class="btn btn-success" (click)="approveEvent()">Duyệt</button>
-                            <button type="button" class="btn btn-danger" (click)="rejectEvent()">Từ chối</button>
+                            <button type="button" class="btn btn-success" (click)="finished()">Hoàn thành</button>
+                            <!-- <button type="button" class="btn btn-danger" (click)="rejectEvent()" *ngIf="!showRejectReason">
+                                Từ chối
+                            </button> -->
+                            </div>
+                            <div *ngIf="showRejectReason" class="mt-1 p-3">
+                                <label for="rejectReason">Lý do từ chối:</label>
+                                <textarea id="rejectReason" class="form-control" [(ngModel)]="rejectReason"></textarea>
+                                <div class="d-flex justify-content-end mt-2">
+                                    <button type="button" class="btn btn-danger" (click)="confirmReject()">Xác nhận từ chối</button>
+                                </div>
                             </div>
                         </div>
                         </div>
@@ -294,9 +303,9 @@
                         
                             <ul class="dropdown-menu rounded-4">
                                 <li><a class="dropdown-item" (click)="openModal(event)" >Chi tiết sự kiện</a></li>
-                                <li>
+                                <!-- <li>
                                     <button class="dropdown-item" (click)="openParticipantModal(event)">Danh sách đăng ký</button>
-                                </li>
+                                </li> -->
                                 <li><a class="dropdown-item text-danger" href="#">Xóa</a></li>
                             </ul>
                         
@@ -334,6 +343,37 @@
                     </div> 
 
                     <!-- Modal thông tin sự kiện -->
+                    <!-- <div
+                    class="modal fade"
+                    id="eventDetailModal"
+                    tabindex="-1"
+                    aria-labelledby="eventDetailModalLabel"
+                    aria-hidden="true"
+                    >
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="eventDetailModalLabel">{{ selectedEvent?.title }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <img [src]="selectedEvent?.imageUrl" class="img-fluid mb-3" *ngIf="selectedEvent?.imageUrl" />
+                            <p>{{ selectedEvent?.description }}</p>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="approveEvent()">Duyệt</button>
+                            <button type="button" class="btn btn-danger" (click)="rejectEvent()" *ngIf="!showRejectReason">
+                                Từ chối
+                            </button>
+                            </div>
+                            <div class="mt-3">
+                                <label for="rejectReason">Lý do từ chối:</label>
+                                <textarea id="rejectReason" class="form-control" [(ngModel)]="rejectReason"></textarea>
+                                <button class="btn btn-danger mt-2" (click)="confirmReject()">Xác nhận từ chối</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div> -->
                     <div
                     class="modal fade"
                     id="eventDetailModal"
@@ -353,27 +393,23 @@
                             </div>
                             <div class="modal-footer">
                             <button type="button" class="btn btn-success" (click)="approveEvent()">Duyệt</button>
-                            <button type="button" class="btn btn-danger" (click)="rejectEvent()">Từ chối</button>
+                            <!-- <button type="button" class="btn btn-danger" (click)="rejectEvent()">Từ chối</button> -->
+                            <button type="button" class="btn btn-danger" (click)="rejectEvent()" *ngIf="!showRejectReason">
+                                Từ chối
+                            </button>
+                            </div>
+                            <div *ngIf="showRejectReason" class="mt-1 p-3">
+                                <label for="rejectReason">Lý do từ chối:</label>
+                                <textarea id="rejectReason" class="form-control" [(ngModel)]="rejectReason"></textarea>
+                                <!-- <button type="button" class="btn btn-danger mt-2  text-end" (click)="confirmReject()">Xác nhận từ chối</button> -->
+                                <div class="d-flex justify-content-end mt-2">
+                                    <button type="button" class="btn btn-danger" (click)="confirmReject()">Xác nhận từ chối</button>
+                                </div>
                             </div>
                         </div>
                         </div>
                     </div>
-                    <div class="col-md-1 d-flex align-items-center justify-content-center">
-                        <div class="dropdown">
-                            <button class="btn p-0 border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/assets/images/icons/ic_more.svg" alt="More">
-                            </button>
-                        
-                            <ul class="dropdown-menu rounded-4">
-                                <li><a class="dropdown-item" (click)="openModal(event)" >Chi tiết sự kiện</a></li>
-                                <li>
-                                    <button class="dropdown-item" (click)="openParticipantModal(event)">Danh sách đăng ký</button>
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#">Xóa</a></li>
-                            </ul>
-                        
-                        </div>
-                    </div>
+                    
                     <div class="modal fade" id="participantModal" tabindex="-1" aria-labelledby="participantModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -430,22 +466,6 @@
                         </div>
                         </div>
                     </div>
-                    <div class="col-md-1 d-flex align-items-center justify-content-center">
-                        <div class="dropdown">
-                            <button class="btn p-0 border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/assets/images/icons/ic_more.svg" alt="More">
-                            </button>
-                        
-                            <ul class="dropdown-menu rounded-4">
-                                <li><a class="dropdown-item" (click)="openModal(event)" >Chi tiết sự kiện</a></li>
-                                <li>
-                                    <button class="dropdown-item" (click)="openParticipantModal(event)">Danh sách đăng ký</button>
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#">Xóa</a></li>
-                            </ul>
-                        
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -475,16 +495,33 @@
                         </div>
                         <div class="modal-body">
                             <form>
-                                <div class="mb-3">
+                                <div *ngIf="message" class="alert alert-danger text-center form-control" role="alert">
+                                    {{ message }}
+                                </div>
+                                <div class="form-floating mb-3">
+                                    
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="organizationName" 
+                                        placeholder="Nhập tên tổ chức"
+                                        [(ngModel)]="organizationName" 
+                                        name="organizationName"
+                                    />
                                     <label for="organizationName" class="form-label">Tên tổ chức</label>
-                                    <input type="text" class="form-control" id="organizationName" placeholder="Nhập tên tổ chức"
-                                        [(ngModel)]="organizationName" name="organizationName">
                                 </div>
                         
-                                <div class="mb-3">
+                                <div class="form-floating mb-3">
+                                    
+                                    <input 
+                                        type="email" 
+                                        class="form-control" 
+                                        id="organizationEmail" 
+                                        placeholder="Nhập email"
+                                        [(ngModel)]="organizationEmail" 
+                                        name="organizationEmail"
+                                    />
                                     <label for="organizationEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="organizationEmail" placeholder="Nhập email"
-                                        [(ngModel)]="organizationEmail" name="organizationEmail">
                                 </div>
                             </form>
                         </div>

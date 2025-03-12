@@ -70,9 +70,10 @@ export class EventdetailComponent implements OnInit, AfterViewInit {
     this.eventService.getEventById(this.eventID).subscribe(
       (res) => {
         this.eventDetail = res.result;
+        console.log('Chi tiết sự kiện',this.eventDetail)
       }
     )
-    this.eventDetail = APPEVENTS.find(event => event.eventID === this.eventID);
+    // this.eventDetail = APPEVENTS.find(event => event.eventID === this.eventID);
 
     this.checkRegistration();
 
