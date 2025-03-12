@@ -27,26 +27,28 @@
           <div class="card p-4 rounded-4">
             <div class="mb-2">
               <span><strong>Tài khoản tổ chức:</strong></span>
-
-              <!-- Chỉ hiển thị nếu không ở chế độ chỉnh sửa -->
               <span *ngIf="!isEditing" id="useremail" style="margin-left: 6px;">
                 {{ user?.email || 'Chưa cập nhật' }}
               </span>
-
-              <!-- Hiển thị ô input khi isEditing = true -->
               <input *ngIf="isEditing" type="text" [(ngModel)]="tempEmail" class="form-control d-inline w-auto ms-2">
 
             </div>
+            
             <div class="mb-2">
               <span><strong>Tên tổ chức</strong></span>
-
-              <!-- Chỉ hiển thị nếu không ở chế độ chỉnh sửa -->
               <span *ngIf="!isEditing" id="username" style="margin-left: 6px;">
-                {{ user?.name || 'Chưa cập nhật' }}
+                {{ user?.facultyName || 'Chưa cập nhật' }}
               </span>
-
-              <!-- Hiển thị ô input khi isEditing = true -->
               <input *ngIf="isEditing" type="text" [(ngModel)]="tempName" class="form-control d-inline w-auto ms-2">
+
+            </div>
+
+            <div class="mb-2">
+              <span><strong>Mô tả: </strong></span>
+              <span *ngIf="!isEditing" id="username" style="margin-left: 6px;">
+                {{ user?.facultyDescription || 'Chưa cập nhật' }}
+              </span>
+              <input *ngIf="isEditing" type="text" [(ngModel)]="tempdescription" class="form-control d-inline w-auto ms-2">
 
             </div>
             <app-button *ngIf="!isEditing" (click)="startEditing()" class="login-button mt-2 btn-edit" text="Chỉnh sửa"
