@@ -32,3 +32,6 @@ color: #F05A22;
 	border-radius: 10px; /* Góc bo tròn */
 	font-size: 16px; /* Kích thước chữ */
   }
+.cardevent {
+  text-decoration: none;
+}

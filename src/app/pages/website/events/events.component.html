@@ -66,6 +66,34 @@
                   </div>
               </div>
           </div>
+
+          <!-- Events -->
+          <div class="container mt-4 mb-4">
+            <div class="row row-cols-1 row-cols-md-3 g-4"> 
+                <div class="col" *ngFor="let event of appEvents">
+                    <a class="cardevent" [routerLink]="['/event-detail', event.id]">
+                        <div class="card h-100 p-2 rounded-4">
+                            <img
+                              [src]="event.imageUrl"
+                              class="card-img-top rounded-3"
+                              alt="Event Image"
+                            />
+                            <div class="card-body">
+                                <h5 class="card-title">{{ event.title.length > 31 ? (event.title | slice:0:31) + '...' : event.title }}</h5>
+                                <p class="card-text">
+                                  <i class="fas fa-clock"></i>
+                                  {{ event.startDate | date: 'short' }} - {{ event.endDate | date: 'short' }}
+                                </p>
+                                <p class="card-text">
+                                  <i class="fas fa-users"></i>
+                                  Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
     <app-footer></app-footer>
 </div>
