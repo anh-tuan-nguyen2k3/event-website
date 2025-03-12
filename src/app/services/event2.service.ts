@@ -51,4 +51,12 @@ export class Event2Service {
        })
      )
     }
+    
+    filter(sql: string): Observable<ApiResponse<any>>{
+      return this.httpClient.get<ApiResponse<any>>(sql).pipe(
+        map((res: ApiResponse<any>) => {
+           return res; 
+       })
+     )
+    }
 }

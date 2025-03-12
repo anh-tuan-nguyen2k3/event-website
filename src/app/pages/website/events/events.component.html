@@ -42,20 +42,19 @@
                   
                   <!-- Dropdown Thể loại -->
                   <div class="col-md-3 col-6">
-                      <select class="form-select rounded-3">
-                          <option selected>Thể loại</option>
-                          <option value="1">Cuộc thi</option>
-                          <option value="2">Hoạt động tình nguyện</option>
-                          <option value="3">Hội thảo/ Workshop</option>
-                          <option value="4">Khác</option>
+                      <select class="form-select rounded-3" [(ngModel)]="selectedCategory" (change)="changeCategory()">
+                        <option value="" selected>Toàn bộ</option>
+                        <option *ngFor="let category of categories" [value]="category.id">
+                          {{ category.categoryName }}
+                        </option>
                       </select>
                   </div>
                   <!-- Dropdown Đơn vị tổ chức -->
                   <div class="col-md-2 col-6">
-                      <select class="form-select rounded-3" [(ngModel)]="selectedUnit">
+                      <select class="form-select rounded-3" [(ngModel)]="selectedUnit" (change)="changeOrg()">
                           <option value="" selected>Đơn vị tổ chức</option>
-                          <option *ngFor="let unit of organizationUnits" [value]="unit">
-                              {{ unit }}
+                          <option *ngFor="let unit of organizationUnits" [value]="unit.id">
+                              {{ unit.facultyName }}
                           </option>
                       </select>
                   </div>
@@ -66,6 +65,33 @@
                   </div>
               </div>
           </div>
+
+          <div class="container mt-4 mb-4">
+            <div class="row row-cols-1 row-cols-md-3 g-4"> 
+                <div class="col" *ngFor="let event of appEvents">
+                    <a class="cardevent" [routerLink]="['/event-detail', event.eventID]">
+                        <div class="card h-100 p-2 rounded-4">
+                            <img
+                              [src]="event.imageUrl"
+                              class="card-img-top rounded-3"
+                              alt="Event Image"
+                            />
+                            <div class="card-body">
+                                <h5 class="card-title">{{ event.title.length > 31 ? (event.title | slice:0:31) + '...' : event.title }}</h5>
+                                <p class="card-text">
+                                  <i class="fas fa-clock"></i>
+                                  {{ event.startDate | date: 'short' }} - {{ event.endDate | date: 'short' }}
+                                </p>
+                                <p class="card-text">
+                                  <i class="fas fa-users"></i>
+                                  Tổng vé: {{ event.totalSeats }} (Còn lại: {{ event.availableSeats }})
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
     <app-footer></app-footer>
 </div>
