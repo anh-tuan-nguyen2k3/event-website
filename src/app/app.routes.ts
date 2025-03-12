@@ -16,6 +16,7 @@ import { AdminhomeComponent } from './pages/admin/adminhome/adminhome.component'
 import { AssociateinfoComponent } from './pages/website/associateinfo/associateinfo.component';
 import { FacultyComponent } from './pages/website/faculty/faculty.component';
 import { DashboardComponent } from './pages/website/dashboard/dashboard.component';
+import { ErrorComponent } from './pages/website/404/404.component';
 
 
 
@@ -88,7 +89,12 @@ export const routes: Routes = [
     {
         path:'dashboard',
         component: DashboardComponent
+    },
+    {
+        path:'404',
+        component: ErrorComponent,
     }
+    
 ];
 
 @NgModule({

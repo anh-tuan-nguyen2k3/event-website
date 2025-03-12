@@ -25,6 +25,12 @@
         <div *ngIf="selectedTab === 'personal-info'">
           <h4 class="mb-4">THÔNG TIN TÀI KHOẢN</h4>
           <div class="card p-4 rounded-4">
+            <div class="mb-2" *ngIf="isEditing">
+              <label class="form-label">Ảnh đại diện</label>
+              <div class="input-group">
+                <input type="file" (change)="onFileSelect($event)" name="image-banner" id="image-banner">
+              </div>
+            </div>
             <div class="mb-2">
               <span><strong>Tài khoản tổ chức:</strong></span>
               <span *ngIf="!isEditing" id="useremail" style="margin-left: 6px;">
