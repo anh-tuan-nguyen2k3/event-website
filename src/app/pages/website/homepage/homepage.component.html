@@ -116,11 +116,11 @@
             <span class="blue">TỔ CHỨC</span>
             <div class="logo-slider">
                 <button id="prevBtn" class="slider-btn">❮</button>
-                <div class="logo-container">
+                <a class="logo-container">
                     <div class="logo-track">
-                        <img *ngFor="let faculty of faculties" [src]="faculty.facultyLogo" class="club-logo" [alt]="faculty.facultyName"/>
+                        <img *ngFor="let faculty of faculties" [src]="faculty.facultyLogo" class="club-logo" [alt]="faculty.facultyName" [routerLink]="['/faculty', faculty.id]"/>
                     </div>
-                </div>
+                </a>
                 <button id="nextBtn" class="slider-btn">❯</button>
             </div>
         </div>

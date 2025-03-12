@@ -6,13 +6,12 @@ import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../../services/category.service';
 import { FacultyService } from '../../../services/faculty.service';
 import { Event2Service } from '../../../services/event2.service';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-events',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, FormsModule, CommonModule, RouterModule],
-  imports: [HeaderComponent, FooterComponent, FormsModule, CommonModule, RouterLink],
+  imports: [HeaderComponent, FooterComponent, FormsModule, CommonModule, RouterLink, RouterModule],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
 })

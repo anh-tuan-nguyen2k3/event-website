@@ -40,7 +40,7 @@ export class AdminhomeComponent implements OnInit {
   cdRef: any;
   message: string = '';
 
-  constructor(private router: Router, private eventSerive: Event2Service, private eventUserService: EventUserService, 
+  constructor(private router: Router, private eventService: Event2Service, private eventUserService: EventUserService, 
     private userService: User2Service, private facultyService: FacultyService
   ) { }
 
@@ -61,7 +61,7 @@ export class AdminhomeComponent implements OnInit {
   }
 
   initialApproveEvents() {
-    this.eventSerive.getAllEventsByStatus("APPROVE").subscribe(
+    this.eventService.getAllEventsByStatus("APPROVE").subscribe(
       (res) => {
         console.log(res.result);
         this.appEvents = res.result;
@@ -71,7 +71,7 @@ export class AdminhomeComponent implements OnInit {
   }
 
   initialPendingEvents() {
-    this.eventSerive.getAllEventsByStatus("PENDING").subscribe(
+    this.eventService.getAllEventsByStatus("PENDING").subscribe(
       (res) => {
         console.log(res.result);
         this.pendingEvents = res.result;

@@ -42,23 +42,16 @@
                   
                   <!-- Dropdown Thể loại -->
                   <div class="col-md-3 col-6">
-                      <select class="form-select rounded-3" [(ngModel)]="selectedCategory" (change)="changeCategory()">
+                      <select class="form-select form-control" [(ngModel)]="selectedCategory" (change)="changeCategory()">
                         <option value="" selected>Toàn bộ</option>
                         <option *ngFor="let category of categories" [value]="category.id">
                           {{ category.categoryName }}
                         </option>
-                      <select class="form-select form-control">
-                          <option selected>Thể loại</option>
-                          <option value="1">Cuộc thi</option>
-                          <option value="2">Hoạt động tình nguyện</option>
-                          <option value="3">Hội thảo/ Workshop</option>
-                          <option value="4">Khác</option>
-                      </select>
+                      </select>  
                   </div>
                   <!-- Dropdown Đơn vị tổ chức -->
                   <div class="col-md-2 col-6">
-                      <select class="form-select form-control" [(ngModel)]="selectedUnit">
-                      <select class="form-select rounded-3" [(ngModel)]="selectedUnit" (change)="changeOrg()">
+                      <select class="form-select form-control" [(ngModel)]="selectedUnit" (change)="changeOrg()">
                           <option value="" selected>Đơn vị tổ chức</option>
                           <option *ngFor="let unit of organizationUnits" [value]="unit.id">
                               {{ unit.facultyName }}
