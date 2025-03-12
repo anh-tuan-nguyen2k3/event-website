@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <app-header class="fixed-header"></app-header>
     <div class="container-fuild row mb-4 content">
-        <img class="event-banner" src="/assets/images/events-banner/banner1.jpeg" alt="">
+        <img class="event-banner" [src]="eventDetail?.bannerUrl" alt="Event Banner">
     </div>
     <div class="container mt-4">
         <div class="row">

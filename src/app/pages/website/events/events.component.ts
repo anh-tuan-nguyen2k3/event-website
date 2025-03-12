@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../partials/header/header.component';
 import { FooterComponent } from '../../partials/footer/footer.component';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-events',
   standalone: true,
+  imports: [HeaderComponent, FooterComponent, FormsModule, CommonModule, RouterModule],
   imports: [HeaderComponent, FooterComponent, FormsModule, CommonModule, RouterLink],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'

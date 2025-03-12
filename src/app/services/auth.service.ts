@@ -24,10 +24,15 @@ export class AuthService {
     get isLoginIn() {
         return this.loginStatus.asObservable(); 
     }
+    // Tuấn sửa
+    // getToken(p0: string): string | null{
+    //     return localStorage.getItem("token")
+    //   }
 
-    getToken(p0: string): string | null{
+    getToken(): string | null{
         return localStorage.getItem("token")
-      }
+    }
+    
     
     setToken(token: string){
           localStorage.setItem("token", token);

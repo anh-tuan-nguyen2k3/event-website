@@ -35,7 +35,7 @@
         <div class="container mt-4 mb-4">
             <div class="row row-cols-1 row-cols-md-3 g-4"> 
                 <div class="col" *ngFor="let event of appEvents">
-                    <a class="cardevent" [routerLink]="['/event-detail', event.eventID]">
+                    <a class="cardevent" [routerLink]="['/event-detail', event.id]">
                         <div class="card h-100 p-2 rounded-4">
                             <img
                               [src]="event.imageUrl"

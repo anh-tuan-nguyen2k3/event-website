@@ -36,11 +36,11 @@
                             </a>
                         </li> -->
                         <li  class="toggler" *ngIf="isLoggedIn">
-                          <a href="/personalinfo" class="text-decoration-none" style="color: inherit;">
+                          <a href="javascript:void(0)" class="text-decoration-none" style="color: inherit;" (click)="navigateBasedOnRole()">
                               <h5>Tài khoản</h5>
                           </a>
-                      </li>
-                      <li *ngIf="!isLoggedIn">
+                        </li>
+                        <li *ngIf="!isLoggedIn">
                           <app-button 
                               class="login-button"
                               text="Đăng nhập" 

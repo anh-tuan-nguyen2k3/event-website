@@ -27,3 +27,19 @@ color: #F05A22;
       justify-content: center; /* Căn giữa nội dung */
   }
 }
+.form-control {
+	padding: 13px 16px; /* Kích thước nút */
+	border-radius: 10px; /* Góc bo tròn */
+	font-size: 16px; /* Kích thước chữ */
+  }
+.cardevent {
+  text-decoration: none;
+}
+.content {
+  margin-bottom: 24px;
+}
+.fixed-header {
+  position: fixed;
+  width: 100%;
+  z-index: 1030;
+}

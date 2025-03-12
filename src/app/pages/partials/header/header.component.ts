@@ -44,4 +44,17 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/home']);
   }
+  navigateBasedOnRole() {
+    const token = this.authService.getToken(); // Giả sử bạn có phương thức này để lấy token
+    if (token) {
+      const role_id: number | null = this.authService.decodeToken(token).scope;
+      if (role_id === 1) {
+        this.router.navigateByUrl('/admin');
+      } else if (role_id === 2) {
+        this.router.navigateByUrl('/associateinfo');
+      } else if (role_id === 3) {
+        this.router.navigateByUrl('/personalinfo');
+      }
+    }
+  }
 }
