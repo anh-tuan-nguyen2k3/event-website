@@ -27,6 +27,8 @@ export class EventdetailComponent implements OnInit, AfterViewInit {
   eventDetail: AppEvent | undefined;
   isRegisteredForEvent: boolean = false; // Trạng thái đã đăng ký
   user: any = null;
+  participants: any[] = [];
+  buttonColor: string = '';
   constructor(private route: ActivatedRoute, private authService: AuthService,
      private userService: User2Service, private eventUserSerivce: EventUserService,private eventService: Event2Service) { }
 
@@ -63,47 +65,63 @@ export class EventdetailComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.updateContentPadding();
     const content = document.querySelector('.content') as HTMLElement;
-    content.style.paddingTop = '80px'
-
+    content.style.paddingTop = '80px';
+  
     this.eventID = Number(this.route.snapshot.paramMap.get('id'));
+    if (isNaN(this.eventID)) {
+      console.error("Invalid event ID");
+      return;
+    }
+  
     console.log(typeof this.eventID);
+  
     this.eventService.getEventById(this.eventID).subscribe(
       (res) => {
         this.eventDetail = res.result;
-        console.log('Chi tiết sự kiện',this.eventDetail)
+        console.log('Chi tiết sự kiện', this.eventDetail);
       }
-    )
-    // this.eventDetail = APPEVENTS.find(event => event.eventID === this.eventID);
-
-    this.checkRegistration();
-
+    );
+  
+    this.eventUserSerivce.getUserByEvent(this.eventID).subscribe(
+      (res) => {
+        this.participants = res.result;
+        console.log('Người tham gia', this.participants);
+        this.checkRegistration(); // Ensure user data exists before calling
+      }
+    );
+  
     const loggedInUser = localStorage.getItem('token');
     if (loggedInUser) {
       this.userService.getUserbyId(this.authService.getUserId()).subscribe(
         (res) => {
           this.user = res.result;
+          console.log('User', this.user);
+          console.log('User email', this.user.email);
+  
+          // Now check registration after user is set
+          this.checkRegistration();
         }
-      )
+      );
     }
-
     
   }
-
+  
   checkRegistration(): void {
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    if (loggedInUser && this.eventID) {
-      const user = JSON.parse(loggedInUser);
-      console.log("Danh sách sự kiện đã đăng ký của user:", user.regisEvent); // In ra danh sách eventID đã đăng ký
-
-      if (user.regisEvent && user.regisEvent.includes(this.eventID.toString())) {
-        this.isRegisteredForEvent = true;
-      }
+    if (!this.user || !this.participants) {
+      console.warn("User or participants data not available yet.");
+      return;
     }
-    console.log(this.eventID);
-    console.log(this.isRegisteredForEvent);
+  
+    this.isRegisteredForEvent = this.participants.some(p => p.id === this.user.id);
+    console.log('Danh sách người tham gia:', this.participants);
+    console.log('User email:', this.user.email);
+    console.log('Đăng ký chưa?', this.isRegisteredForEvent);
+    this.buttonColor = this.isRegisteredForEvent ? '#6c757d' : '#F05A22';
+    console.log('mau button', this.buttonColor);
+    
 
   }
-
+  
   ngAfterViewInit(): void {
     // Listen for resize events and update padding dynamically
     window.addEventListener('resize', this.updateContentPadding);
@@ -137,6 +155,7 @@ export class EventdetailComponent implements OnInit, AfterViewInit {
           alert("Đăng ký sự kiện thành công")
       }
     )
+    this.checkRegistration();
 
     let modalElement = document.getElementById('registerModal');
     if (modalElement) {

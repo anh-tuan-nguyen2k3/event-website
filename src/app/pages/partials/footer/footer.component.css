@@ -52,6 +52,12 @@ h5 {
 ul {
     padding: 0;
 }
+.line-li h5 {
+    word-wrap: break-word; /* Cho phép xuống dòng khi từ quá dài */
+    white-space: normal; /* Cho phép văn bản xuống dòng */
+    overflow-wrap: break-word; /* Tương tự word-wrap */
+    display: block;
+}
 @media (max-width: 768px) {
     footer .row > div {
         flex: 0 0 100%; 

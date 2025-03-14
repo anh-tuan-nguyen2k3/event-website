@@ -54,7 +54,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
       }
       this.userService.register(data).subscribe(
         (res)=> {
-          window.location.href='/home';
+          window.location.href='/login';
         }
       );
     }  

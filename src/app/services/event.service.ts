@@ -4,7 +4,7 @@ export class AppEvent {
     description: string; // Mô tả chi tiết về sự kiện
     startDate: Date; // Ngày bắt đầu sự kiện
     endDate: Date; // Ngày kết thúc sự kiện
-    status: 'Pending' | 'Approved' | 'Rejected'; // Trạng thái duyệt sự kiện
+    status: 'Pending' | 'APPROVE' | 'Rejected'; // Trạng thái duyệt sự kiện
     createdBy: number; // ID người tạo sự kiện
     totalSeats: number; // Tổng số lượng chỗ ngồi
     availableSeats: number; // Số lượng chỗ ngồi còn lại
@@ -24,7 +24,7 @@ export class AppEvent {
       description: string,
       startDate: Date,
       endDate: Date,
-      status: 'Pending' | 'Approved' | 'Rejected',
+      status: 'Pending' | 'APPROVE' | 'Rejected',
       createdBy: number,
       totalSeats: number,
       availableSeats: number,

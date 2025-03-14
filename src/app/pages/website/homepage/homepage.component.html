@@ -118,8 +118,26 @@
                 <button id="prevBtn" class="slider-btn">❮</button>
                 <a class="logo-container">
                     <div class="logo-track">
-                        <img *ngFor="let faculty of faculties" [src]="faculty.facultyLogo" class="club-logo" [alt]="faculty.facultyName" [routerLink]="['/faculty', faculty.id]"/>
+                        <ng-container *ngFor="let faculty of faculties">
+                          <img 
+                            *ngIf="faculty.facultyLogo !== null" 
+                            [src]="faculty.facultyLogo" 
+                            class="club-logo" 
+                            [alt]="faculty.facultyName" 
+                            [routerLink]="['/faculty', faculty.id]"
+                          />
+                        </ng-container>
                     </div>
+                      
+                    
+                    <!-- <ng-container *ngFor="let user of participants; let i = index">
+                        <tr *ngIf="user.username !== null">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ user.id }}</td>
+                          <td>{{ user.username }}</td>
+                          <td>{{ user.email }}</td>
+                        </tr>
+                      </ng-container> -->
                 </a>
                 <button id="nextBtn" class="slider-btn">❯</button>
             </div>

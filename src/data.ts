@@ -31,7 +31,7 @@ export const APPEVENTS: AppEvent[] = [
       description: "Một cuộc thi dành cho sinh viên về quản lý ERP.",
       startDate: new Date("2024-11-16T07:30:00"),
       endDate: new Date("2024-11-16T12:00:00"),
-      status: "Approved", // Hoặc "Pending", "Rejected"
+      status: "APPROVE", // Hoặc "Pending", "Rejected"
       createdBy: 101, // ID người tạo
       totalSeats: 200, // Tổng số lượng chỗ ngồi
       availableSeats: 50, // Số lượng chỗ ngồi còn lại
@@ -88,7 +88,7 @@ Nhìn chung, hội nghị về những tiến bộ khoa học kỹ thuật khôn
       description: "Hội nghị về những tiến bộ khoa học kỹ thuật.",
       startDate: new Date("2024-12-10T09:00:00"),
       endDate: new Date("2024-12-10T17:00:00"),
-      status: "Approved",
+      status: "APPROVE",
       createdBy: 102,
       totalSeats: 300,
       availableSeats: 120,

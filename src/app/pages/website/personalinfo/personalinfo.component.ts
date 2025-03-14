@@ -94,7 +94,8 @@ export class PersonalinfoComponent implements AfterViewInit, OnInit {
 
 
   ngAfterViewInit(): void {
-    this.initdata();
+    // this.initdata();
+    // this.filter(this.sql)
   }
 
   selectTab(tab: string, event: Event) {
@@ -105,23 +106,9 @@ export class PersonalinfoComponent implements AfterViewInit, OnInit {
   }
   // user: any;
   initdata() {
-    // const loggedInUser = localStorage.getItem('loggedInUser');
-    // if (loggedInUser) {
-    //   this.user = JSON.parse(loggedInUser); // Chuyển đổi từ chuỗi JSON sang đối tượng
-    //   this.isLoggedIn = true;
-
-    //   console.log(this.user)
-    //   }
-    //   this.loadEvents();
+    this.filter(this.sql)
   }
-  loadEvents() {
-    if (this.isLoggedIn && this.user) {
-      this.appEvents = APPEVENTS.filter(event => event.participants.includes(this.user.idnumber));
-    } else {
-      this.appEvents = [];
-    }
-  }
-
+  
   onClick() {
     console.log("Button Thêm sự kiện được nhấn!");
     // Thêm logic mở modal/tạo sự kiện ở đây
@@ -200,6 +187,8 @@ export class PersonalinfoComponent implements AfterViewInit, OnInit {
     this.regisEventService.getEventRegister(sql).subscribe(
       (res) => {
         this.appEvents = res.result;
+        console.log('list event', this.appEvents)
+
       }
     )
   }

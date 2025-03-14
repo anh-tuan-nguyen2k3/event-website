@@ -167,3 +167,35 @@ button {
 	border-radius: 10px; /* Góc bo tròn */
 	font-size: 16px; /* Kích thước chữ */
   }
+.score {
+	padding-top: 0px;
+}
+.clickable-row {
+	cursor: pointer;
+  }
+  
+.clickable-row:hover {
+background-color: #f1f1f1;
+}
+.club-logo {
+width: 100px; 
+  height: 100px;
+  border-radius: 50%; 
+  object-fit: cover; 
+  border: 3px solid rgba(0, 0, 0, 0.1); 
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 16px;
+}
+.modal {
+	z-index: 5000;
+}
+.ic_more{
+	/* align-self: flex-start; */
+}
+.btn-close{
+	margin-top: 0px;
+}
+.btn_down{
+	height: 32px;
+	width: 32px;
+}

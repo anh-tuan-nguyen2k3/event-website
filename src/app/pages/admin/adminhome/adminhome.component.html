@@ -127,7 +127,7 @@
                     <div class="col-md-2 d-flex justify-content-center align-items-center">
                         <img
                             [src]="event.imageUrl"
-                            class="img-fluid rounded-start rounded-4"
+                            class="img-fluid rounded-4"
                             alt="Event Image"
                         />
                     </div>
@@ -150,7 +150,7 @@
                                 <span
                                     class="badge"
                                     [ngClass]="{
-                                    'bg-success': event.status === 'Approved',
+                                    'bg-success': event.status === 'APPROVE',
                                     'bg-warning text-dark': event.status === 'Pending',
                                     'bg-danger': event.status === 'Rejected'
                                     }"
@@ -184,8 +184,20 @@
                         <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <h5 class="modal-title" id="participantModalLabel">Danh sách đăng ký tham gia</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h5 class="modal-title" id="participantModalLabel">Danh sách đăng ký tham gia</h5>
+                                <div class="d-flex gap-2 align-items-center dropdown">
+                                    <div class="dropdown">
+                                        <button class="btn p-0 border-0 btn_down" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img src="/assets/images/icons/ic_more.svg" alt="More">
+                                        </button>
+                                        <ul class="dropdown-menu rounded-4">
+                                            <li><a class="dropdown-item" (click)="downloadParticipants()" >Tải xuống</a></li>
+                                        </ul>
+
+                                    </div>
+                                    
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin: 0px;"></button>
+                                </div>
                             </div>
                             <div class="modal-body">
                             <table class="table table-bordered">
@@ -198,12 +210,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let user of participants; let i = index">
-                                    <td>{{ i + 1 }}</td>
-                                    <td>{{ user.idnumber }}</td>
-                                    <td>{{ user.name }}</td>
-                                    <td>{{ user.email }}</td>
-                                </tr>
+                                    <ng-container *ngFor="let user of participants; let i = index">
+                                        <tr *ngIf="user.username !== null">
+                                          <td>{{ i + 1 }}</td>
+                                          <td>{{ user.id }}</td>
+                                          <td>{{ user.username }}</td>
+                                          <td>{{ user.email }}</td>
+                                        </tr>
+                                      </ng-container>
                                 </tbody>
                             </table>
                             </div>
@@ -230,16 +244,16 @@
                             <p>{{ selectedEvent?.description }}</p>
                             </div>
                             <div class="modal-footer">
-                            <button type="button" class="btn btn-success" (click)="finished()">Hoàn thành</button>
+                            <button type="button" class="btn btn-success" (click)="finished()" *ngIf="!showScore">Hoàn thành</button>
                             <!-- <button type="button" class="btn btn-danger" (click)="rejectEvent()" *ngIf="!showRejectReason">
                                 Từ chối
                             </button> -->
                             </div>
-                            <div *ngIf="showRejectReason" class="mt-1 p-3">
-                                <label for="rejectReason">Lý do từ chối:</label>
-                                <textarea id="rejectReason" class="form-control" [(ngModel)]="rejectReason"></textarea>
+                            <div *ngIf="showScore" class="mt-1 p-3 score">
+                                <label for="score">Số điểm rèn luyện cho sự kiện: </label>
+                                <textarea id="score" class="form-control" [(ngModel)]="score"></textarea>
                                 <div class="d-flex justify-content-end mt-2">
-                                    <button type="button" class="btn btn-danger" (click)="confirmReject()">Xác nhận từ chối</button>
+                                    <button type="button" class="btn btn-success" (click)="finished_sendscore()">OK</button>
                                 </div>
                             </div>
                         </div>
@@ -343,37 +357,6 @@
                     </div> 
 
                     <!-- Modal thông tin sự kiện -->
-                    <!-- <div
-                    class="modal fade"
-                    id="eventDetailModal"
-                    tabindex="-1"
-                    aria-labelledby="eventDetailModalLabel"
-                    aria-hidden="true"
-                    >
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="eventDetailModalLabel">{{ selectedEvent?.title }}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                            <img [src]="selectedEvent?.imageUrl" class="img-fluid mb-3" *ngIf="selectedEvent?.imageUrl" />
-                            <p>{{ selectedEvent?.description }}</p>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-success" (click)="approveEvent()">Duyệt</button>
-                            <button type="button" class="btn btn-danger" (click)="rejectEvent()" *ngIf="!showRejectReason">
-                                Từ chối
-                            </button>
-                            </div>
-                            <div class="mt-3">
-                                <label for="rejectReason">Lý do từ chối:</label>
-                                <textarea id="rejectReason" class="form-control" [(ngModel)]="rejectReason"></textarea>
-                                <button class="btn btn-danger mt-2" (click)="confirmReject()">Xác nhận từ chối</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div> -->
                     <div
                     class="modal fade"
                     id="eventDetailModal"
@@ -491,7 +474,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                         <h5 class="modal-title" id="organizationModalLabel">Thêm tổ chức</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeorgModal()"></button>
                         </div>
                         <div class="modal-body">
                             <form>
@@ -533,25 +516,61 @@
                     </div>
                 </div>
             </div>
-        
-
-
         <table class="table table-bordered">
             <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Tổ chức</th>
-                    <th>Email</th>
-                </tr>
+              <tr>
+                <th>STT</th>
+                <th>Tổ chức</th>
+                <th>Email</th>
+              </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of faculties; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ user.facultyName }}</td>
-                    <td>{{ user.email }}</td>
+              <ng-container *ngFor="let user of faculties; let i = index">
+                <tr (click)="selectRow(user)" [class.clickable-row]="true" [style.fontSize.px]="14">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ user.facultyName }}</td>
+                  <td>{{ user.email }}</td>
                 </tr>
+                <tr *ngIf="selectedUser === user">
+                  <td colspan="3">
+                    <div class="row px-4">
+                      <div class="col-sm-12 col-xl-6 p-3" style="font-size: 12px;">
+                        <div class="d-flex justify-content-between">
+                          <p class="fw-bold" style="font-size: 14px;">Email</p>
+                          <div>{{ user.email }}</div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                          <p class="fw-bold" style="font-size: 14px;">Tên tổ chức</p>
+                          <div>{{ user.facultyName }}</div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                          <p class="fw-bold" style="font-size: 14px;">Ảnh đại diện</p>
+                          <div>
+                            <img [src]="user.facultyLogo" alt="" class="club-logo"> 
+                        </div>
+                        </div>
+                      </div>
+                      <!-- <div class="col-sm-12 col-xl-6 p-3" style="font-size: 12px;">
+                        <div class="d-flex justify-content-between">
+                          <p class="fw-bold" style="font-size: 14px;">Mã giảm giá:</p>
+                          <div>{{ user.discountCode }}</div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                          <p class="fw-bold" style="font-size: 14px;">Trình độ:</p>
+                          <div>{{ user.level }}</div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                          <p class="fw-bold" style="font-size: 14px;">Thời gian học:</p>
+                          <div>{{ user.courseDuration }} (phút)</div>
+                        </div>
+                      </div> -->
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
             </tbody>
-        </table>
+          </table>
+          
         </div>
 
 

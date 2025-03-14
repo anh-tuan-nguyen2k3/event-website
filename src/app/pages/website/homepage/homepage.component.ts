@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Event2Service } from '../../../services/event2.service';
 import { FacultyService } from '../../../services/faculty.service';
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
@@ -19,9 +20,11 @@ import { FacultyService } from '../../../services/faculty.service';
   styleUrl: './homepage.component.css'
 })
 export class HomepageComponent implements OnInit, AfterViewInit {
-  constructor (private eventService: Event2Service, private facultyService: FacultyService  ) {}
+  constructor (private eventService: Event2Service, private facultyService: FacultyService,
+    ) {}
   appEvents: any ;
   faculties: any ;
+  maxIndex: any;
 
   ngOnInit(): void {
     this.updateContentPadding();
@@ -44,6 +47,9 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       (res) => {
         console.log(res.result);
         this.faculties = res.result;
+        console.log(this.faculties.length);
+        this.maxIndex = this.faculties.length - 4;
+
       }
     )
 
@@ -58,16 +64,15 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     const nextBtn = document.getElementById('nextBtn');
 
     let index = 0;
-    const maxIndex = logos.length - 6; // Vì luôn hiển thị 6 logo
-
     function updateSlide() {
       track.style.transform = `translateX(-${index * 110}px)`;
     }
 
     nextBtn?.addEventListener('click', () => {
-      if (index < maxIndex) {
+      if (index < this.maxIndex) {
         index++;
         updateSlide();
+        console.log('next dc an')
       }
     });
 
@@ -88,5 +93,6 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       content.style.paddingTop = `${headerHeight}px`;
     }
   }
+  
 
 }

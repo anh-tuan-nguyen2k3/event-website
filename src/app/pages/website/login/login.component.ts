@@ -25,10 +25,12 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     // Kiểm tra trạng thái đăng nhập từ localStorage
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    if (loggedInUser) {
-      window.location.href = '/home'
+    const token = this.authService.getToken();
+    if (token) {
+       window.location.href = '/home'
+       console.log('da dang nhap');
     }
+    
   }
 
   login() {

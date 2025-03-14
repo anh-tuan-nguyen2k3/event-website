@@ -24,7 +24,7 @@ declare var bootstrap: any; // Để sử dụng Bootstrap modal
 export class AssociateinfoComponent implements OnInit, AfterViewInit{
     selectedTab: string = 'personal-info';
     isLoggedIn: boolean = false; // Kiểm tra người dùng đã đăng nhập chưa
-    appEvents: AppEvent[] = [];
+    appEvents: any;
     color = '#F05A22'; // Màu mặc định của nút
     textColor = '#ffffff'; // Màu chữ mặc định
     participants: any[] = [];
@@ -43,8 +43,9 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
     sql :any;
     categories: any;
     constructor (private dialog: MatDialog, private authService: AuthService, 
-      private eventService: Event2Service, private userService: User2Service,
-    private categoryService: CategoryService, private regisEventService: EventUserService) {}
+    private eventService: Event2Service, private userService: User2Service,
+    private categoryService: CategoryService, private regisEventService: EventUserService,
+    private eventUserService : EventUserService) {}
 
     ngOnInit(): void {
       const userId = this.authService.getUserId();
@@ -63,15 +64,6 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
         )
       
     }
-
-
-
-    // user: any = {
-    //   email: 'nguyenanhtuan1.442003@gmail.com',
-    //   name: 'Đoàn khoa Hệ thống thông tin',
-    //   faculty_description: '',
-    // };
-
     event = {
       faculty_id: -1,
       title: '',
@@ -94,6 +86,11 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
         this.event.imageUrl = file;
       }else if (event.target.name === 'image-account') {
         this.avatar = file;
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+        this.user.facultyLogo = e.target.result; // Cập nhật trực tiếp user.facultyLogo
+      };
+        reader.readAsDataURL(file);
       }
       console.log(file)
     }  
@@ -119,15 +116,12 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
         this.event.faculty_id = this.authService.getUserId();
         console.log(this.event.faculty_id)
       }
-      // this.loadEvents();
+      this.loadEvents();
     }
 
     loadEvents() {
-      if (this.isLoggedIn && this.user) {
-        this.appEvents = APPEVENTS.filter(event => event.participants.includes(this.user.idnumber));
-      } else {
-        this.appEvents = [];
-      }  }
+      this.filter(this.sql)
+    }
   
     onClick() {
       console.log("Add event button is clicked");
@@ -148,7 +142,12 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
 
     openParticipantModal(event: any) {
       this.selectedEventTitle = event.title;
-      this.participants = USERS.filter(user => event.participants.includes(user.idnumber));
+      // this.participants = USERS.filter(user => event.participants.includes(user.idnumber));
+      this.eventUserService.getUserByEvent(event.id).subscribe(
+        (res) => {
+          this.participants = res.result;
+        }
+      )
   
       // Hiển thị modal bằng Bootstrap JS
       const modalElement = document.getElementById('participantModal');
@@ -243,6 +242,7 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
         formData.append('facultyLogo', this.avatar);
 
       console.log(formData);
+      
 
       this.userService.updateFaculty(this.user.id, formData).subscribe(
         (res) => {
@@ -251,7 +251,10 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
           }
         }
       )
+      this.user.facultyName = this.tempName;
+      this.user.facultyDescription = this.tempdescription
       this.isEditing = false;
+      
     }
 
     initialEvents(){
@@ -307,6 +310,8 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
       this.regisEventService.getEventRegister(sql).subscribe(
         (res) => {
           this.appEvents = res.result;
+          console.log('su kien', this.appEvents);
+          
         }
       )
     }
