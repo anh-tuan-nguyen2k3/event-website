@@ -167,7 +167,8 @@ export class AdminhomeComponent implements OnInit {
               this.message='';
             }
   
-            window.location.href="/admin"
+            window.location.href="/admin";
+            this.selectedTab = 'dashboard';
           }
         )
         let modalElement = document.getElementById('organizationModal');

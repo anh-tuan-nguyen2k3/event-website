@@ -12,6 +12,7 @@ import { Event2Service } from '../../../services/event2.service';
 import { User2Service } from '../../../services/user2.service';
 import { CategoryService } from '../../../services/category.service';
 import { EventUserService } from '../../../services/event-user.service';
+import { Toast } from 'bootstrap';
 declare var bootstrap: any; // Để sử dụng Bootstrap modal
 
 @Component({
@@ -177,8 +178,16 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
       this.eventService.save(formData).subscribe(
         (res) => {
           if(res.code === 1000){
-            console.log("success!");
+            console.log("success!");      
           }
+          const toastElement = document.getElementById('successToast');
+                        if (toastElement) {
+                            const toast = new Toast(toastElement);
+                            toast.show();
+                            setTimeout(() => {
+                                window.location.href = '/associateinfo';
+                            }, 2000);
+                        }
         }
       )
     }

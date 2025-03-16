@@ -26,7 +26,7 @@ import { ErrorComponent } from './pages/website/404/404.component';
 export const routes: Routes = [
     {
         path:'',
-        redirectTo:'personalinfo',
+        redirectTo:'home',
         pathMatch:'full'
     },
     {

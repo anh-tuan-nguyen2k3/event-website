@@ -37,19 +37,19 @@
                             {{ message }}
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="email" placeholder=" " required [(ngModel)]="email" name="email"/>
+                            <input type="email" class="form-control" id="email" placeholder=" " required [(ngModel)]="email" name="email" (input) = "resetMessage()"/>
                             <label for="email">Email</label>
                         </div>   
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="username" placeholder=" " required [(ngModel)]="username" name="username"/>
+                            <input type="text" class="form-control" id="username" placeholder=" " required [(ngModel)]="username" name="username" (input) = "resetMessage()"/>
                             <label for="username">Họ và tên</label>
                         </div>        
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="password" placeholder=" " required [(ngModel)]="password" name="password"/>
+                            <input type="password" class="form-control" id="password" placeholder=" " required [(ngModel)]="password" name="password" (input) = "resetMessage()"/>
                             <label for="password">Mật khẩu</label>
                         </div>  
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="passwordcheck" placeholder=" " required [(ngModel)]="passwordCheck" name="passwordCheck"/>
+                            <input type="password" class="form-control" id="passwordcheck" placeholder=" " required [(ngModel)]="passwordCheck" name="passwordCheck" (input) = "resetMessage()"/>
                             <label for="passwordcheck">Nhập lại mật khẩu</label>
                         </div>  
                         <div>
@@ -61,6 +61,19 @@
                                 textColor="#fff"
                                 (click)="onSubmit()">
                             </app-button>
+                        </div>
+                        <!-- Toast -->
+                        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                            <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                    <strong class="me-auto">Thông báo</strong>
+                                    <small>vừa xong</small>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+                                    Đăng ký thành công!
+                                </div>
+                            </div>
                         </div>
                     </form>
                     

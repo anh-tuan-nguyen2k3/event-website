@@ -43,16 +43,22 @@ export class LoginComponent implements OnInit{
           email: this.email,
           password: this.password
         }
-        this.authService.authenticate(req).subscribe(
-          (res) => {
+        this.authService.authenticate(req).subscribe({
+          next : (res) => {
               const role_id : number|null = this.authService.decodeToken(res.result.token).scope;
               if(role_id == 3 || role_id == 2){
                 this.router.navigateByUrl('/home')
               }else if(role_id == 1){
                 this.router.navigateByUrl('/admin')
               }
+          },
+          error: (err) => {
+            // Xử lý lỗi thực sự
+            if (err.status === 401) { // Conflict - thường dùng cho tài khoản đã tồn tại
+                this.message = "Tài khoản hoặc mật khẩu không đúng!";
+            } 
           }
-        )
+      })
       }
     // Tìm kiếm người dùng với email và mật khẩu khớp
     
@@ -62,7 +68,7 @@ export class LoginComponent implements OnInit{
     this.message="";
   }
   isEmailValid(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex kiểm tra định dạng email
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   }
 }

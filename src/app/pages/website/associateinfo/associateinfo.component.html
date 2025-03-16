@@ -198,7 +198,7 @@
                       </div>
                       <div class="col-md-4 col-6">
                         <label for="category" class="form-label">Thể loại</label>
-                        <select (change)="onCategoryChange($event)" class="form-select rounded-3" required
+                        <select (change)="onCategoryChange($event)" class="form-control" required
                           [(ngModel)]="event.catgoryId" name="category">
                           <option value={{1}}>Cuộc thi</option>
                           <option value={{2}}>Hoạt động tình nguyện</option>
@@ -226,6 +226,19 @@
                       <button type="submit" class="btn btn-primary" [disabled]="!eventForm.form.valid">Gửi sự
                         kiện</button>
                     </div>
+                    <!-- Toast -->
+                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                      <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                          <div class="toast-header">
+                              <strong class="me-auto">Thông báo</strong>
+                              <small>vừa xong</small>
+                              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                          </div>
+                          <div class="toast-body">
+                              Thêm sự kiện thành công!
+                          </div>
+                      </div>
+                  </div>
                   </form>
                 </div>
               </div>
