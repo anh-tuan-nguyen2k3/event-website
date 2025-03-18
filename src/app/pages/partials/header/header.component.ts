@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonComponent, CommonModule],
+  imports: [ButtonComponent, CommonModule, FormsModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   
@@ -16,6 +17,9 @@ import { AuthService } from '../../../services/auth.service';
 export class HeaderComponent implements OnInit {
   isMenuOpen: boolean = false; // Biến trạng thái cho menu
   isLoggedIn: boolean = false; // Kiểm tra người dùng đã đăng nhập chưa
+  searchTerm: string = ''; // To bind with the input field
+
+  
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -56,5 +60,11 @@ export class HeaderComponent implements OnInit {
         this.router.navigateByUrl('/personalinfo');
       }
     }
+  }
+
+  onSearchSubmit(): void {
+    console.log('Search term:', this.searchTerm);
+    // Implement logic here, e.g., filtering a list, API call, etc.
+    window.location.href=`/events?search=${this.searchTerm}`;
   }
 }

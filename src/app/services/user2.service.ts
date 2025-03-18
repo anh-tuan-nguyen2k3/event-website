@@ -14,6 +14,14 @@ export class User2Service {
 
      }
 
+     forgetPassword(email: string): Observable<ApiResponse<any>>{
+      return this.httpClient.get<ApiResponse<any>>(`${this.url}/reset?email=${email}`).pipe(
+        map((res: ApiResponse<any>) => {
+           return res; 
+       })
+     )
+    }
+
     updateFaculty(id: number, data: any){
       return this.httpClient.put<ApiResponse<any>>(`${this.url}/faculty/${id}`, data).pipe(
         map((res: ApiResponse<any>) => {

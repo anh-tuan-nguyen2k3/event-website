@@ -20,12 +20,16 @@ export class Event2Service {
       )
     }
 
-    getAllEventsByStatus(status: string): Observable<ApiResponse<any>>{
-      return this.httpClient.get<ApiResponse<any>>(`${this.url}?status=${status}`).pipe(
+    getAllEventsByStatus(status: string, title: string = ""): Observable<ApiResponse<any>>{
+      let sql = `${this.url}?status=${status}`;
+      if(title !== ""){
+        sql = sql + `&title=${title}`;
+      }
+      return this.httpClient.get<ApiResponse<any>>(sql).pipe(
          map((res: ApiResponse<any>) => {
             return res; 
         })
-      )
+      ) 
     }
 
     getEventById(id: number): Observable<ApiResponse<any>>{
@@ -44,8 +48,12 @@ export class Event2Service {
      )
     }
 
-    updateStatus(id: number, status: string): Observable<ApiResponse<any>>{
-      return this.httpClient.post<ApiResponse<any>>(`${this.url}/status?id=${id}&status=${status}`, null).pipe(
+    updateStatus(id: number, status: string, comment: string): Observable<ApiResponse<any>>{
+      let sql = `${this.url}/status?id=${id}&status=${status}`;
+      if(comment !== ""){
+        sql = sql + `&comment=${comment}`;
+      }
+      return this.httpClient.post<ApiResponse<any>>(sql, null).pipe(
         map((res: ApiResponse<any>) => {
            return res; 
        })

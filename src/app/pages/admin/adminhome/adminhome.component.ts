@@ -219,7 +219,7 @@ export class AdminhomeComponent implements OnInit {
   approveEvent() {
     // alert('Sự kiện đã được duyệt!');
     console.log(this.selectedEvent);
-    this.eventService.updateStatus(this.selectedEvent.id, "APPROVE").subscribe(
+    this.eventService.updateStatus(this.selectedEvent.id, "APPROVE", "").subscribe(
       (res) => {
         let modalElement = document.getElementById('eventDetailModal');
         let modal = bootstrap.Modal.getInstance(modalElement);
@@ -253,7 +253,7 @@ export class AdminhomeComponent implements OnInit {
       return;
     }
 
-    this.eventService.updateStatus(this.selectedEvent.id, "REJECT").subscribe(
+    this.eventService.updateStatus(this.selectedEvent.id, "REJECT", this.rejectReason).subscribe(
       (res) => {
         window.location.href = '/admin';
       }

@@ -11,8 +11,8 @@
                         <img src="assets/images/icons/ic_toggle.svg" alt="Menu Icon" />
                     </button>
                     <div class="container col-3 div-search">
-                        <form class="form-full-width">
-                            <input class="form-control" type="search" placeholder="ERPsim 2024" aria-label="Search" style="font-family: 'Lato';">
+                        <form class="form-full-width" (ngSubmit)="onSearchSubmit()">
+                            <input [(ngModel)]="searchTerm" class="form-control" name = "search" type="search" placeholder="ERPsim 2024" aria-label="Search" style="font-family: 'Lato';">
                         </form>
                     </div>
                     
