@@ -115,7 +115,7 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
       if (loggedInUser) {
         this.isLoggedIn = true;
         this.event.faculty_id = this.authService.getUserId();
-        console.log(this.event.faculty_id)
+        console.log('???',this.event.faculty_id)
       }
       this.loadEvents();
     }
@@ -166,14 +166,14 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
       formData.append('startDate', this.event.startDate);
       formData.append('endDate', this.event.endDate);
       formData.append('location', this.event.location);
-      formData.append('participants', this.event.participants.toString());
+      formData.append('totalSeats', this.event.participants.toString());
       formData.append('catgoryId', this.event.catgoryId.toString());
       if(this.event.bannerUrl !== null)
         formData.append('bannerUrl', this.event.bannerUrl);
       if(this.event.imageUrl !== null)
       formData.append('imageUrl', this.event.imageUrl);
 
-      console.log(formData);
+      console.log("data" + formData);
 
       this.eventService.save(formData).subscribe(
         (res) => {

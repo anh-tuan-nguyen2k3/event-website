@@ -213,15 +213,6 @@ export class AdminhomeComponent implements OnInit {
     } else {
       console.error('Modal element not found.');
     }
-
-
-    //   this.selectedEvent = event;
-    //   const modalElement = document.getElementById('eventDetailModal');
-    //   if (modalElement) {
-    //     const modal = new (window as any).bootstrap.Modal(modalElement);
-    //     modal.show();
-    //   }
-
   }
 
 
@@ -230,7 +221,13 @@ export class AdminhomeComponent implements OnInit {
     console.log(this.selectedEvent);
     this.eventService.updateStatus(this.selectedEvent.id, "APPROVE").subscribe(
       (res) => {
-        window.location.href = '/admin';
+        let modalElement = document.getElementById('eventDetailModal');
+        let modal = bootstrap.Modal.getInstance(modalElement);
+        modal.hide();
+        this.initialApproveEvents();
+        this.initialPendingEvents();
+        this.selectedTab = 'all-event'
+        // window.location.href = '/admin';
       }
     )
   }

@@ -38,7 +38,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     // this.appEvents = APPEVENTS;
     this.eventService.getAllEventsByStatus("APPROVE").subscribe(
       (res) => {
-          console.log(res.result);
+          console.log('event:???',res.result);
           this.appEvents = res.result;
       }
     )

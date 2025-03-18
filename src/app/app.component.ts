@@ -20,7 +20,6 @@ export class AppComponent implements OnInit{
   title = 'event-app';
   ngOnInit(): void {
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('Bootstrap carousel initialized!');
     });
   }
 }

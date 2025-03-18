@@ -227,7 +227,7 @@
 
                     <!-- Modal thông tin sự kiện -->
                     <div
-                    class="modal fade"
+                    class="modal fade custom-modal"
                     id="eventDetailModal"
                     tabindex="-1"
                     aria-labelledby="eventDetailModalLabel"
@@ -358,7 +358,7 @@
 
                     <!-- Modal thông tin sự kiện -->
                     <div
-                    class="modal fade"
+                    class="modal fade custom-modal"
                     id="eventDetailModal"
                     tabindex="-1"
                     aria-labelledby="eventDetailModalLabel"
@@ -371,7 +371,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                            <img [src]="selectedEvent?.imageUrl" class="img-fluid mb-3" *ngIf="selectedEvent?.imageUrl" />
+                            <img [src]="selectedEvent?.imageUrl" class="img-fluid mb-3 imageinfo" *ngIf="selectedEvent?.imageUrl" />
                             <p>{{ selectedEvent?.description }}</p>
                             </div>
                             <div class="modal-footer">
@@ -425,7 +425,7 @@
                     </div> 
 
                     <!-- Modal thông tin sự kiện -->
-                    <div
+                    <!-- <div
                     class="modal fade"
                     id="eventDetailModal"
                     tabindex="-1"
@@ -448,7 +448,35 @@
                             </div>
                         </div>
                         </div>
+                    </div> -->
+                    <!-- <div
+                    class="modal fade"
+                    id="eventDetailModal"
+                    tabindex="-1"
+                    aria-labelledby="eventDetailModalLabel"
+                    aria-hidden="true"
+                    >
+                    <div class="modal-dialog modal-lg"> 
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="eventDetailModalLabel">{{ selectedEvent?.title }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img 
+                            [src]="selectedEvent?.imageUrl" 
+                            class="img-fluid w-100 mb-3" 
+                            *ngIf="selectedEvent?.imageUrl" 
+                            />
+                            <p>{{ selectedEvent?.description }}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" (click)="approveEvent()">Duyệt</button>
+                            <button type="button" class="btn btn-danger" (click)="rejectEvent()">Từ chối</button>
+                        </div>
+                        </div>
                     </div>
+                    </div> -->
                 </div>
             </div>
         </div>

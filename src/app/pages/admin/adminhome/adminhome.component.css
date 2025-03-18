@@ -199,3 +199,19 @@ width: 100px;
 	height: 32px;
 	width: 32px;
 }
+.modal-dialog {
+	max-width: 800px; /* Hoặc giá trị mong muốn */
+}
+.imageinfo {
+
+}
+/* Tăng kích thước modal */
+.custom-modal .modal-dialog {
+  max-width: 50%; /* Hoặc giá trị cụ thể như 1000px */
+}
+
+/* Đảm bảo hình ảnh full chiều rộng */
+.custom-modal .modal-body img {
+  width: 100%;
+  height: auto;
+}
