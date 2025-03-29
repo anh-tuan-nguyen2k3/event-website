@@ -82,6 +82,19 @@
             </app-button>
           </div>
         </div>
+        <!-- Toast -->
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+          <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header">
+                  <strong class="me-auto">Thông báo</strong>
+                  <small>vừa xong</small>
+                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                  Chỉnh sửa thông tin thành công!
+              </div>
+          </div>
+      </div>
         <!-- Sự kiện của tôi -->
         <div *ngIf="selectedTab === 'my-events'">
           <!-- <h4 class="mb-4">SỰ KIỆN CỦA TÔI</h4> -->

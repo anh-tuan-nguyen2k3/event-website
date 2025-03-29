@@ -271,8 +271,8 @@
                     <p class="card-text">
                       <span class="badge" [ngClass]="{
                                 'bg-success': event.status === 'APPROVE',
-                                'bg-warning text-dark': event.status === 'Pending',
-                                'bg-danger': event.status === 'Rejected'
+                                'bg-warning text-dark': event.status === 'PENDING',
+                                'bg-danger': event.status === 'REJECT'
                                 }">
                         {{ event.status }}
                       </span>
@@ -290,14 +290,18 @@
 
                   <ul class="dropdown-menu rounded-4">
                     <li><a class="dropdown-item" (click)="openModal(event)">Chi tiết sự kiện</a></li>
-                    <li>
+                    <li *ngIf="event.status === 'APPROVE'">
                       <button class="dropdown-item" (click)="openParticipantModal(event)">Danh sách đăng ký</button>
                     </li>
-                    <li><a class="dropdown-item text-danger" href="#">Xóa</a></li>
+                    <li *ngIf="event.status === 'REJECT'">
+                      <a class="dropdown-item text-danger" (click)="openComment(event)">Lí do từ chối</a>
+                    </li>
                   </ul>
 
                 </div>
               </div>
+              
+
               <!-- Model danh sách tham gia -->
               <div class="modal fade" id="participantModal" tabindex="-1" aria-labelledby="participantModalLabel"
                 aria-hidden="true">
@@ -305,7 +309,19 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="participantModalLabel">Danh sách đăng ký tham gia</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <div class="d-flex gap-2 align-items-center dropdown">
+                          <div class="dropdown">
+                              <button class="btn p-0 border-0 btn_down" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <img src="/assets/images/icons/ic_more.svg" alt="More">
+                              </button>
+                              <ul class="dropdown-menu rounded-4">
+                                  <li><a class="dropdown-item" (click)="downloadParticipants()" >Tải xuống</a></li>
+                              </ul>
+      
+                          </div>
+                          
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin: 0px;"></button>
+                      </div>
                     </div>
                     <div class="modal-body">
                       <table class="table table-bordered">
@@ -344,19 +360,6 @@
                       <img [src]="selectedEvent?.imageUrl" class="img-fluid mb-3" *ngIf="selectedEvent?.imageUrl" />
                       <p>{{ selectedEvent?.description }}</p>
                     </div>
-                    <!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-success" (click)="approveEvent()">Duyệt</button>
-                        <button type="button" class="btn btn-danger" (click)="rejectEvent()" *ngIf="!showRejectReason">
-                            Từ chối
-                        </button>
-                        </div> -->
-                    <!-- <div *ngIf="showRejectReason" class="mt-1 p-3">
-                            <label for="rejectReason">Lý do từ chối:</label>
-                            <textarea id="rejectReason" class="form-control" [(ngModel)]="rejectReason"></textarea>
-                            <div class="d-flex justify-content-end mt-2">
-                                <button type="button" class="btn btn-danger" (click)="confirmReject()">Xác nhận từ chối</button>
-                            </div>
-                        </div> -->
                   </div>
                 </div>
               </div>
@@ -394,6 +397,24 @@
                       </tr>
                     </tbody>
                   </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="commentModalLabel">{{ selectedEvent?.title }}</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <img [src]="selectedEvent?.imageUrl" class="img-fluid mb-3" *ngIf="selectedEvent?.imageUrl" />
+                  <p>{{ selectedEvent?.description }}</p>
+                  <div class="alert alert-danger mt-3" *ngIf="selectedEvent?.comment">
+                    <strong>Lý do từ chối:</strong>
+                    <p>{{ selectedEvent?.comment }}</p>
+                  </div>
                 </div>
               </div>
             </div>

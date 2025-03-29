@@ -38,8 +38,11 @@ color: #F05A22;
 .content {
   margin-bottom: 24px;
 }
-.fixed-header {
+/* .fixed-header {
   position: fixed;
   width: 100%;
   z-index: 1030;
+} */
+app-footer {
+  margin-top: auto;
 }

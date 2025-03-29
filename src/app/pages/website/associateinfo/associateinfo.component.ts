@@ -13,6 +13,9 @@ import { User2Service } from '../../../services/user2.service';
 import { CategoryService } from '../../../services/category.service';
 import { EventUserService } from '../../../services/event-user.service';
 import { Toast } from 'bootstrap';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+
 declare var bootstrap: any; // Để sử dụng Bootstrap modal
 
 @Component({
@@ -323,5 +326,56 @@ export class AssociateinfoComponent implements OnInit, AfterViewInit{
           
         }
       )
+    }
+    downloadParticipants(){
+      if (!this.participants || this.participants.length === 0) {
+        console.warn('Không có dữ liệu để xuất!');
+        return;
+      }
+      
+      // Tạo dữ liệu cho bảng
+      const data = this.participants.map((user, index) => [
+        index + 1,
+        user.id,
+        user.username,
+        user.email
+      ]);
+      
+      // Thêm tiêu đề
+      const title = [[this.selectedEvent?.title || 'Danh sách đăng ký']];
+      const header = [['STT', 'Mã số sinh viên', 'Họ và Tên', 'Email']];
+      
+      // Kết hợp tiêu đề, header và dữ liệu
+      const finalData = [...title, [], ...header, ...data];
+      
+      // Tạo worksheet
+      const worksheet = XLSX.utils.aoa_to_sheet(finalData);
+      
+      // Merge ô cho tiêu đề (ô A1 đến D1)
+      worksheet['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: 3 } }];
+      
+      // Tùy chỉnh độ rộng các cột
+      worksheet['!cols'] = [
+        { wch: 5 },   // STT
+        { wch: 15 },  // Mã số sinh viên
+        { wch: 20 },  // Họ và Tên
+        { wch: 25 }   // Email
+      ];
+      
+      // Tạo workbook và thêm sheet
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Danh sách');
+      
+      // Xuất file Excel
+      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+      saveAs(blob, 'Danh_sach_dang_ky.xlsx');
+      
+    }
+
+    openComment(event: any) {
+      this.selectedEvent = event; // Gán sự kiện được chọn
+      const modal = new bootstrap.Modal(document.getElementById('commentModal')); // Mở modal
+      modal.show();
     }
 }

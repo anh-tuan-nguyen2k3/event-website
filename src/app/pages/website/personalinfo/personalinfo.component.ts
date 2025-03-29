@@ -10,6 +10,7 @@ import { User2Service } from '../../../services/user2.service';
 import { AuthService } from '../../../services/auth.service';
 import { EventUserService } from '../../../services/event-user.service';
 import { CategoryService } from '../../../services/category.service';
+import { Toast } from 'bootstrap';
 
 @Component({
   selector: 'app-personalinfo',
@@ -85,7 +86,15 @@ export class PersonalinfoComponent implements AfterViewInit, OnInit {
         }
       }
     )
+    this.user.username = this.tempName; 
+    this.user.phone = this.tempPhone;
+    this.user.idnumber = this.tempId;
 
+    const toastElement = document.getElementById('successToast');
+                            if (toastElement) {
+                                const toast = new Toast(toastElement);
+                                toast.show();}
+    
 
 
 

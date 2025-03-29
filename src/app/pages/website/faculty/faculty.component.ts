@@ -89,7 +89,7 @@ export class FacultyComponent implements OnInit {
   loadEvents() {
     this.regisEventService.getEventRegister(this.sql).subscribe(
       (res) => {
-        this.appEvents = res.result;
+        this.appEvents = res.result.filter((event: { status: string; }) => event.status === "APPROVE");
         console.log('su kien', this.appEvents);
       }
     );

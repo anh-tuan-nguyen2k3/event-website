@@ -1,38 +1,9 @@
 <div class="container-fluid">
-    <app-header class="fixed-header"></app-header>
+    <app-header></app-header>
     <div class="content vh-100">
         <div class="container align-items-center text-center pt-4 title mb-4">
             <span class="blue">SỰ KIỆN</span> <span class="orange m-1">NỔI BẬT</span>
         </div>
-        <!-- <div class="container mb-4">
-            <div class="row g-2 align-items-center">
-              <div class="col-2">
-                <button class="btn btn-outline-secondary w-100">Mới nhất</button>
-              </div>
-              <div class="col-3">
-                <select class="form-select rounded-3">
-                  <option selected>Thể loại</option>
-                  <option value="1">Cuộc thi</option>
-                  <option value="2">Hoạt động tình nguyện</option>
-                  <option value="3">Hội thảo/ Workshop</option>
-                  <option value="4">Khác</option>
-                </select>
-              </div>
-              <div class="col-2">
-                <select class="form-select" [(ngModel)]="selectedUnit">
-                  <option value="" selected>Đơn vị tổ chức</option>
-                  <option *ngFor="let unit of organizationUnits" [value]="unit">
-                    {{ unit }}
-                  </option>
-                </select>
-              </div>
-                           
-              
-              <div class="col-2">
-                <input type="date" class="form-control">
-              </div>
-            </div>
-          </div> -->
           <div class="container mb-4">
               <div class="row g-2 align-items-center">
                   <!-- Nút Mới Nhất -->
@@ -43,7 +14,7 @@
                   <!-- Dropdown Thể loại -->
                   <div class="col-md-3 col-6">
                       <select class="form-select form-control" [(ngModel)]="selectedCategory" (change)="changeCategory()">
-                        <option value="" selected>Toàn bộ</option>
+                        <option value="">Toàn bộ</option>
                         <option *ngFor="let category of categories" [value]="category.id">
                           {{ category.categoryName }}
                         </option>
@@ -93,6 +64,9 @@
                 </div>
             </div>
         </div>
+        
+        <app-footer></app-footer>
     </div>
-    <app-footer></app-footer>
+    
+    
 </div>

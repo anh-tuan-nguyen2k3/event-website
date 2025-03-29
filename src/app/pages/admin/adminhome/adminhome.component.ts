@@ -296,30 +296,7 @@ closeorgModal() {
   modal.hide();
 }
 downloadParticipants(){
-  // if (!this.participants || this.participants.length === 0) {
-  //   console.warn('Không có dữ liệu để xuất!');
-  //   return;
-  // }
 
-  // // Tạo dữ liệu cho file Excel
-  // const data = this.participants.map((user, index) => ({
-  //   STT: index + 1,
-  //   'Mã số sinh viên': user.id,
-  //   'Họ và Tên': user.username,
-  //   Email: user.email,
-  // }));
-
-  // // Tạo workbook và worksheet
-  // const worksheet = XLSX.utils.json_to_sheet(data);
-  // const workbook = XLSX.utils.book_new();
-  // XLSX.utils.book_append_sheet(workbook, worksheet, 'Danh sách đăng ký');
-
-  // // Xuất file Excel
-  // const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-  // const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
-
-  // // Lưu file
-  // saveAs(blob, 'Danh_sach_dang_ky.xlsx');
   if (!this.participants || this.participants.length === 0) {
     console.warn('Không có dữ liệu để xuất!');
     return;

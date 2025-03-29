@@ -212,6 +212,7 @@ width: 100px;
 
 /* Đảm bảo hình ảnh full chiều rộng */
 .custom-modal .modal-body img {
-  width: 100%;
+  width: 50%;
   height: auto;
+  align-items: center;
 }
