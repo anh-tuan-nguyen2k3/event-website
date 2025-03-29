@@ -30,7 +30,7 @@ export class EventdetailComponent implements OnInit, AfterViewInit {
   participants: any[] = [];
   buttonColor: string = '';
   constructor(private route: ActivatedRoute, private authService: AuthService,
-     private userService: User2Service, private eventUserSerivce: EventUserService,private eventService: Event2Service) { }
+  private userService: User2Service, private eventUserSerivce: EventUserService,private eventService: Event2Service) { }
 
 
 
@@ -145,16 +145,33 @@ export class EventdetailComponent implements OnInit, AfterViewInit {
 
   submitForm() {
     console.log('Dữ liệu form:', this.formData);
+
+
     // alert('Form submitted!'); 
-    const data = {
-      event_id: this.eventID,
-      user_id: this.user.id,
-    }
-    this.eventUserSerivce.reisterEvent(data).subscribe(
-      (res) => {
-          alert("Đăng ký sự kiện thành công")
+    if(this.user != null){
+      const data = {
+        event_id: this.eventID,
+        user_id: this.user.id,
       }
-    )
+      this.eventUserSerivce.reisterEvent(data).subscribe(
+        (res) => {
+            alert("Đăng ký sự kiện thành công")
+        }
+      )
+    }else{
+      const data = {
+        event_id: this.eventID,
+        guestName: this.formData.username,
+        emailGuest: this.formData.email,
+        phoneGuest: this.formData.phone
+      }
+      this.eventUserSerivce.reisterEvent(data).subscribe(
+        (res) => {
+            alert("Đăng ký sự kiện thành công")
+        }
+      )
+    }
+    
     this.checkRegistration();
 
     let modalElement = document.getElementById('registerModal');
