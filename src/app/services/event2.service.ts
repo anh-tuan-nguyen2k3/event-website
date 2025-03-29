@@ -40,6 +40,15 @@ export class Event2Service {
      )
     }
 
+    getDashBoard(): Observable<ApiResponse<any>>{
+      return this.httpClient.get<ApiResponse<any>>(`${this.url}/dashboard`).pipe(
+        map((res: ApiResponse<any>) => {
+           return res; 
+       })
+     )
+    }
+    
+
     save(data: any): Observable<ApiResponse<any>>{
       return this.httpClient.post<ApiResponse<any>>(`${this.url}`, data).pipe(
         map((res: ApiResponse<any>) => {

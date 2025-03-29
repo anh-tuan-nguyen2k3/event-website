@@ -19,7 +19,7 @@ export class EventsComponent implements OnInit{
  
   selectedUnit: any = ''; // Lưu giá trị đơn vị được chọn
   search: any;
-  selectedCategory: any;
+  selectedCategory: any = "";
   organizationUnits: any;
   categories: any;
   appEvents: any; 

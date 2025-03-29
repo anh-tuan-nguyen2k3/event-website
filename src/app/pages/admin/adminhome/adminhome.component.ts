@@ -39,6 +39,7 @@ export class AdminhomeComponent implements OnInit {
   rejectReason = '';
   cdRef: any;
   message: string = '';
+  dashborad: any;
 
 
   constructor(private router: Router, private eventService: Event2Service, private eventUserService: EventUserService, 
@@ -49,6 +50,14 @@ export class AdminhomeComponent implements OnInit {
     this.initialApproveEvents();
     this.initialPendingEvents();
     this.getFaculities();
+  }
+
+  getDashBoadr(){
+    this.eventService.getDashBoard().subscribe(
+      (res) => {
+        this.dashborad = res.result;
+      } 
+    )
   }
 
   getFaculities(){
